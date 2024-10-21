@@ -3,12 +3,41 @@ version: '1.0-SNAPSHOT'
 main: com.softepen.sPvP.sPvP
 api-version: '1.18'
 prefix: sPvP
-authors: [ Niuren_ ]
-description: Softepen pvp plugin
+author: Niuren_
+description: A customizable PvP plugin for Minecraft servers.
 website: https://softepen.com
 
 softdepend: ["PlaceholderAPI"]
 
 commands:
   spvp:
-    description: Main sPvP command
+    description: Opens the sPvP menu
+    usage: /spvp
+    permission: spvp.commands.spvp
+  spvp reload:
+    description: Reloads the plugin configuration
+    usage: /spvp reload
+    permission: spvp.commands.reload
+
+permissions:
+  spvp.commands.spvp:
+    description: Permission to open the sPvP menu
+    default: true
+  spvp.commands.reload:
+    description: Permission to reload the plugin configuration
+    default: op
+  spvp.commands.*:
+    description: Grants access to all sPvP commands
+    default: op
+    children:
+      spvp.commands.spvp: true
+      spvp.commands.reload: true
+  spvp.messages.*:
+    description: Grants access to all custom kill messages
+    default: op
+  spvp.*:
+    description: Grants all permissions for the sPvP plugin
+    default: op
+    children:
+      spvp.commands.*: true
+      spvp.messages.*: true
