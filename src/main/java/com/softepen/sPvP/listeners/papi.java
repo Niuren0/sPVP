@@ -35,15 +35,6 @@ public class papi extends PlaceholderExpansion {
 
         if (player == null) return null;
 
-        if (params.equalsIgnoreCase("lastCritic")) System.out.println(criticalHitLastCombo.get(player).toString());
-        if (params.equalsIgnoreCase("criticalRecord")) System.out.println(criticalHitComboRecord.get(player).toString());
-        if (params.equalsIgnoreCase("killSeries")) System.out.println(killSeries.get(player).toString());
-        if (params.equalsIgnoreCase("killSeriesRecord")) System.out.println(killSeriesRecord.get(player).toString());
-        if (params.equalsIgnoreCase("kills")) System.out.println(kills.get(player).toString());
-        if (params.equalsIgnoreCase("deaths")) System.out.println(deaths.get(player).toString());
-
-        System.out.println("-----------------------------------------");
-
         if (params.equalsIgnoreCase("lastCritic")) return criticalHitLastCombo.get(player).toString();
         if (params.equalsIgnoreCase("criticalRecord")) return criticalHitComboRecord.get(player).toString();
         if (params.equalsIgnoreCase("killSeries")) return killSeries.get(player).toString();
