@@ -1,0 +1,40 @@
+prefix: '&esPvP&7: &6'
+reloaded: "{prefix} Plugin successfully reloaded."
+onlyPlayers: "{prefix} Only players can execute this command!"
+killMessageSelected: "{prefix} Special kill message selected."
+
+comboMessages:
+  3: "3 combo, great combo!"
+  4: "4 combo, amazing skill!"
+  5: "5 combo, unstoppable!"
+  6: "6 combo, legendary!"
+  7: "7 combo, you're a beast!"
+  8: "8 combo, combo master!"
+  9: "9 combo, flawless victory!"
+  10: "10 combo, godlike!"
+
+streakMessages:
+  3: "{killer} has achieved 3 kills by taking down {victim}, great job!"
+  4: "{killer} has achieved 4 kills by taking down {victim}, amazing skill!"
+  5: "{killer} has achieved 5 kills by taking down {victim}, unstoppable!"
+  6: "{killer} has achieved 6 kills by taking down {victim}, legendary!"
+  7: "{killer} has achieved 7 kills by taking down {victim}, you're a beast!"
+  8: "{killer} has achieved 8 kills by taking down {victim}, kill master!"
+  9: "{killer} has achieved 9 kills by taking down {victim}, flawless victory!"
+  10: "{killer} has achieved 10 kills by taking down {victim}, godlike!"
+
+specialKillMessageFormat: "{prefix} {message}"
+
+specialKillMessages:
+  messagePermission1: "{killer} ruthlessly eliminated {victim}!"
+  messagePermission2: "{killer} claimed absolute victory over {victim}!"
+  messagePermission3: "{killer} crushed {victim} on the path to triumph!"
+  messagePermission4: "{killer} outplayed {victim} with an impressive move!"
+  messagePermission5: "{killer} took down {victim} and emerged victorious!"
+  messagePermission6: "{killer} annihilated {victim} on the battlefield!"
+  messagePermission7: "{killer} proved to be unstoppable against {victim}!"
+  messagePermission8: "{killer} brought {victim} down with immense power!"
+  messagePermission9: "{killer} defeated {victim} on the road to victory!"
+  messagePermission10: "{killer} rendered {victim} powerless!"
+  messagePermission11: "{killer} outsmarted {victim} with a brilliant strategy!"
+  messagePermission12: "{killer} brought an end to {victim}!"

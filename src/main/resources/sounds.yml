@@ -1,0 +1,19 @@
+default:
+  1:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 1.0
+  2:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 1.2
+  3:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 1.4
+  4:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 1.6
+  5:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 1.8
+  6:
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    pitch: 2.0

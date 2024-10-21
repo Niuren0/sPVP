@@ -1,0 +1,101 @@
+license: yourLicenseCode
+
+language: en
+streakAnnouncements: true
+specialKillMessages: true
+
+sounds:
+  critical_hit: default # sounds.yml
+  critical_break: ENTITY_VILLAGER_NO
+
+comboCooldown: 3
+
+settingsMenu:
+  title: Settings
+  row: 5
+
+  killMessages:
+    slot: 12
+    item: SKELETON_SKULL
+    title: Special Kill Messages
+    lore:
+      - Click to the special kill message settings!
+  comboMessages:
+    slot: 14
+    enabled_state:
+      item: GREEN_WOOL
+      title: Combo Messages Enabled
+      lore:
+        - Click to change the combo messages to false!
+    disabled_state:
+      item: RED_WOOL
+      title: Combo Messages Disabled
+      lore:
+        - Click to change the combo messages to true!
+
+  sound:
+    slot: 22
+    enabled_state:
+      item: BELL
+      title: Sound Enabled
+      lore:
+        - Click to change the sound to false!
+    disabled_state:
+      item: BELL
+      title: Sound Disabled
+      lore:
+        - Click to change the sound to true!
+
+  enable:
+    slot: 30
+    enabled_state:
+      item: GREEN_WOOL
+      title: Health Indıcator Enabled
+      lore:
+        - Click to change the health indicator to false!
+    disabled_state:
+      item: RED_WOOL
+      title: Health Indıcator Disabled
+      lore:
+        - Click to change the health indicator to true!
+  color:
+    slot: 32
+    item: DYE # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
+    title: Health Color
+    lore:
+      - Left click for forward
+      - Right click for backward
+
+  filler:
+    enable: false
+    item: ORANGE_STAINED_GLASS_PANE
+    title: " " # Use blank for nothing
+    lore:
+      - www.softepen.com
+
+killMessagesMenu:
+  title: Special Kill Messages
+  row: 3
+
+  selected:
+    item: YELLOW_STAINED_GLASS_PANE
+    title: "{message}"
+    lore:
+      - Selected kill message
+  hasPerm:
+    item: GREEN_STAINED_GLASS_PANE
+    title: "{message}"
+    lore:
+      - Click to select the message
+  hasNotPerm:
+    item: RED_STAINED_GLASS_PANE
+    title: "{message}"
+    lore:
+      - Visit www.softepen.com to buy the message
+
+  filler:
+    enable: false
+    item: ORANGE_STAINED_GLASS_PANE
+    title: " " # Use blank for nothing
+    lore:
+      - www.softepen.com
