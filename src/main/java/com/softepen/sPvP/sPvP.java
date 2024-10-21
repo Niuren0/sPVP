@@ -1,7 +1,6 @@
 package com.softepen.sPvP;
 
 import com.softepen.sPvP.commands.MainCommand;
-import com.softepen.sPvP.commands.TestCommand;
 import com.softepen.sPvP.commands.spvpTabComplete;
 import com.softepen.sPvP.events.DamageEvent;
 import com.softepen.sPvP.events.DeathEvent;
@@ -11,7 +10,6 @@ import com.softepen.sPvP.listeners.papi;
 import com.softepen.sPvP.managers.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,8 +55,6 @@ public final class sPvP extends JavaPlugin {
         }
 
         Objects.requireNonNull(getCommand("spvp")).setExecutor(new MainCommand());
-        Objects.requireNonNull(getCommand("test")).setExecutor(new TestCommand());
-
         Objects.requireNonNull(getCommand("spvp")).setTabCompleter(new spvpTabComplete());
 
         getServer().getPluginManager().registerEvents(new DamageEvent(), this);
