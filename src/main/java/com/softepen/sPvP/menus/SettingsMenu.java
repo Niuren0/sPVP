@@ -6,6 +6,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import net.kyori.adventure.text.Component;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -221,8 +223,14 @@ public class SettingsMenu {
         itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            if (itemName != null) meta.setDisplayName(itemName);
-            if (itemLore != null) meta.setLore(itemLore);
+            if (itemName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemName));
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                meta.setLore(coloredLore);
+            }
             itemStack.setItemMeta(meta);
         }
 
