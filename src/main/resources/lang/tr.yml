@@ -1,0 +1,40 @@
+prefix: '&esPvP&7: &6'
+reloaded: "{prefix} &aEklenti başarıyla yeniden yüklendi."
+onlyPlayers: "{prefix} &cBu komutu sadece oyuncular kullanabilir!"
+killMessageSelected: "{prefix} &bÖzel öldürme mesajı seçildi."
+
+comboMessages:
+  3: "&e3 kombo, &a&lmükemmel kombo!"
+  4: "&e4 kombo, &b&lhayranlık uyandıran yetenek!"
+  5: "&e5 kombo, &c&ldurdurulamaz!"
+  6: "&e6 kombo, &6&lefsanevi!"
+  7: "&e7 kombo, &d&lsen bir canavarsın!"
+  8: "&e8 kombo, &e&lkombo ustası!"
+  9: "&e9 kombo, &9&lkusursuz zafer!"
+  10: "&e10 kombo, &5&ltanrısal!"
+
+streakMessages:
+  3: "&e{killer}, &e{victim} &file 3 öldürmeye ulaştı, &amükemmel bir iş!"
+  4: "&e{killer}, &e{victim} &file 4 öldürmeye ulaştı, &bhayranlık uyandıran yetenek!"
+  5: "&e{killer}, &e{victim} &file 5 öldürmeye ulaştı, &cdurdurulamaz!"
+  6: "&e{killer}, &e{victim} &file 6 öldürmeye ulaştı, &6efsanevi!"
+  7: "&e{killer}, &e{victim} &file 7 öldürmeye ulaştı, &dsen bir canavarsın!"
+  8: "&e{killer}, &e{victim} &file 8 öldürmeye ulaştı, &esavaş ustası!"
+  9: "&e{killer}, &e{victim} &file 9 öldürmeye ulaştı, &9kusursuz zafer!"
+  10: "&e{killer}, &e{victim} &file 10 öldürmeye ulaştı, &5tanrısal!"
+
+specialKillMessageFormat: "{prefix} &f{message}"
+
+specialKillMessages:
+  messagePermission1: "&e{killer} &f{victim} &facımasızca ortadan kaldırdı!"
+  messagePermission2: "&e{killer} &f{victim} &füzerinde mutlak zafer kazandı!"
+  messagePermission3: "&e{killer}, &f{victim} &fezici bir şekilde ezip geçti!"
+  messagePermission4: "&e{killer}, &f{victim} &fkarşısında etkileyici bir hareket sergiledi!"
+  messagePermission5: "&e{killer}, &f{victim} &fyenerek galip çıktı!"
+  messagePermission6: "&e{killer}, &f{victim} &fsavaş alanında yok etti!"
+  messagePermission7: "&e{killer}, &f{victim} &fkarşısında durdurulamaz olduğunu kanıtladı!"
+  messagePermission8: "&e{killer}, &f{victim} &fbüyük bir güçle devirdi!"
+  messagePermission9: "&e{killer}, &f{victim} &fyenerek zafer yolunda ilerledi!"
+  messagePermission10: "&e{killer}, &f{victim} &fkarşısında çaresiz bıraktı!"
+  messagePermission11: "&e{killer}, &f{victim} &fkarşısında dahice bir strateji kullandı!"
+  messagePermission12: "&e{killer}, &f{victim} &f'in sonunu getirdi!"
