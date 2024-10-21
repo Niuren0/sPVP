@@ -12,16 +12,26 @@ comboCooldown: 3
 
 settingsMenu:
   title: Settings
-  row: 5
+  row: 6
+
+  profile:
+    slot: 13
+    lore:
+      - "Kills: {kills}"
+      - "Deaths: {deaths}"
+      - "Last Combo: {lastCombo}"
+      - "Combo Record: {comboRecord}"
+      - "Kill Series: {killSeries}"
+      - "Kill Series Record: {killSeriesRecord}"
 
   killMessages:
-    slot: 12
+    slot: 21
     item: SKELETON_SKULL
     title: Special Kill Messages
     lore:
       - Click to the special kill message settings!
   comboMessages:
-    slot: 14
+    slot: 23
     enabled_state:
       item: GREEN_WOOL
       title: Combo Messages Enabled
@@ -34,7 +44,7 @@ settingsMenu:
         - Click to change the combo messages to true!
 
   sound:
-    slot: 22
+    slot: 31
     enabled_state:
       item: BELL
       title: Sound Enabled
@@ -47,7 +57,7 @@ settingsMenu:
         - Click to change the sound to true!
 
   enable:
-    slot: 30
+    slot: 39
     enabled_state:
       item: GREEN_WOOL
       title: Health Indıcator Enabled
@@ -59,7 +69,7 @@ settingsMenu:
       lore:
         - Click to change the health indicator to true!
   color:
-    slot: 32
+    slot: 41
     item: DYE # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
     title: Health Color
     lore:

@@ -6,6 +6,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import net.kyori.adventure.text.Component;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -100,6 +101,7 @@ public class KillMessagesSelector {
             while (iterator.hasNext()) {
                 String lore = iterator.next();
                 lore = lore.replace("{message}", message);
+                lore = ChatColor.translateAlternateColorCodes('&', lore);
                 iterator.set(lore);
             }
         }

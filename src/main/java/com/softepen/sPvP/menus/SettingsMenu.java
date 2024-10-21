@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.softepen.sPvP.sPvP.plugin;
-import static com.softepen.sPvP.sPvP.configManager;
+import static com.softepen.sPvP.sPvP.*;
 
 public class SettingsMenu {
     public SettingsMenu (Player player) {
@@ -31,6 +31,8 @@ public class SettingsMenu {
                 .title(Component.text(configManager.getString("settingsMenu.title")))
                 .rows(configManager.getInt("settingsMenu.row"))
                 .create();
+
+        GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem();
 
         GuiItem enableItem = ItemBuilder.from(getItemStack(player, "enable")).asGuiItem(event -> {
             event.setCancelled(true);
@@ -171,6 +173,7 @@ public class SettingsMenu {
         gui.setItem(configManager.getInt("settingsMenu.comboMessages.slot"), comboMessagesItem);
         gui.setItem(configManager.getInt("settingsMenu.enable.slot"), enableItem);
         gui.setItem(configManager.getInt("settingsMenu.color.slot"), colorItem);
+        gui.setItem(configManager.getInt("settingsMenu.profile.slot"), profileItem);
         if (configManager.getBoolean("settingsMenu.filler.enable")) {
             gui.getFiller().fill(ItemBuilder.from(getItemStack(player, "filler")).asGuiItem());
         }
@@ -235,6 +238,57 @@ public class SettingsMenu {
         }
 
         return itemStack;
+    }
+
+    private ItemStack getPlayerSkull(Player player) {
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
+        if (headMeta != null) {
+            headMeta.setOwningPlayer(player);
+
+            headMeta.setDisplayName(player.getDisplayName());
+            List<String> itemLore = configManager.getStringList("settingsMenu.profile.lore");
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    lore = lore
+                            .replace("{kills}", kills.getOrDefault(player, 0).toString())
+                            .replace("{deaths}", deaths.getOrDefault(player, 0).toString())
+                            .replace("{lastCombo}", criticalHitLastCombo.getOrDefault(player, 0).toString())
+                            .replace("{comboRecord}", getComboRecord(player))
+                            .replace("{killSeries}", killSeries.getOrDefault(player, 0).toString())
+                            .replace("{killSeriesRecord}", getKillSeriesRecord(player));
+
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                headMeta.setLore(coloredLore);
+            }
+
+            head.setItemMeta(headMeta);
+        }
+        else {
+            plugin.getLogger().warning("Can not find head meta for " + player.getName());
+        }
+
+        return head;
+    }
+
+    private String getComboRecord(Player player) {
+        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+
+        int savedRecord = settings.getComboRecord();
+        int hashmapRecord = criticalHitComboRecord.getOrDefault(player, 0);
+
+        return String.valueOf(Math.max(hashmapRecord, savedRecord));
+    }
+
+    private String getKillSeriesRecord(Player player) {
+        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+
+        int savedRecord = settings.getKillSeriesRecord();
+        int hashmapRecord = killSeriesRecord.getOrDefault(player, 0);
+
+        return String.valueOf(Math.max(hashmapRecord, savedRecord));
     }
 
     public static String getRawColor(String input) {
