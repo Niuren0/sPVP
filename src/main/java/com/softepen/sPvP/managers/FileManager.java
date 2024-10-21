@@ -36,7 +36,8 @@ public class FileManager {
     }
 
     public String getString(String path) {
-        return config.getString(path);
+        String str = Objects.requireNonNull(config.getString(path));
+        return ChatColor.translateAlternateColorCodes('&', str);
     }
 
     public double getDouble(String path) {

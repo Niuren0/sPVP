@@ -27,7 +27,7 @@ public class KillMessagesSelector {
         String playerName = player.getName();
 
         Gui gui = Gui.gui()
-                .title(Component.text(configManager.getString("settingsMenu.title")))
+                .title(Component.text(configManager.getString("killMessagesMenu.title")))
                 .rows(configManager.getInt("killMessagesMenu.row"))
                 .create();
 

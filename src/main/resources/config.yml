@@ -11,101 +11,105 @@ sounds:
 comboCooldown: 3
 
 settingsMenu:
-  title: Settings
+  title: "&6Settings"
   row: 6
 
   profile:
     slot: 13
     lore:
-      - "Kills: {kills}"
-      - "Deaths: {deaths}"
-      - "Last Combo: {lastCombo}"
-      - "Combo Record: {comboRecord}"
-      - "Kill Series: {killSeries}"
-      - "Kill Series Record: {killSeriesRecord}"
+      - "&aKills: &e{kills}"
+      - "&aDeaths: &e{deaths}"
+      - "&aLast Combo: &e{lastCombo}"
+      - "&aCombo Record: &e{comboRecord}"
+      - "&aKill Series: &e{killSeries}"
+      - "&aKill Series Record: &e{killSeriesRecord}"
 
   killMessages:
     slot: 21
     item: SKELETON_SKULL
-    title: Special Kill Messages
+    title: "&cSpecial Kill Messages"
     lore:
-      - Click to the special kill message settings!
+      - "&7Click to the special kill message settings!"
+
   comboMessages:
     slot: 23
     enabled_state:
       item: GREEN_WOOL
-      title: Combo Messages Enabled
+      title: "&aCombo Messages Enabled"
       lore:
-        - Click to change the combo messages to false!
+        - "&7Click to change the combo messages to &cfalse&a!"
     disabled_state:
       item: RED_WOOL
-      title: Combo Messages Disabled
+      title: "&cCombo Messages Disabled"
       lore:
-        - Click to change the combo messages to true!
+        - "&7Click to change the combo messages to &atrue&c!"
 
   sound:
     slot: 31
     enabled_state:
       item: BELL
-      title: Sound Enabled
+      title: "&aSound Enabled"
       lore:
-        - Click to change the sound to false!
+        - "&7Click to change the sound to &cfalse&a!"
     disabled_state:
       item: BELL
-      title: Sound Disabled
+      title: "&cSound Disabled"
       lore:
-        - Click to change the sound to true!
+        - "&7Click to change the sound to &atrue&c!"
 
   enable:
     slot: 39
     enabled_state:
       item: GREEN_WOOL
-      title: Health Indıcator Enabled
+      title: "&aHealth Indicator Enabled"
       lore:
-        - Click to change the health indicator to false!
+        - "&7Click to change the health indicator to &cfalse&a!"
     disabled_state:
       item: RED_WOOL
-      title: Health Indıcator Disabled
+      title: "&cHealth Indicator Disabled"
       lore:
-        - Click to change the health indicator to true!
+        - "&7Click to change the health indicator to &atrue&c!"
+
   color:
     slot: 41
     item: DYE # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
-    title: Health Color
+    title: "&bHealth Color"
     lore:
-      - Left click for forward
-      - Right click for backward
+      - "&7Left click for &aforward"
+      - "&7Right click for &cbackward"
 
   filler:
     enable: false
     item: ORANGE_STAINED_GLASS_PANE
     title: " " # Use blank for nothing
     lore:
-      - www.softepen.com
+      - "&7www.softepen.com"
 
 killMessagesMenu:
-  title: Special Kill Messages
+  title: "&cSpecial Kill Messages"
   row: 3
 
   selected:
     item: YELLOW_STAINED_GLASS_PANE
-    title: "{message}"
+    title: "&e{message}"
     lore:
-      - Selected kill message
+      - "&aSelected kill message"
+
   hasPerm:
     item: GREEN_STAINED_GLASS_PANE
-    title: "{message}"
+    title: "&a{message}"
     lore:
-      - Click to select the message
+      - "&7Click to select the message"
+
   hasNotPerm:
     item: RED_STAINED_GLASS_PANE
-    title: "{message}"
+    title: "&c{message}"
     lore:
-      - Visit www.softepen.com to buy the message
+      - "&7Visit &bwww.softepen.com &7to buy the message"
 
   filler:
     enable: false
     item: ORANGE_STAINED_GLASS_PANE
     title: " " # Use blank for nothing
     lore:
-      - www.softepen.com
+      - "&7www.softepen.com"
