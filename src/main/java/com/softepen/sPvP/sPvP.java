@@ -42,8 +42,8 @@ public final class sPvP extends JavaPlugin {
 
         messagesManager = new FileManager("lang/en.yml");
         messagesManager.loadConfig();
-//        messagesManager = new FileManager("lang/tr.yml");
-//        messagesManager.loadConfig();
+        messagesManager = new FileManager("lang/tr.yml");
+        messagesManager.loadConfig();
         messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
         messagesManager.loadConfig();
 
