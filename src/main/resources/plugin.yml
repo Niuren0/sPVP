@@ -12,5 +12,3 @@ softdepend: ["PlaceholderAPI"]
 commands:
   spvp:
     description: Main sPvP command
-  test:
-    description: test
