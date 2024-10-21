@@ -79,8 +79,7 @@ public class DamageEvent implements Listener {
                     double healthAfterDamage = victim.getHealth() - event.getDamage();
                     if (healthAfterDamage < 0) healthAfterDamage = 0;
 
-                    double hearts = healthAfterDamage / 2.0;
-                    String formattedHearts = String.format("%.1f", hearts);
+                    String formattedHearts = String.format("%.1f", healthAfterDamage);
                     attacker.sendTitle(" ", getColor(settings.getHealthIndicatorColor()) + "❤" + formattedHearts, 10, 40, 10);
                 }
             }
