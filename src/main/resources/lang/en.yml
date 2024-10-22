@@ -1,7 +1,6 @@
 prefix: '&esPvP&7: &6'
 reloaded: "{prefix} &aPlugin reloaded successfully."
 onlyPlayers: "{prefix} &cOnly players can use this command!"
-killMessageSelected: "{prefix} &bSpecial kill message selected."
 
 comboMessages:
   3: "&e3 combo, &a&lGreat start!"
