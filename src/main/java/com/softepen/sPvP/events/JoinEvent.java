@@ -21,7 +21,7 @@ public class JoinEvent implements Listener {
         criticalHitComboRecord.put(player, settings.getComboRecord());
         killSeriesRecord.put(player, settings.getKillSeriesRecord());
         killSeries.put(player, 0);
-        kills.put(player, 0);
-        deaths.put(player, 0);
+        kills.put(player, settings.getKills());
+        deaths.put(player, settings.getDeaths());
     }
 }
