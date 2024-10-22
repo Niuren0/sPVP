@@ -43,7 +43,22 @@ public class KillMessagesSelector {
             if (player.hasPermission("spvp.messages." + key)) {
                 PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
                 if (Objects.equals(settings.getKillMessage(), key)) {
-                    guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> event.setCancelled(true));
+                    guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {
+                        event.setCancelled(true);
+
+                        File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
+                        FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
+
+                        playerData.set("killMessage", null);
+
+                        try {
+                            playerData.save(playerFile);
+                        } catch (IOException e) {
+                            plugin.getLogger().severe("An error occurred when saving player data file: " + e);
+                        }
+
+                        new SettingsMenu(player);
+                    });
                 } else {
                     guiItem = ItemBuilder.from(getItemStack("hasPerm", message)).asGuiItem(event -> {
                         event.setCancelled(true);
@@ -59,7 +74,7 @@ public class KillMessagesSelector {
                             plugin.getLogger().severe("An error occurred when saving player data file: " + e);
                         }
 
-                        gui.close(player);
+                        new SettingsMenu(player);
 
                     });
                 }
@@ -70,6 +85,12 @@ public class KillMessagesSelector {
             gui.setItem(i, guiItem);
             i++;
         }
+
+        GuiItem backItem = ItemBuilder.from(getItemStack("back", null)).asGuiItem(event -> {
+            event.setCancelled(true);
+            new SettingsMenu(player);
+        });
+        gui.setItem(configManager.getInt("killMessagesMenu.back.slot"), backItem);
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
 
@@ -94,6 +115,10 @@ public class KillMessagesSelector {
             material = Material.valueOf(configManager.getString("killMessagesMenu.hasNotPerm.item"));
             itemName = configManager.getString("killMessagesMenu.hasNotPerm.title").replace("{message}", message);
             itemLore = configManager.getStringList("killMessagesMenu.hasNotPerm.lore");
+        } else if (Objects.equals(s, "back")) {
+            material = Material.valueOf(configManager.getString("killMessagesMenu.back.item"));
+            itemName = configManager.getString("killMessagesMenu.back.title");
+            itemLore = configManager.getStringList("killMessagesMenu.back.lore");
         }
 
         if (itemLore != null) {
