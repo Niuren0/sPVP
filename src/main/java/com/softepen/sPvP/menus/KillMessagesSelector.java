@@ -44,8 +44,6 @@ public class KillMessagesSelector {
                 PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
                 if (Objects.equals(settings.getKillMessage(), key)) {
                     guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {
-                        event.setCancelled(true);
-
                         File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
                         FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -61,8 +59,6 @@ public class KillMessagesSelector {
                     });
                 } else {
                     guiItem = ItemBuilder.from(getItemStack("hasPerm", message)).asGuiItem(event -> {
-                        event.setCancelled(true);
-
                         File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
                         FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -79,17 +75,14 @@ public class KillMessagesSelector {
                     });
                 }
             } else {
-                guiItem = ItemBuilder.from(getItemStack("hasNotPerm", message)).asGuiItem(event -> event.setCancelled(true));
+                guiItem = ItemBuilder.from(getItemStack("hasNotPerm", message)).asGuiItem();
             }
 
             gui.setItem(i, guiItem);
             i++;
         }
 
-        GuiItem backItem = ItemBuilder.from(getItemStack("back", "")).asGuiItem(event -> {
-            event.setCancelled(true);
-            new SettingsMenu(player);
-        });
+        GuiItem backItem = ItemBuilder.from(getItemStack("back", "")).asGuiItem(event -> new SettingsMenu(player));
         gui.setItem(configManager.getInt("killMessagesMenu.back.slot"), backItem);
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
