@@ -11,12 +11,15 @@ import static com.softepen.sPvP.sPvP.*;
 public class Reload implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        configManager.reloadConfig();
-        soundsManager.reloadConfig();
-        messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
-        messagesManager.loadConfig();
+        if (commandSender.hasPermission("spvp.commands.reload") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
+            configManager.reloadConfig();
+            soundsManager.reloadConfig();
+            messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
+            messagesManager.loadConfig();
 
-        commandSender.sendMessage(messagesManager.getPrefixString("reloaded"));
+            commandSender.sendMessage(messagesManager.getPrefixString("reloaded"));
+        } else commandSender.sendMessage(messagesManager.getPrefixString("noPerm"));
+
         return true;
     }
 }

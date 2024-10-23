@@ -40,7 +40,7 @@ public class KillMessagesSelector {
                     .replace("{attacker}", playerName)
                     .replace("{killer}", playerName);
 
-            if (player.hasPermission("spvp.messages." + key)) {
+            if (player.hasPermission("spvp.messages." + key) || player.hasPermission("spvp.messages.*") || player.hasPermission("spvp.*")) {
                 PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
                 if (Objects.equals(settings.getKillMessage(), key)) {
                     guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {

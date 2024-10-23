@@ -15,12 +15,12 @@ public class spvpTabComplete implements TabCompleter {
         List<String> completions = new ArrayList<>();
         List<String> COMMANDS = new ArrayList<>();
 
-        if (commandSender.isOp()) {
-            if (args.length == 1) {
+        if (args.length == 1) {
+            if (commandSender.hasPermission("spvp.commands.reload") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
                 COMMANDS.add("reload");
                 StringUtil.copyPartialMatches(args[0], COMMANDS, completions);
             }
-        } else completions = null;
+        }
 
         return completions;
     }
