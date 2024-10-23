@@ -75,8 +75,7 @@ settingsMenu:
     item: WOOL # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
     title: "&bHealth Color"
     lore:
-      - "&7Left click for &aforward"
-      - "&7Right click for &cbackward"
+      - "&7Click to change the health indicator color!"
 
   filler:
     enable: false
