@@ -3,10 +3,15 @@ package com.softepen.sPvP.events;
 import com.softepen.sPvP.managers.PlayerSettings;
 import com.softepen.sPvP.managers.PlayerSettingsManager;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+
+import java.io.File;
+import java.io.IOException;
 
 import static com.softepen.sPvP.sPvP.*;
 import static com.softepen.sPvP.utils.getStreakMessages;
@@ -51,6 +56,32 @@ public class DeathEvent implements Listener {
                         else plugin.getLogger().warning("Special kill messages is null: " + perm);
                     }
                 }
+            }
+
+            // KILLER SAVE
+            File killerFile = new File(plugin.getDataFolder(), "data/" + killer.getName() + ".yml");
+            FileConfiguration killerData = YamlConfiguration.loadConfiguration(killerFile);
+
+            int killerKills = killerData.getInt("kill." + victim.getName(), 0);
+            killerData.set("kill." + victim.getName(), killerKills + 1);
+
+            try {
+                killerData.save(killerFile);
+            } catch (IOException e) {
+                plugin.getLogger().severe("An error occurred when saving killer data file: " + e);
+            }
+
+            // VICTIM SAVE
+            File victimFile = new File(plugin.getDataFolder(), "data/" + victim.getName() + ".yml");
+            FileConfiguration victimData = YamlConfiguration.loadConfiguration(victimFile);
+
+            int victimDeaths = victimData.getInt("death." + victim.getName(), 0);
+            victimData.set("death." + victim.getName(), victimDeaths + 1);
+
+            try {
+                victimData.save(victimFile);
+            } catch (IOException e) {
+                plugin.getLogger().severe("An error occurred when saving victim data file: " + e);
             }
         }
     }
