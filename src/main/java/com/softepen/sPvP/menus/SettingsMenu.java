@@ -35,8 +35,6 @@ public class SettingsMenu {
         GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem();
 
         GuiItem enableItem = ItemBuilder.from(getItemStack(player, "enable")).asGuiItem(event -> {
-            event.setCancelled(true);
-
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -53,81 +51,9 @@ public class SettingsMenu {
             gui.updateItem(configManager.getInt("settingsMenu.enable.slot"), new ItemStack(getItemStack(player, "enable")));
         });
 
-        GuiItem colorItem = ItemBuilder.from(getItemStack(player, "color")).asGuiItem(event -> {
-            event.setCancelled(true);
-
-            ItemStack item = event.getCurrentItem();
-            assert item != null;
-            String itemName = item.getType().name();
-
-            Material[] colors = new Material[]{Material.WHITE_WOOL, Material.ORANGE_WOOL, Material.MAGENTA_WOOL,
-                    Material.LIGHT_BLUE_WOOL, Material.YELLOW_WOOL, Material.LIME_WOOL, Material.PINK_WOOL,
-                    Material.GRAY_WOOL, Material.LIGHT_GRAY_WOOL, Material.CYAN_WOOL, Material.PURPLE_WOOL,
-                    Material.BLUE_WOOL, Material.BROWN_WOOL, Material.GREEN_WOOL, Material.RED_WOOL,
-                    Material.BLACK_WOOL};
-
-            if (itemName.contains("CONCRETE")) {
-                colors = new Material[]{Material.WHITE_CONCRETE, Material.ORANGE_CONCRETE, Material.MAGENTA_CONCRETE,
-                        Material.LIGHT_BLUE_CONCRETE, Material.YELLOW_CONCRETE, Material.LIME_CONCRETE, Material.PINK_CONCRETE,
-                        Material.GRAY_CONCRETE, Material.LIGHT_GRAY_CONCRETE, Material.CYAN_CONCRETE, Material.PURPLE_CONCRETE,
-                        Material.BLUE_CONCRETE, Material.BROWN_CONCRETE, Material.GREEN_CONCRETE, Material.RED_CONCRETE,
-                        Material.BLACK_CONCRETE};
-            } else if (itemName.contains("CONCRETE_POWDER")) {
-                colors = new Material[]{Material.WHITE_CONCRETE_POWDER, Material.ORANGE_CONCRETE_POWDER, Material.MAGENTA_CONCRETE_POWDER,
-                        Material.LIGHT_BLUE_CONCRETE_POWDER, Material.YELLOW_CONCRETE_POWDER, Material.LIME_CONCRETE_POWDER, Material.PINK_CONCRETE_POWDER,
-                        Material.GRAY_CONCRETE_POWDER, Material.LIGHT_GRAY_CONCRETE_POWDER, Material.CYAN_CONCRETE_POWDER, Material.PURPLE_CONCRETE_POWDER,
-                        Material.BLUE_CONCRETE_POWDER, Material.BROWN_CONCRETE_POWDER, Material.GREEN_CONCRETE_POWDER, Material.RED_CONCRETE_POWDER,
-                        Material.BLACK_CONCRETE_POWDER};
-            } else if (itemName.contains("STAINED_GLASS")) {
-                colors = new Material[]{Material.WHITE_STAINED_GLASS, Material.ORANGE_STAINED_GLASS, Material.MAGENTA_STAINED_GLASS,
-                        Material.LIGHT_BLUE_STAINED_GLASS, Material.YELLOW_STAINED_GLASS, Material.LIME_STAINED_GLASS, Material.PINK_STAINED_GLASS,
-                        Material.GRAY_STAINED_GLASS, Material.LIGHT_GRAY_STAINED_GLASS, Material.CYAN_STAINED_GLASS, Material.PURPLE_STAINED_GLASS,
-                        Material.BLUE_STAINED_GLASS, Material.BROWN_STAINED_GLASS, Material.GREEN_STAINED_GLASS, Material.RED_STAINED_GLASS,
-                        Material.BLACK_STAINED_GLASS};
-            } else if (itemName.contains("STAINED_GLASS_PANE")) {
-                colors = new Material[]{Material.WHITE_STAINED_GLASS_PANE, Material.ORANGE_STAINED_GLASS_PANE, Material.MAGENTA_STAINED_GLASS_PANE,
-                        Material.LIGHT_BLUE_STAINED_GLASS_PANE, Material.YELLOW_STAINED_GLASS_PANE, Material.LIME_STAINED_GLASS_PANE, Material.PINK_STAINED_GLASS_PANE,
-                        Material.GRAY_STAINED_GLASS_PANE, Material.LIGHT_GRAY_STAINED_GLASS_PANE, Material.CYAN_STAINED_GLASS_PANE, Material.PURPLE_STAINED_GLASS_PANE,
-                        Material.BLUE_STAINED_GLASS_PANE, Material.BROWN_STAINED_GLASS_PANE, Material.GREEN_STAINED_GLASS_PANE, Material.RED_STAINED_GLASS_PANE,
-                        Material.BLACK_STAINED_GLASS_PANE};
-            } else if (itemName.contains("DYE")) {
-                colors = new Material[]{Material.WHITE_DYE, Material.ORANGE_DYE, Material.MAGENTA_DYE,
-                        Material.LIGHT_BLUE_DYE, Material.YELLOW_DYE, Material.LIME_DYE, Material.PINK_DYE,
-                        Material.GRAY_DYE, Material.LIGHT_GRAY_DYE, Material.CYAN_DYE, Material.PURPLE_DYE,
-                        Material.BLUE_DYE, Material.BROWN_DYE, Material.GREEN_DYE, Material.RED_DYE,
-                        Material.BLACK_DYE};
-            }
-
-            int currentIndex = -1;
-            for (int i = 0; i < colors.length; i++) {
-                if (item.getType() == colors[i]) {
-                    currentIndex = i;
-                    break;
-                }
-            }
-
-            int newIndex;
-            if (event.getClick().isLeftClick()) newIndex = (currentIndex + 1) % colors.length;
-            else if (event.getClick().isRightClick()) newIndex = (currentIndex - 1 + colors.length) % colors.length;
-            else return;
-
-            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
-            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
-
-            playerData.set("healthIndicatorColor", colors[newIndex].name());
-
-            try {
-                playerData.save(playerFile);
-            } catch (IOException e) {
-                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
-            }
-
-            gui.updateItem(configManager.getInt("settingsMenu.color.slot"), new ItemStack(getItemStack(player, "color")));
-        });
+        GuiItem colorItem = ItemBuilder.from(getItemStack(player, "color")).asGuiItem(event -> new ColorSelectMenu(player));
         
         GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> {
-           event.setCancelled(true);
-
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -144,14 +70,9 @@ public class SettingsMenu {
             gui.updateItem(configManager.getInt("settingsMenu.sound.slot"), new ItemStack(getItemStack(player, "sound")));
         });
 
-        GuiItem killMessagesItem = ItemBuilder.from(getItemStack(player, "killMessages")).asGuiItem(event -> {
-            event.setCancelled(true);
-            new KillMessagesSelector(player);
-        });
+        GuiItem killMessagesItem = ItemBuilder.from(getItemStack(player, "killMessages")).asGuiItem(event -> new KillMessagesSelector(player));
 
         GuiItem comboMessagesItem = ItemBuilder.from(getItemStack(player, "comboMessages")).asGuiItem(event -> {
-            event.setCancelled(true);
-
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
@@ -213,8 +134,7 @@ public class SettingsMenu {
             itemName = configManager.getString("settingsMenu.enable." + state + ".title");
             itemLore = configManager.getStringList("settingsMenu.enable." + state + ".lore");
         } else if (Objects.equals(item, "color")) {
-            String color = getRawColor(settings.getHealthIndicatorColor());
-            material = Material.valueOf(color + configManager.getString("settingsMenu.color.item"));
+            material = Material.valueOf(settings.getHealthIndicatorColor());
             itemName = configManager.getString("settingsMenu.color.title");
             itemLore = configManager.getStringList("settingsMenu.color.lore");
         } else if (Objects.equals(item, "filler")) {
@@ -289,16 +209,5 @@ public class SettingsMenu {
         int hashmapRecord = killSeriesRecord.getOrDefault(player, 0);
 
         return String.valueOf(Math.max(hashmapRecord, savedRecord));
-    }
-
-    public static String getRawColor(String input) {
-        input = input.replace("WOOL", "");
-        input = input.replace("CONCRETE", "");
-        input = input.replace("CONCRETE_POWDER", "");
-        input = input.replace("STAINED_GLASS", "");
-        input = input.replace("STAINED_GLASS_PANE", "");
-        input = input.replace("DYE", "");
-
-        return input;
     }
 }

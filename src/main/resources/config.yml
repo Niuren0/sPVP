@@ -119,3 +119,28 @@ killMessagesMenu:
     title: " " # Use blank for nothing
     lore:
       - "&7www.softepen.com"
+
+colorSelectMenu:
+  title: "&6Color Select"
+  row: 3
+
+  selected:
+    lore:
+      - "&aSelected color"
+
+  unselected:
+    lore:
+      - "&aClick to select the color"
+
+  back:
+    slot: 22
+    item: BARRIER
+    title: "&cBack"
+    lore: []
+
+  filler:
+    enable: false
+    item: ORANGE_STAINED_GLASS_PANE
+    title: " " # Use blank for nothing
+    lore:
+      - "&7www.softepen.com"

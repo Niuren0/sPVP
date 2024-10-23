@@ -86,40 +86,20 @@ public class KillMessagesSelector {
             i++;
         }
 
-        GuiItem backItem = ItemBuilder.from(getItemStack("back", null)).asGuiItem(event -> {
+        GuiItem backItem = ItemBuilder.from(getItemStack("back", "")).asGuiItem(event -> {
             event.setCancelled(true);
             new SettingsMenu(player);
         });
         gui.setItem(configManager.getInt("killMessagesMenu.back.slot"), backItem);
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
-
         gui.open(player);
     }
 
-    private ItemStack getItemStack(String s, String message){
-        Material material = Material.AIR;
-        ItemStack itemStack;
-        String itemName = null;
-        List<String> itemLore = null;
-
-        if (Objects.equals(s, "selected")) {
-            material = Material.valueOf(configManager.getString("killMessagesMenu.selected.item"));
-            itemName = configManager.getString("killMessagesMenu.selected.title").replace("{message}", message);
-            itemLore = configManager.getStringList("killMessagesMenu.selected.lore");
-        } else if (Objects.equals(s, "hasPerm")) {
-            material = Material.valueOf(configManager.getString("killMessagesMenu.hasPerm.item"));
-            itemName = configManager.getString("killMessagesMenu.hasPerm.title").replace("{message}", message);
-            itemLore = configManager.getStringList("killMessagesMenu.hasPerm.lore");
-        } else if (Objects.equals(s, "hasNotPerm")) {
-            material = Material.valueOf(configManager.getString("killMessagesMenu.hasNotPerm.item"));
-            itemName = configManager.getString("killMessagesMenu.hasNotPerm.title").replace("{message}", message);
-            itemLore = configManager.getStringList("killMessagesMenu.hasNotPerm.lore");
-        } else if (Objects.equals(s, "back")) {
-            material = Material.valueOf(configManager.getString("killMessagesMenu.back.item"));
-            itemName = configManager.getString("killMessagesMenu.back.title");
-            itemLore = configManager.getStringList("killMessagesMenu.back.lore");
-        }
+    private ItemStack getItemStack(String s, String message) {
+        Material material = Material.valueOf(configManager.getString("killMessagesMenu." + s + ".item"));
+        String itemName = configManager.getString("killMessagesMenu." + s + ".title").replace("{message}", message);
+        List<String> itemLore = configManager.getStringList("killMessagesMenu." + s + ".lore");
 
         if (itemLore != null) {
             ListIterator<String> iterator = itemLore.listIterator();
@@ -131,10 +111,10 @@ public class KillMessagesSelector {
             }
         }
 
-        itemStack = new ItemStack(material);
+        ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            if (itemName != null) meta.setDisplayName(itemName);
+            meta.setDisplayName(itemName);
             if (itemLore != null) meta.setLore(itemLore);
             itemStack.setItemMeta(meta);
         }
