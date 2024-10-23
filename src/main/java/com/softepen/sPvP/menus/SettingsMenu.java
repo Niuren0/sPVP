@@ -134,7 +134,7 @@ public class SettingsMenu {
             itemName = configManager.getString("settingsMenu.enable." + state + ".title");
             itemLore = configManager.getStringList("settingsMenu.enable." + state + ".lore");
         } else if (Objects.equals(item, "color")) {
-            material = Material.valueOf(settings.getHealthIndicatorColor());
+            material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
             itemName = configManager.getString("settingsMenu.color.title");
             itemLore = configManager.getStringList("settingsMenu.color.lore");
         } else if (Objects.equals(item, "filler")) {
@@ -209,5 +209,15 @@ public class SettingsMenu {
         int hashmapRecord = killSeriesRecord.getOrDefault(player, 0);
 
         return String.valueOf(Math.max(hashmapRecord, savedRecord));
+    }
+
+    private String getRawColor(String input) {
+        input = input.replace("_WOOL", "");
+        input = input.replace("_CONCRETE", "");
+        input = input.replace("_POWDER", "");
+        input = input.replace("_STAINED_GLASS", "");
+        input = input.replace("_PANE", "");
+
+        return input;
     }
 }
