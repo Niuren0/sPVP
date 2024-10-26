@@ -11,8 +11,9 @@ public class PlayerSettings {
     private final int kills;
     private final int deaths;
     private final String killMessage;
+    private final String comboSound;
 
-    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, int lastCombo, int comboRecord, int killSeriesRecord, int kills, int deaths, String killMessage) {
+    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, int lastCombo, int comboRecord, int killSeriesRecord, int kills, int deaths, String killMessage, String comboSound) {
         this.sound = sound;
         this.healthIndicator = healthIndicator;
         this.healthIndicatorColor = healthIndicatorColor;
@@ -23,6 +24,7 @@ public class PlayerSettings {
         this.kills = kills;
         this.deaths = deaths;
         this.killMessage = killMessage;
+        this.comboSound = comboSound;
     }
 
     public boolean getSound() {
@@ -63,5 +65,9 @@ public class PlayerSettings {
 
     public String getKillMessage() {
         return killMessage;
+    }
+
+    public String getComboSound() {
+        return comboSound;
     }
 }

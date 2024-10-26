@@ -67,10 +67,7 @@ public class ColorSelectMenu {
             i++;
         }
 
-        GuiItem backItem = ItemBuilder.from(getItemStack(null, "back")).asGuiItem(event -> {
-            event.setCancelled(true);
-            new SettingsMenu(player);
-        });
+        GuiItem backItem = ItemBuilder.from(getItemStack(null, "back")).asGuiItem(event -> new SettingsMenu(player));
         gui.setItem(configManager.getInt("colorSelectMenu.back.slot"), backItem);
 
         if (configManager.getBoolean("colorSelectMenu.filler.enable")) {

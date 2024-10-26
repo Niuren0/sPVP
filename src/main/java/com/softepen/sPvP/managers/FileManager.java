@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.softepen.sPvP.sPvP.plugin;
 
@@ -40,8 +41,12 @@ public class FileManager {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 
-    public double getDouble(String path) {
-        return config.getDouble(path);
+    public Set<String> getKeys(boolean b) {
+        return config.getKeys(b);
+    }
+
+    public double getDouble(String path, double def) {
+        return config.getDouble(path, def);
     }
 
     public ConfigurationSection getConfigurationSection(String path) {

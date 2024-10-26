@@ -53,22 +53,7 @@ public class SettingsMenu {
 
         GuiItem colorItem = ItemBuilder.from(getItemStack(player, "color")).asGuiItem(event -> new ColorSelectMenu(player));
         
-        GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> {
-            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
-            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
-
-            PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
-
-            playerData.set("sound", !settings.getSound());
-
-            try {
-                playerData.save(playerFile);
-            } catch (IOException e) {
-                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
-            }
-
-            gui.updateItem(configManager.getInt("settingsMenu.sound.slot"), new ItemStack(getItemStack(player, "sound")));
-        });
+        GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> new SoundSelectmenu(player));
 
         GuiItem killMessagesItem = ItemBuilder.from(getItemStack(player, "killMessages")).asGuiItem(event -> new KillMessagesSelector(player));
 
@@ -104,46 +89,32 @@ public class SettingsMenu {
         gui.open(player);
     }
 
-    private ItemStack getItemStack(Player player, String item){
+    private ItemStack getItemStack(Player player, String item) {
         PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
 
-        Material material = Material.AIR;
-        ItemStack itemStack;
-        String state, itemName = null;
-        List<String> itemLore = null;
+        Material material;
+        String state = null, itemName;
+        List<String> itemLore;
 
-        if (Objects.equals(item, "sound")) {
-            state = settings.getSound() ? "enabled_state" : "disabled_state";
-            material = Material.valueOf(configManager.getString("settingsMenu.sound." + state + ".item"));
-
-            itemName = configManager.getString("settingsMenu.sound." + state + ".title");
-            itemLore = configManager.getStringList("settingsMenu.sound." + state + ".lore");
-        } else if (Objects.equals(item, "killMessages")) {
-            material = Material.valueOf(configManager.getString("settingsMenu.killMessages.item"));
-
-            itemName = configManager.getString("settingsMenu.killMessages.title");
-            itemLore = configManager.getStringList("settingsMenu.killMessages.lore");
+        if (Objects.equals(item, "enable")) {
+            state = settings.getHealthIndicator() ? "enabled_state" : "disabled_state";
         } else if (Objects.equals(item, "comboMessages")) {
             state = settings.getComboMessages() ? "enabled_state" : "disabled_state";
-            material = Material.valueOf(configManager.getString("settingsMenu.comboMessages." + state + ".item"));
-            itemName = configManager.getString("settingsMenu.comboMessages." + state + ".title");
-            itemLore = configManager.getStringList("settingsMenu.comboMessages." + state + ".lore");
-        } else if (Objects.equals(item, "enable")) {
-            state = settings.getHealthIndicator() ? "enabled_state" : "disabled_state";
-            material = Material.valueOf(configManager.getString("settingsMenu.enable." + state + ".item"));
-            itemName = configManager.getString("settingsMenu.enable." + state + ".title");
-            itemLore = configManager.getStringList("settingsMenu.enable." + state + ".lore");
-        } else if (Objects.equals(item, "color")) {
-            material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
-            itemName = configManager.getString("settingsMenu.color.title");
-            itemLore = configManager.getStringList("settingsMenu.color.lore");
-        } else if (Objects.equals(item, "filler")) {
-            material = Material.valueOf(configManager.getString("settingsMenu.filler.item"));
-            itemName = configManager.getString("settingsMenu.filler.title");
-            itemLore = configManager.getStringList("settingsMenu.filler.lore");
         }
 
-        itemStack = new ItemStack(material);
+        if (state != null) {
+            material = Material.valueOf(configManager.getString("settingsMenu." + item + "." + state + ".item"));
+            itemName = configManager.getString("settingsMenu." + item + "." + state + ".title");
+            itemLore = configManager.getStringList("settingsMenu." + item + "." + state + ".lore");
+        } else {
+            if (Objects.equals(item, "color")) {
+                material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
+            } else material = Material.valueOf(configManager.getString("settingsMenu." + item + ".item"));
+            itemName = configManager.getString("settingsMenu." + item + ".title");
+            itemLore = configManager.getStringList("settingsMenu." + item + ".lore");
+        }
+
+        ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
             if (itemName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemName));

@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
@@ -107,8 +108,14 @@ public class KillMessagesSelector {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(itemName);
-            if (itemLore != null) meta.setLore(itemLore);
+            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemName));
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                meta.setLore(coloredLore);
+            }
             itemStack.setItemMeta(meta);
         }
 

@@ -1,5 +1,6 @@
 package com.softepen.sPvP;
 
+import com.softepen.sPvP.managers.PlayerSettingsManager;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -16,20 +17,20 @@ public class utils {
         }
     }
 
-    public static Sound getComboSound(int combo, Sound defaultSound) {
-        String path = configManager.getString("sounds.critical_hit");
+    public static Sound getComboSound(int combo, Player player) {
+        String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
         String soundName = soundsManager.getString(path + "." + combo + ".sound");
+        if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
         try {
             return Sound.valueOf(soundName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            return defaultSound;
+            return null;
         }
     }
 
-    public static float getComboSoundPitch(int combo) {
-        String path = configManager.getString("sounds.critical_hit");
-        float soundPitch;
-        soundPitch = (float) soundsManager.getDouble(path + "." + combo + ".pitch");
+    public static float getComboSoundPitch(int combo, Player player) {
+        String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
+        float soundPitch = (float) soundsManager.getDouble(path + "." + combo + ".pitch", 1);
         try {
             return soundPitch;
         } catch (IllegalArgumentException | NullPointerException e) {

@@ -5,7 +5,7 @@ streakAnnouncements: true
 specialKillMessages: true
 
 sounds:
-  critical_hit: default # sounds.yml
+  critical_hit_default: experience # sounds.yml
   critical_break: ENTITY_VILLAGER_NO
 
 comboCooldown: 3
@@ -46,16 +46,10 @@ settingsMenu:
 
   sound:
     slot: 31
-    enabled_state:
-      item: BELL
-      title: "&aSound Enabled"
-      lore:
-        - "&7Click to change the sound to &cfalse&a!"
-    disabled_state:
-      item: BELL
-      title: "&cSound Disabled"
-      lore:
-        - "&7Click to change the sound to &atrue&c!"
+    item: BELL
+    title: "&bCombo Sound"
+    lore:
+      - "&7Click to change the combo sounds!"
 
   enable:
     slot: 39
@@ -133,6 +127,46 @@ colorSelectMenu:
 
   back:
     slot: 22
+    item: BARRIER
+    title: "&cBack"
+    lore: []
+
+  filler:
+    enable: false
+    item: ORANGE_STAINED_GLASS_PANE
+    title: " " # Use blank for nothing
+    lore:
+      - "&7www.softepen.com"
+
+soundSelectMenu:
+  title: "&6Sound Select"
+  row: 3
+
+  selected:
+    item: GREEN_STAINED_GLASS_PANE
+    lore:
+      - "&aSelected sound"
+
+  unselected:
+    item: RED_STAINED_GLASS_PANE
+    lore:
+      - "&aClick to select the sound"
+
+  sound:
+    slot: 21
+    enabled_state:
+      item: GREEN_WOOL
+      title: "&aSound Enabled"
+      lore:
+        - "&7Click to change the sound to &cfalse&a!"
+    disabled_state:
+      item: RED_WOOL
+      title: "&cSound Disabled"
+      lore:
+        - "&7Click to change the sound to &atrue&c!"
+
+  back:
+    slot: 23
     item: BARRIER
     title: "&cBack"
     lore: []
