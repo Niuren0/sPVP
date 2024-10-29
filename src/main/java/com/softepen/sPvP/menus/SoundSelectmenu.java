@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Objects;
 
 import static com.softepen.sPvP.sPvP.*;
@@ -104,15 +103,6 @@ public class SoundSelectmenu {
             } else itemName = name;
             material = Material.valueOf(configManager.getString("soundSelectMenu." + s + ".item"));
             itemLore = configManager.getStringList("soundSelectMenu." + s + ".lore");
-        }
-
-        if (itemLore != null) {
-            ListIterator<String> iterator = itemLore.listIterator();
-            while (iterator.hasNext()) {
-                String lore = iterator.next();
-                lore = ChatColor.translateAlternateColorCodes('&', lore);
-                iterator.set(lore);
-            }
         }
 
         ItemStack itemStack = new ItemStack(material);

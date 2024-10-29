@@ -14,10 +14,10 @@ commands:
     description: Opens the sPvP menu
     usage: /spvp
     permission: spvp.commands.spvp
-  spvp reload:
-    description: Reloads the plugin configuration
-    usage: /spvp reload
-    permission: spvp.commands.reload
+  profile:
+    description: Player profile menu
+    usage: /profile [player]
+    permission: spvp.commands.profile
 
 permissions:
   spvp.commands.spvp:
@@ -26,15 +26,21 @@ permissions:
   spvp.commands.reload:
     description: Permission to reload the plugin configuration
     default: op
+  spvp.commands.profile:
+    description: Permission to reload the plugin configuration
+    default: true
   spvp.commands.*:
     description: Grants access to all sPvP commands
     default: op
     children:
       spvp.commands.spvp: true
       spvp.commands.reload: true
+      spvp.commands.profile: true
+
   spvp.messages.*:
     description: Grants access to all custom kill messages
     default: op
+
   spvp.*:
     description: Grants all permissions for the sPvP plugin
     default: op

@@ -1,8 +1,8 @@
 prefix: '&esPvP&7: &6'
 reloaded: "{prefix} &aEklenti başarıyla yeniden yüklendi."
 onlyPlayers: "{prefix} &cBu komutu sadece oyuncular kullanabilir!"
-killMessageSelected: "{prefix} &bÖzel öldürme mesajı seçildi."
 noPerm: "{prefix} &cBu komutu kullanmak için iznin yok!"
+cantFindPlayer: "{prefix} &cOyuncu mevcut değil veya çevrimdışı!"
 
 comboMessages:
   3: "&e3 kombo, &a&lHarika başlangıç!"

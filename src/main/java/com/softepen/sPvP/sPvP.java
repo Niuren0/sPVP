@@ -1,6 +1,7 @@
 package com.softepen.sPvP;
 
 import com.softepen.sPvP.commands.MainCommand;
+import com.softepen.sPvP.commands.ProfileCommand;
 import com.softepen.sPvP.commands.spvpTabComplete;
 import com.softepen.sPvP.events.DamageEvent;
 import com.softepen.sPvP.events.DeathEvent;
@@ -56,6 +57,8 @@ public final class sPvP extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("spvp")).setExecutor(new MainCommand());
         Objects.requireNonNull(getCommand("spvp")).setTabCompleter(new spvpTabComplete());
+
+        Objects.requireNonNull(getCommand("profile")).setExecutor(new ProfileCommand());
 
         getServer().getPluginManager().registerEvents(new DamageEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);

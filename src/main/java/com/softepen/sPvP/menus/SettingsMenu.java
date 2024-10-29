@@ -32,7 +32,7 @@ public class SettingsMenu {
                 .rows(configManager.getInt("settingsMenu.row"))
                 .create();
 
-        GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem();
+        GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem(event -> new ProfileMenu(player, player));
 
         GuiItem enableItem = ItemBuilder.from(getItemStack(player, "enable")).asGuiItem(event -> {
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
@@ -188,6 +188,7 @@ public class SettingsMenu {
         input = input.replace("_POWDER", "");
         input = input.replace("_STAINED_GLASS", "");
         input = input.replace("_PANE", "");
+        input = input.replace("_DYE", "");
 
         return input;
     }

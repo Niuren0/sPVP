@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Objects;
 
 import static com.softepen.sPvP.sPvP.*;
@@ -94,16 +93,6 @@ public class KillMessagesSelector {
         Material material = Material.valueOf(configManager.getString("killMessagesMenu." + s + ".item"));
         String itemName = configManager.getString("killMessagesMenu." + s + ".title").replace("{message}", message);
         List<String> itemLore = configManager.getStringList("killMessagesMenu." + s + ".lore");
-
-        if (itemLore != null) {
-            ListIterator<String> iterator = itemLore.listIterator();
-            while (iterator.hasNext()) {
-                String lore = iterator.next();
-                lore = lore.replace("{message}", message);
-                lore = ChatColor.translateAlternateColorCodes('&', lore);
-                iterator.set(lore);
-            }
-        }
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();

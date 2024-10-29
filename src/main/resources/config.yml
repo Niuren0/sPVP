@@ -5,7 +5,7 @@ streakAnnouncements: true
 specialKillMessages: true
 
 sounds:
-  critical_hit_default: experience # sounds.yml
+  critical_hit_default: Experience Sound # sounds.yml
   critical_break: ENTITY_VILLAGER_NO
 
 comboCooldown: 3
@@ -167,6 +167,108 @@ soundSelectMenu:
 
   back:
     slot: 23
+    item: BARRIER
+    title: "&cBack"
+    lore: []
+
+  filler:
+    enable: false
+    item: ORANGE_STAINED_GLASS_PANE
+    title: " " # Use blank for nothing
+    lore:
+      - "&7www.softepen.com"
+
+profileMenu:
+  title: "&6{player} Profile"
+  row: 6
+
+  deaths:
+    slot: 20
+    item: SKELETON_SKULL
+    title: "&cTotal Deaths"
+    lore:
+      - "&7{player} &cdied {deaths} &7times"
+  kills:
+    slot: 29
+    item: WITHER_SKELETON_SKULL
+    title: "&aTotal Kills"
+    lore:
+      - "&7{player} &ahas {kills} &7kills"
+
+  last5deaths:
+    slot: 21
+    item: SKELETON_SKULL
+    title: "&cLast 5 Deaths"
+    lore:
+      - "&7#1 &6- &a{1} &7(&b{time1}&7)"
+      - "&7#2 &6- &a{2} &7(&b{time2}&7)"
+      - "&7#3 &6- &a{3} &7(&b{time3}&7)"
+      - "&7#4 &6- &a{4} &7(&b{time4}&7)"
+      - "&7#5 &6- &a{5} &7(&b{time5}&7)"
+  last5kills:
+    slot: 30
+    item: WITHER_SKELETON_SKULL
+    title: "&aLast 5 Kills"
+    lore:
+      - "&7#1 &6- &a{1} &7(&b{time1}&7)"
+      - "&7#2 &6- &a{2} &7(&b{time2}&7)"
+      - "&7#3 &6- &a{3} &7(&b{time3}&7)"
+      - "&7#4 &6- &a{4} &7(&b{time4}&7)"
+      - "&7#5 &6- &a{5} &7(&b{time5}&7)"
+
+  top5deaths:
+    slot: 22
+    item: SKELETON_SKULL
+    title: "&cTop 5 Deaths"
+    lore:
+      - "&7#1 &6- &c{1} &6- &b{count1}"
+      - "&7#2 &6- &c{2} &6- &b{count2}"
+      - "&7#3 &6- &c{3} &6- &b{count3}"
+      - "&7#4 &6- &c{4} &6- &b{count4}"
+      - "&7#5 &6- &c{5} &6- &b{count5}"
+  top5kills:
+    slot: 31
+    item: WITHER_SKELETON_SKULL
+    title: "&aTop 5 Kills"
+    lore:
+      - "&7#1 &6- &a{1} &6- &b{count1}"
+      - "&7#2 &6- &a{2} &6- &b{count2}"
+      - "&7#3 &6- &a{3} &6- &b{count3}"
+      - "&7#4 &6- &a{4} &6- &b{count4}"
+      - "&7#5 &6- &a{5} &6- &b{count5}"
+
+  lastCombo:
+    slot: 23
+    item: SKELETON_SKULL
+    title: "&aLast Combo"
+    lore:
+      - "&7{player}'s last combo &a{lastCombo}"
+  comboRecord:
+    slot: 32
+    item: WITHER_SKELETON_SKULL
+    title: "&bCombo Record"
+    lore:
+      - "&7{player}'s combo record &a{comboRecord}"
+
+  currentStreak:
+    slot: 24
+    item: SKELETON_SKULL
+    title: "&aCurrent Streak"
+    lore:
+      - "&7{player}'s current streak &a{currentStreak}"
+  streakRecord:
+    slot: 33
+    item: WITHER_SKELETON_SKULL
+    title: "&bStreak Record"
+    lore:
+      - "&7{player}'s streak record &a{streakRecord}"
+
+
+
+
+
+  back:
+    slot: 49
     item: BARRIER
     title: "&cBack"
     lore: []

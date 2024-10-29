@@ -94,6 +94,7 @@ public class DamageEvent implements Listener {
         input = input.replace("_POWDER", "");
         input = input.replace("_STAINED_GLASS", "");
         input = input.replace("_PANE", "");
+        input = input.replace("_DYE", "");
 
         return switch (input) {
             case "ORANGE", "BROWN" -> ChatColor.GOLD;
