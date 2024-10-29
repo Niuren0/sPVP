@@ -75,8 +75,8 @@ public class DeathEvent implements Listener {
             File victimFile = new File(plugin.getDataFolder(), "data/" + victim.getName() + ".yml");
             FileConfiguration victimData = YamlConfiguration.loadConfiguration(victimFile);
 
-            int victimDeaths = victimData.getInt("death." + victim.getName(), 0);
-            victimData.set("death." + victim.getName(), victimDeaths + 1);
+            int victimDeaths = victimData.getInt("death." + killer.getName(), 0);
+            victimData.set("death." + killer.getName(), victimDeaths + 1);
 
             try {
                 victimData.save(victimFile);
