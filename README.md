@@ -7,36 +7,41 @@
 
 ## Özellikler
 
-- 🌐 **Çoklu dil desteği** (`/lang/tr.yml`, `en.yml`, ve daha fazlası)
+- 🌐 **Çoklu Dil Desteği** (`/lang/tr.yml`, `en.yml`, ve daha fazlası)
 - 🔥 **Öldürme Serisi Mesajları**: Her öldürme serisi dönüm noktasında benzersiz mesajlar
 - 🛠 **İzin Tabanlı Özel Mesajlar**: Oyuncu izinlerine göre öldürme mesajlarını özelleştirin (`perm:mesaj` formatı)
-- 🎵 **Özelleştirilebilir Kombo Sesleri**: Her kritik vuruş kombosu için ses ve pitch seçme, ses kategorileri ile genişletilmiş özelleştirme
-- 🩸 **Can Göstergesi**: PvP sırasında rakibin canını altyazı olarak gösterir
-- ⚙️ **Kullanıcı Tarafından Özelleştirilebilir Menü**:
+- 🎵 **Özelleştirilebilir ve Seçilebilir Kombo Sesleri**: Her kritik vuruş kombosu için ses ve pitch seçme, ses kategorileri ile genişletilmiş özelleştirme
+- 🩸 **Can Göstergesi**: PvP sırasında rakibin canını ekranda, seçilen renkle gösterir
+- ☠️ **Profil Menüsü**: Gelişmiş oyuncu profil menüsü
+- ⚙️ **Özelleştirilebilir Ayarlar Menüsü**:
+  - Profil
   - Kombo seslerini açıp kapatma
+  - Kombo sesi seçme
   - Action bar kombo mesajlarını açıp kapatma
   - Rakibin canını gösterme açıp kapatma
   - Can göstergesi yazı rengini seçme
-  - Özel öldürme mesajları için izinleri belirleme
+  - Özel öldürme mesajı seçme
 - 📊 **PlaceholderAPI Desteği**: Ölüm, öldürme, mevcut kombo sayısı, kombo rekoru, mevcut öldürme serisi ve öldürme serisi rekoru gibi istatistikleri PlaceholderAPI ile takip edin.
 
 ## Komutlar
 
-| Komut          | Açıklama                     | İzin                       | Varsayılan |
-| -------------- | ---------------------------- | -------------------------- | ---------- |
-| `/spvp`        | sPvP menüsünü açar            | `spvp.commands.spvp`        | `true`     |
-| `/spvp reload` | Eklentiyi yeniden yükler      | `spvp.commands.reload`      | `op`       |
+| Komut               | Açıklama                            | İzin                    | Varsayılan |
+|---------------------|-------------------------------------|-------------------------|------------|
+| `/spvp`             | sPvP menüsünü açar                  | `spvp.commands.spvp`    | `true`     |
+| `/profile <oyuncu>` | Belirtilen oyuncunun profilini açar | `spvp.commands.profile` | `true`     |
+| `/spvp reload`      | Eklentiyi yeniden yükler            | `spvp.commands.reload`  | `op`       |
 
 ## İzinler
 
-| İzin                      | Açıklama                                      | Varsayılan |
-| ------------------------- | --------------------------------------------- | ---------- |
-| `spvp.*`                   | Tüm izinleri verir                           | `op`       |
-| `spvp.commands.*`          | Tüm komutlar için izin                        | `op`       |
-| `spvp.commands.reload`     | Eklentiyi yeniden yükleme izni                | `op`       |
-| `spvp.commands.spvp`       | sPvP menüsünü açma izni                       | `true`     |
-| `spvp.messages.*`          | Tüm özel öldürme mesajları için izin          | `op`     |
-| `spvp.messages.<perm>`     | Belirli özel öldürme mesajı için izin         | `op`     |
+| İzin                    | Açıklama                              | Varsayılan |
+|-------------------------|---------------------------------------| ---------- |
+| `spvp.*`                | Tüm izinleri verir                    | `op`       |
+| `spvp.commands.*`       | Tüm komutlar için izin                | `op`       |
+| `spvp.commands.reload`  | Eklentiyi yeniden yükleme izni        | `op`       |
+| `spvp.commands.spvp`    | sPvP menüsünü açma izni               | `true`     |
+| `spvp.commands.profile` | Profil menüsünü açma izni             | `true`     |
+| `spvp.messages.*`       | Tüm özel öldürme mesajları için izin  | `op`     |
+| `spvp.messages.<perm>`  | Belirli özel öldürme mesajı için izin | `op`     |
 
 ## PlaceholderAPI Desteği
 
