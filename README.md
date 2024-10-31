@@ -21,27 +21,32 @@
   - Rakibin canını gösterme açıp kapatma
   - Can göstergesi yazı rengini seçme
   - Özel öldürme mesajı seçme
+- 🥶 **Oyuncu Dondurma**: Ceza komutu ayarlanabilir /freeze ve /unfreeze
 - 📊 **PlaceholderAPI Desteği**: Ölüm, öldürme, mevcut kombo sayısı, kombo rekoru, mevcut öldürme serisi ve öldürme serisi rekoru gibi istatistikleri PlaceholderAPI ile takip edin.
 
 ## Komutlar
 
-| Komut               | Açıklama                            | İzin                    | Varsayılan |
-|---------------------|-------------------------------------|-------------------------|------------|
-| `/spvp`             | sPvP menüsünü açar                  | `spvp.commands.spvp`    | `true`     |
-| `/profile <oyuncu>` | Belirtilen oyuncunun profilini açar | `spvp.commands.profile` | `true`     |
-| `/spvp reload`      | Eklentiyi yeniden yükler            | `spvp.commands.reload`  | `op`       |
+| Komut                | Açıklama                                   | İzin                     | Varsayılan |
+|----------------------|--------------------------------------------|--------------------------|------------|
+| `/spvp`              | sPvP menüsünü açar                         | `spvp.commands.spvp`     | `true`     |
+| `/profile <oyuncu>`  | Belirtilen oyuncunun profilini açar        | `spvp.commands.profile`  | `true`     |
+| `/freeze <oyuncu>`   | Belirtilen oyuncuyu dondurur               | `spvp.commands.freeze`   | `op`        |
+| `/unfreeze <oyuncu>` | Belirtilen oyuncunun dondurulmasını kaldır | `spvp.commands.unfreese` | `op`       |
+| `/spvp reload`       | Eklentiyi yeniden yükler                   | `spvp.commands.reload`   | `op`       |
 
 ## İzinler
 
-| İzin                    | Açıklama                              | Varsayılan |
-|-------------------------|---------------------------------------| ---------- |
-| `spvp.*`                | Tüm izinleri verir                    | `op`       |
-| `spvp.commands.*`       | Tüm komutlar için izin                | `op`       |
-| `spvp.commands.reload`  | Eklentiyi yeniden yükleme izni        | `op`       |
-| `spvp.commands.spvp`    | sPvP menüsünü açma izni               | `true`     |
-| `spvp.commands.profile` | Profil menüsünü açma izni             | `true`     |
-| `spvp.messages.*`       | Tüm özel öldürme mesajları için izin  | `op`     |
-| `spvp.messages.<perm>`  | Belirli özel öldürme mesajı için izin | `op`     |
+| İzin                     | Açıklama                              | Varsayılan |
+|--------------------------|---------------------------------------| ---------- |
+| `spvp.*`                 | Tüm izinleri verir                    | `op`       |
+| `spvp.commands.*`        | Tüm komutlar için izin                | `op`       |
+| `spvp.commands.reload`   | /spvp reload komutu izni              | `op`       |
+| `spvp.commands.spvp`     | /spvp komutu izni                     | `true`     |
+| `spvp.commands.profile`  | /profile komutu izni                  | `true`     |
+| `spvp.commands.freeze`   | /freeze komutu izni                   | `true`     |
+| `spvp.commands.unfreeze` | /unfreeze komutu izni                 | `true`     |
+| `spvp.messages.*`        | Tüm özel öldürme mesajları için izin  | `op`     |
+| `spvp.messages.<perm>`   | Belirli özel öldürme mesajı için izin | `op`     |
 
 ## PlaceholderAPI Desteği
 

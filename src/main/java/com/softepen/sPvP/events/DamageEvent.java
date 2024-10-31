@@ -23,6 +23,18 @@ public class DamageEvent implements Listener {
         if (event.isCancelled()) return;
         if (event.getDamager() instanceof Player attacker) {
             if (event.getEntity() instanceof Player victim) {
+
+                if (frozens.containsKey(attacker)) {
+                    event.setCancelled(true);
+                    attacker.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(attacker).getName()));
+                    return;
+                }
+                if (frozens.containsKey(victim)) {
+                    event.setCancelled(true);
+                    victim.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(victim).getName()));
+                    return;
+                }
+
                 boolean isCritical = attacker.getFallDistance() > 0.0 &&
                         !((LivingEntity) attacker).isOnGround() &&
                         !attacker.isInWater() &&

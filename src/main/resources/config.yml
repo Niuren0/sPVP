@@ -4,6 +4,10 @@ language: en
 streakAnnouncements: true
 specialKillMessages: true
 
+freeze:
+  commands: # Commands to be processed when frozen player quits
+    - "ban {playerName} Freeze Quit"
+
 sounds:
   critical_hit_default: Experience Sound # sounds.yml
   critical_break: ENTITY_VILLAGER_NO

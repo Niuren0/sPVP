@@ -18,6 +18,14 @@ commands:
     description: Player profile menu
     usage: /profile [player]
     permission: spvp.commands.profile
+  freeze:
+    description: Freeze the player
+    usage: /freeze [player]
+    permission: spvp.commands.freeze
+  unfreeze:
+    description: Unfreeze the player
+    usage: /unfreeze [player]
+    permission: spvp.commands.unfreeze
 
 permissions:
   spvp.commands.spvp:
@@ -27,8 +35,14 @@ permissions:
     description: Permission to reload the plugin configuration
     default: op
   spvp.commands.profile:
-    description: Permission to reload the plugin configuration
+    description: Permission to open the player profile menu
     default: true
+  spvp.commands.freeze:
+    description: Permission to freeze the player
+    default: op
+  spvp.commands.unfreeze:
+    description: Permission to unfreeze the player
+    default: op
   spvp.commands.*:
     description: Grants access to all sPvP commands
     default: op
@@ -36,6 +50,8 @@ permissions:
       spvp.commands.spvp: true
       spvp.commands.reload: true
       spvp.commands.profile: true
+      spvp.commands.freeze: true
+      spvp.commands.unfreeze: true
 
   spvp.messages.*:
     description: Grants access to all custom kill messages

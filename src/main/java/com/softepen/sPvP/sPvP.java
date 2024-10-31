@@ -2,15 +2,15 @@ package com.softepen.sPvP;
 
 import com.softepen.sPvP.commands.MainCommand;
 import com.softepen.sPvP.commands.ProfileCommand;
+import com.softepen.sPvP.commands.freeze.FreezeCommand;
+import com.softepen.sPvP.commands.freeze.UnfreezeCommand;
 import com.softepen.sPvP.commands.spvpTabComplete;
-import com.softepen.sPvP.events.DamageEvent;
-import com.softepen.sPvP.events.DeathEvent;
-import com.softepen.sPvP.events.JoinEvent;
-import com.softepen.sPvP.events.QuitEvent;
+import com.softepen.sPvP.events.*;
 import com.softepen.sPvP.listeners.papi;
 import com.softepen.sPvP.managers.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +30,7 @@ public final class sPvP extends JavaPlugin {
     public static HashMap<Player, Integer> killSeriesRecord = new HashMap<>();
     public static HashMap<Player, Integer> kills = new HashMap<>();
     public static HashMap<Player, Integer> deaths = new HashMap<>();
+    public static HashMap<Player, CommandSender> frozens = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -56,14 +57,25 @@ public final class sPvP extends JavaPlugin {
         }
 
         Objects.requireNonNull(getCommand("spvp")).setExecutor(new MainCommand());
+        Objects.requireNonNull(getCommand("profile")).setExecutor(new ProfileCommand());
+        Objects.requireNonNull(getCommand("freeze")).setExecutor(new FreezeCommand());
+        Objects.requireNonNull(getCommand("unfreeze")).setExecutor(new UnfreezeCommand());
+
         Objects.requireNonNull(getCommand("spvp")).setTabCompleter(new spvpTabComplete());
 
-        Objects.requireNonNull(getCommand("profile")).setExecutor(new ProfileCommand());
 
         getServer().getPluginManager().registerEvents(new DamageEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
-        getServer().getPluginManager().registerEvents(new QuitEvent(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new OnBreak(), this);
+        getServer().getPluginManager().registerEvents(new OnClick(), this);
+        getServer().getPluginManager().registerEvents(new OnCommand(), this);
+        getServer().getPluginManager().registerEvents(new OnDrop(), this);
+        getServer().getPluginManager().registerEvents(new OnInventoryOpen(), this);
+        getServer().getPluginManager().registerEvents(new OnMove(), this);
+        getServer().getPluginManager().registerEvents(new OnPickup(), this);
+        getServer().getPluginManager().registerEvents(new OnPlace(), this);
+        getServer().getPluginManager().registerEvents(new QuitEvent(), this);
 
         List<String> lines = List.of(
                 "&c-=-=-=-=-=-=-=-=-= &6sPvP Plugin &c-=-=-=-=-=-=-=-=-=",

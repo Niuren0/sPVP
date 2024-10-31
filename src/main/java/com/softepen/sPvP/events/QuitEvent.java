@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static com.softepen.sPvP.sPvP.*;
 
@@ -18,6 +19,14 @@ public class QuitEvent implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+
+        if (frozens.containsKey(player)) {
+            List<String> commands = configManager.getStringList("freeze.commands");
+            for (String command : commands) {
+                command = command.replace("{playerName}", player.getName());
+                plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), command);
+            }
+        }
 
         int lastCombo = criticalHitLastCombo.getOrDefault(player, 0);
         int comboRecord = criticalHitComboRecord.getOrDefault(player, 0);
