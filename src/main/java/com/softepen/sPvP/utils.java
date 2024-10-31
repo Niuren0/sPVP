@@ -24,12 +24,13 @@ public class utils {
     }
 
     public static Sound getComboSound(int combo, Player player) {
-        String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
-        String soundName = soundsManager.getString(path + "." + combo + ".sound");
-        if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
         try {
+            String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
+            String soundName = soundsManager.getString(path + "." + combo + ".sound");
+            if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
             return Sound.valueOf(soundName);
         } catch (IllegalArgumentException | NullPointerException e) {
+            plugin.getLogger().warning("Error at " + player.getName() + " :" + e);
             return null;
         }
     }
