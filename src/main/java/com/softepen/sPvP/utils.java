@@ -30,7 +30,7 @@ public class utils {
             if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
             return Sound.valueOf(soundName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            plugin.getLogger().warning("Error at " + player.getName() + " :" + e);
+            plugin.getLogger().warning("Error at " + player.getName() + "'s getComboSound function :" + e);
             return null;
         }
     }
