@@ -267,10 +267,6 @@ profileMenu:
     lore:
       - "&7{player}'s streak record &a{streakRecord}"
 
-
-
-
-
   back:
     slot: 49
     item: BARRIER
