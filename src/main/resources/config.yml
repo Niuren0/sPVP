@@ -8,6 +8,10 @@ freeze:
   commands: # Commands to be processed when frozen player quits
     - "ban {playerName} Freeze Quit"
 
+log:
+  enable: true
+  format: "[{date}] {killer} ✘ {victim}"
+
 sounds:
   critical_hit_default: Experience Sound # sounds.yml
   critical_break: ENTITY_VILLAGER_NO

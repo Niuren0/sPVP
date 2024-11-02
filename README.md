@@ -22,6 +22,7 @@
   - Can göstergesi yazı rengini seçme
   - Özel öldürme mesajı seçme
 - 🥶 **Oyuncu Dondurma**: Ceza komutu ayarlanabilir /freeze ve /unfreeze
+- ⚔️ **Ölme Öldürme Log'u**: Gelişmiş ölme ve öldürme kayıtları
 - 📊 **PlaceholderAPI Desteği**: Ölüm, öldürme, mevcut kombo sayısı, kombo rekoru, mevcut öldürme serisi ve öldürme serisi rekoru gibi istatistikleri PlaceholderAPI ile takip edin.
 
 ## Komutlar

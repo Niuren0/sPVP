@@ -16,8 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static com.softepen.sPvP.sPvP.*;
-import static com.softepen.sPvP.utils.getStreakMessages;
-import static com.softepen.sPvP.utils.getSpecialKillMessage;
+import static com.softepen.sPvP.utils.*;
 
 public class DeathEvent implements Listener {
     @EventHandler
@@ -121,6 +120,16 @@ public class DeathEvent implements Listener {
                 victimData.save(victimFile);
             } catch (IOException e) {
                 plugin.getLogger().severe("An error occurred when saving " + victimName + " victim data file: " + e);
+            }
+
+            // DEATH LOG
+            if (configManager.getBoolean("log.enable")) {
+                String message = configManager.getString("log.format")
+                        .replace("{date}", formattedDateTime)
+                        .replace("{killer}", killerName)
+                        .replace("{victim}", victimName);
+
+                logMessage(message);
             }
         }
     }

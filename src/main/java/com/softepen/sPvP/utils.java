@@ -8,7 +8,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static com.softepen.sPvP.sPvP.*;
@@ -142,5 +147,18 @@ public class utils {
         }
 
         return updatedMessages;
+    }
+
+    public static void logMessage(String message) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            message = message.replace("{timestamp}", timestamp);
+
+            writer.write(message);
+            writer.newLine();
+        } catch (IOException e) {
+            plugin.getLogger().severe("Log dosyasına yazılamadı: " + e.getMessage());
+        }
     }
 }

@@ -14,6 +14,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +25,7 @@ public final class sPvP extends JavaPlugin {
     public static FileManager configManager;
     public static FileManager soundsManager;
     public static FileManager messagesManager;
+    public static File logFile;
     public static HashMap<Player, Integer> criticalHitCombo = new HashMap<>();
     public static HashMap<Player, Integer> criticalHitLastCombo = new HashMap<>();
     public static HashMap<Player, Integer> criticalHitComboRecord = new HashMap<>();
@@ -48,6 +51,24 @@ public final class sPvP extends JavaPlugin {
         messagesManager.loadConfig();
         messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
         messagesManager.loadConfig();
+
+        if (configManager.getBoolean("log.enable")) {
+            logFile = new File(plugin.getDataFolder(), "logs/deaths.log");
+
+            try {
+                File logDir = logFile.getParentFile();
+                if (!logDir.exists() && !logDir.mkdir()) {
+                    getLogger().severe("Log directory couldn't be created.");
+                }
+
+                if (!logFile.exists() && !logFile.createNewFile()) {
+                    getLogger().severe("Log file couldn't be created.");
+                }
+
+            } catch (IOException e) {
+                getLogger().severe("Log file creation failed: " + e.getMessage());
+            }
+        }
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new papi().register();
