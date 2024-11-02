@@ -80,8 +80,15 @@ public class SettingsMenu {
         gui.setItem(configManager.getInt("settingsMenu.enable.slot"), enableItem);
         gui.setItem(configManager.getInt("settingsMenu.color.slot"), colorItem);
         gui.setItem(configManager.getInt("settingsMenu.profile.slot"), profileItem);
+
         if (configManager.getBoolean("settingsMenu.filler.enable")) {
-            gui.getFiller().fill(ItemBuilder.from(getItemStack(player, "filler")).asGuiItem());
+            for (String key : configManager.getConfigurationSection("settingsMenu.filler.items").getKeys(false)) {
+                List<Integer> slots = configManager.getIntegerList("settingsMenu.filler.items." + key + ".slots");
+                GuiItem fillerItem = ItemBuilder.from(getItemStack(player, "settingsMenu.filler.items." + key)).asGuiItem();
+                for (Integer slot : slots) {
+                    gui.setItem(slot, fillerItem);
+                }
+            }
         }
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
@@ -107,11 +114,18 @@ public class SettingsMenu {
             itemName = configManager.getString("settingsMenu." + item + "." + state + ".title");
             itemLore = configManager.getStringList("settingsMenu." + item + "." + state + ".lore");
         } else {
-            if (Objects.equals(item, "color")) {
-                material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
-            } else material = Material.valueOf(configManager.getString("settingsMenu." + item + ".item"));
-            itemName = configManager.getString("settingsMenu." + item + ".title");
-            itemLore = configManager.getStringList("settingsMenu." + item + ".lore");
+            if (item.startsWith("settingsMenu.filler.items.")) {
+                material = Material.valueOf(configManager.getString(item + ".item"));
+                itemName = configManager.getString(item + ".title");
+                itemLore = configManager.getStringList(item + ".lore");
+
+            } else {
+                if (Objects.equals(item, "color")) {
+                    material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
+                } else material = Material.valueOf(configManager.getString("settingsMenu." + item + ".item"));
+                itemName = configManager.getString("settingsMenu." + item + ".title");
+                itemLore = configManager.getStringList("settingsMenu." + item + ".lore");
+            }
         }
 
         ItemStack itemStack = new ItemStack(material);

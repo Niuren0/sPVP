@@ -29,14 +29,14 @@ settingsMenu:
       - "&aKill Series Record: &e{killSeriesRecord}"
 
   killMessages:
-    slot: 21
-    item: SKELETON_SKULL
+    slot: 20
+    item: GOLDEN_SWORD
     title: "&cSpecial Kill Messages"
     lore:
       - "&7Click to the special kill message settings!"
 
   comboMessages:
-    slot: 23
+    slot: 21
     enabled_state:
       item: GREEN_WOOL
       title: "&aCombo Messages Enabled"
@@ -49,14 +49,14 @@ settingsMenu:
         - "&7Click to change the combo messages to &atrue&c!"
 
   sound:
-    slot: 31
+    slot: 22
     item: BELL
     title: "&bCombo Sound"
     lore:
       - "&7Click to change the combo sounds!"
 
   enable:
-    slot: 39
+    slot: 23
     enabled_state:
       item: GREEN_WOOL
       title: "&aHealth Indicator Enabled"
@@ -69,18 +69,46 @@ settingsMenu:
         - "&7Click to change the health indicator to &atrue&c!"
 
   color:
-    slot: 41
+    slot: 24
     item: WOOL # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
     title: "&bHealth Color"
     lore:
       - "&7Click to change the health indicator color!"
 
   filler:
-    enable: false
-    item: ORANGE_STAINED_GLASS_PANE
-    title: " " # Use blank for nothing
-    lore:
-      - "&7www.softepen.com"
+    enable: true
+    items:
+      pink:
+        item: PINK_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 9
+          - 17
+          - 18
+          - 26
+          - 27
+          - 35
+          - 36
+          - 44
+      lime:
+        item: LIME_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 29
+          - 31
+          - 33
+      red:
+        item: RED_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 30
+          - 32
 
 killMessagesMenu:
   title: "&cSpecial Kill Messages"
@@ -111,11 +139,22 @@ killMessagesMenu:
     lore: []
 
   filler:
-    enable: false
-    item: ORANGE_STAINED_GLASS_PANE
-    title: " " # Use blank for nothing
-    lore:
-      - "&7www.softepen.com"
+    enable: true
+    items:
+      lime:
+        item: LIME_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 18
+          - 19
+          - 20
+          - 21
+          - 23
+          - 24
+          - 25
+          - 26
 
 colorSelectMenu:
   title: "&6Color Select"
@@ -136,11 +175,22 @@ colorSelectMenu:
     lore: []
 
   filler:
-    enable: false
-    item: ORANGE_STAINED_GLASS_PANE
-    title: " " # Use blank for nothing
-    lore:
-      - "&7www.softepen.com"
+    enable: true
+    items:
+      lime:
+        item: LIME_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 18
+          - 19
+          - 20
+          - 21
+          - 23
+          - 24
+          - 25
+          - 26
 
 soundSelectMenu:
   title: "&6Sound Select"
@@ -176,11 +226,21 @@ soundSelectMenu:
     lore: []
 
   filler:
-    enable: false
-    item: ORANGE_STAINED_GLASS_PANE
-    title: " " # Use blank for nothing
-    lore:
-      - "&7www.softepen.com"
+    enable: true
+    items:
+      lime:
+        item: LIME_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 18
+          - 19
+          - 20
+          - 22
+          - 24
+          - 25
+          - 26
 
 profileMenu:
   title: "&6{player} Profile"
@@ -275,7 +335,4 @@ profileMenu:
 
   filler:
     enable: false
-    item: ORANGE_STAINED_GLASS_PANE
-    title: " " # Use blank for nothing
-    lore:
-      - "&7www.softepen.com"
+    items: []

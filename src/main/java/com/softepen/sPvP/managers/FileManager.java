@@ -45,6 +45,10 @@ public class FileManager {
         return config.getKeys(b);
     }
 
+    public List<Integer> getIntegerList(String path) {
+        return config.getIntegerList(path);
+    }
+
     public double getDouble(String path, double def) {
         return config.getDouble(path, def);
     }

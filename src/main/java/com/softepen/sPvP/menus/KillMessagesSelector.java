@@ -85,14 +85,34 @@ public class KillMessagesSelector {
         GuiItem backItem = ItemBuilder.from(getItemStack("back", "")).asGuiItem(event -> new SettingsMenu(player));
         gui.setItem(configManager.getInt("killMessagesMenu.back.slot"), backItem);
 
+        if (configManager.getBoolean("killMessagesMenu.filler.enable")) {
+            for (String key : configManager.getConfigurationSection("killMessagesMenu.filler.items").getKeys(false)) {
+                List<Integer> slots = configManager.getIntegerList("killMessagesMenu.filler.items." + key + ".slots");
+                GuiItem fillerItem = ItemBuilder.from(getItemStack("killMessagesMenu.filler.items." + key, null)).asGuiItem();
+                for (Integer slot : slots) {
+                    gui.setItem(slot, fillerItem);
+                }
+            }
+        }
+
         gui.setDefaultClickAction(event -> event.setCancelled(true));
         gui.open(player);
     }
 
     private ItemStack getItemStack(String s, String message) {
-        Material material = Material.valueOf(configManager.getString("killMessagesMenu." + s + ".item"));
-        String itemName = configManager.getString("killMessagesMenu." + s + ".title").replace("{message}", message);
-        List<String> itemLore = configManager.getStringList("killMessagesMenu." + s + ".lore");
+        Material material;
+        String itemName;
+        List<String> itemLore;
+
+        if (s.startsWith("killMessagesMenu.filler.items.")) {
+            material = Material.valueOf(configManager.getString(s + ".item"));
+            itemName = configManager.getString(s + ".title");
+            itemLore = configManager.getStringList(s + ".lore");
+        } else {
+            material = Material.valueOf(configManager.getString("killMessagesMenu." + s + ".item"));
+            itemName = configManager.getString("killMessagesMenu." + s + ".title").replace("{message}", message);
+            itemLore = configManager.getStringList("killMessagesMenu." + s + ".lore");
+        }
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();

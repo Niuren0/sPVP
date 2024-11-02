@@ -71,8 +71,15 @@ public class ColorSelectMenu {
         gui.setItem(configManager.getInt("colorSelectMenu.back.slot"), backItem);
 
         if (configManager.getBoolean("colorSelectMenu.filler.enable")) {
-            gui.getFiller().fill(ItemBuilder.from(getItemStack(null, "filler")).asGuiItem());
+            for (String key : configManager.getConfigurationSection("colorSelectMenu.filler.items").getKeys(false)) {
+                List<Integer> slots = configManager.getIntegerList("colorSelectMenu.filler.items." + key + ".slots");
+                GuiItem fillerItem = ItemBuilder.from(getItemStack(null, "colorSelectMenu.filler.items." + key)).asGuiItem();
+                for (Integer slot : slots) {
+                    gui.setItem(slot, fillerItem);
+                }
+            }
         }
+
         gui.setDefaultClickAction(event -> event.setCancelled(true));
         gui.open(player);
     }
@@ -81,26 +88,29 @@ public class ColorSelectMenu {
         List<String> itemLore;
         String itemName = null;
 
-        if (Objects.equals(s, "back") || Objects.equals(s, "filler")) {
-            material = Material.valueOf(configManager.getString("colorSelectMenu." + s + ".item"));
-            itemName = configManager.getString("colorSelectMenu." + s + ".title");
-        }
-        itemLore = configManager.getStringList("colorSelectMenu." + s + ".lore");
-
-        if (itemLore != null) {
-            ListIterator<String> iterator = itemLore.listIterator();
-            while (iterator.hasNext()) {
-                String lore = iterator.next();
-                lore = ChatColor.translateAlternateColorCodes('&', lore);
-                iterator.set(lore);
+        if (s.startsWith("colorSelectMenu.filler.items.")) {
+            material = Material.valueOf(configManager.getString(s + ".item"));
+            itemName = configManager.getString(s + ".title");
+            itemLore = configManager.getStringList(s + ".lore");
+        } else {
+            if (Objects.equals(s, "back") || Objects.equals(s, "filler")) {
+                material = Material.valueOf(configManager.getString("colorSelectMenu." + s + ".item"));
+                itemName = configManager.getString("colorSelectMenu." + s + ".title");
             }
+            itemLore = configManager.getStringList("colorSelectMenu." + s + ".lore");
         }
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(itemName);
-            if (itemLore != null) meta.setLore(itemLore);
+            if (itemName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemName));
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                meta.setLore(coloredLore);
+            }
             itemStack.setItemMeta(meta);
         }
 

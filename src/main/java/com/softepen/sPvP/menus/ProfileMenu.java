@@ -53,17 +53,34 @@ public class ProfileMenu {
         gui.setItem(configManager.getInt("profileMenu.back.slot"), backItem);
 
         if (configManager.getBoolean("profileMenu.filler.enable")) {
-            gui.getFiller().fill(ItemBuilder.from(getItemStack("filler", player)).asGuiItem());
+            for (String key : configManager.getConfigurationSection("profileMenu.filler.items").getKeys(false)) {
+                List<Integer> slots = configManager.getIntegerList("profileMenu.filler.items." + key + ".slots");
+                GuiItem fillerItem = ItemBuilder.from(getItemStack("profileMenu.filler.items." + key, player)).asGuiItem();
+                for (Integer slot : slots) {
+                    gui.setItem(slot, fillerItem);
+                }
+            }
         }
+
         gui.setDefaultClickAction(event -> event.setCancelled(true));
         gui.open(opener);
     }
 
     private ItemStack getItemStack(String s, Player player) {
+        Material material;
+        String itemName;
+        List<String> itemLore;
         PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
-        Material material = Material.valueOf(configManager.getString("profileMenu." + s + ".item"));
-        String itemName = configManager.getString("profileMenu." + s + ".title");
-        List<String> itemLore = configManager.getStringList("profileMenu." + s + ".lore");
+
+        if (s.startsWith("profileMenu.filler.items.")) {
+            material = Material.valueOf(configManager.getString(s + ".item"));
+            itemName = configManager.getString(s + ".title");
+            itemLore = configManager.getStringList(s + ".lore");
+        } else {
+            material = Material.valueOf(configManager.getString("profileMenu." + s + ".item"));
+            itemName = configManager.getString("profileMenu." + s + ".title");
+            itemLore = configManager.getStringList("profileMenu." + s + ".lore");
+        }
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();

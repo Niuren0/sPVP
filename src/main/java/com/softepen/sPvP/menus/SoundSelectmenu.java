@@ -81,8 +81,15 @@ public class SoundSelectmenu {
         gui.setItem(configManager.getInt("soundSelectMenu.back.slot"), backItem);
 
         if (configManager.getBoolean("soundSelectMenu.filler.enable")) {
-            gui.getFiller().fill(ItemBuilder.from(getItemStack("filler", null , null)).asGuiItem());
+            for (String key : configManager.getConfigurationSection("soundSelectMenu.filler.items").getKeys(false)) {
+                List<Integer> slots = configManager.getIntegerList("soundSelectMenu.filler.items." + key + ".slots");
+                GuiItem fillerItem = ItemBuilder.from(getItemStack("soundSelectMenu.filler.items." + key, null, null)).asGuiItem();
+                for (Integer slot : slots) {
+                    gui.setItem(slot, fillerItem);
+                }
+            }
         }
+
         gui.setDefaultClickAction(event -> event.setCancelled(true));
         gui.open(player);
     }
@@ -92,17 +99,23 @@ public class SoundSelectmenu {
         String itemName;
         List<String> itemLore;
 
-        if (Objects.equals(s, "sound")) {
-            String state = PlayerSettingsManager.getPlayerSettings(player).getSound() ? "enabled_state" : "disabled_state";
-            material = Material.valueOf(configManager.getString("soundSelectMenu." + s + "." + state + ".item"));
-            itemName = configManager.getString("soundSelectMenu." + s + "." + state + ".title");
-            itemLore = configManager.getStringList("soundSelectMenu." + s + "." + state + ".lore");
+        if (s.startsWith("soundSelectMenu.filler.items.")) {
+            material = Material.valueOf(configManager.getString(s + ".item"));
+            itemName = configManager.getString(s + ".title");
+            itemLore = configManager.getStringList(s + ".lore");
         } else {
-            if (Objects.equals(s, "back") || Objects.equals(s, "filler")) {
-                itemName = configManager.getString("soundSelectMenu." + s + ".title");
-            } else itemName = name;
-            material = Material.valueOf(configManager.getString("soundSelectMenu." + s + ".item"));
-            itemLore = configManager.getStringList("soundSelectMenu." + s + ".lore");
+            if (Objects.equals(s, "sound")) {
+                String state = PlayerSettingsManager.getPlayerSettings(player).getSound() ? "enabled_state" : "disabled_state";
+                material = Material.valueOf(configManager.getString("soundSelectMenu." + s + "." + state + ".item"));
+                itemName = configManager.getString("soundSelectMenu." + s + "." + state + ".title");
+                itemLore = configManager.getStringList("soundSelectMenu." + s + "." + state + ".lore");
+            } else {
+                if (Objects.equals(s, "back") || Objects.equals(s, "filler")) {
+                    itemName = configManager.getString("soundSelectMenu." + s + ".title");
+                } else itemName = name;
+                material = Material.valueOf(configManager.getString("soundSelectMenu." + s + ".item"));
+                itemLore = configManager.getStringList("soundSelectMenu." + s + ".lore");
+            }
         }
 
         ItemStack itemStack = new ItemStack(material);
