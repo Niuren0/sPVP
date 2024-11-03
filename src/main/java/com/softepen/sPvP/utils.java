@@ -40,16 +40,15 @@ public class utils {
             if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
             return Sound.valueOf(soundName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            plugin.getLogger().warning("Error at " + player.getName() + "'s getComboSound function :" + e);
-            return null;
+            plugin.getLogger().warning("Error at " + player.getName() + "'s getComboSound function, using default sound :" + e);
+            return Sound.valueOf(soundsManager.getString(configManager.getString("sounds.critical_hit_default") + ".default.sound"));
         }
     }
 
     public static float getComboSoundPitch(int combo, Player player) {
-        String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
-        float soundPitch = (float) soundsManager.getDouble(path + "." + combo + ".pitch", 1);
         try {
-            return soundPitch;
+            String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
+            return (float) soundsManager.getDouble(path + "." + combo + ".pitch", 1);
         } catch (IllegalArgumentException | NullPointerException e) {
             return 1;
         }
