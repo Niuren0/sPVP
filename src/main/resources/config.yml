@@ -1,5 +1,3 @@
-license: yourLicenseCode
-
 language: en
 streakAnnouncements: true
 specialKillMessages: true
@@ -7,6 +5,18 @@ specialKillMessages: true
 freeze:
   commands: # Commands to be processed when frozen player quits
     - "ban {playerName} Freeze Quit"
+
+# hit -> combo count, combo messages, critical sound, health indicator
+# death -> Disabled regions for kill streaks, special kill messages, kill and death saves, kill and death logs
+disabledRegions:
+  hit:
+    - elmas
+  death: []
+
+disabledWorld:
+  hit:
+    - elmas
+  death: []
 
 log:
   enable: true

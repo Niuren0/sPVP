@@ -7,7 +7,7 @@ author: Niuren_
 description: A customizable PvP plugin for Minecraft servers.
 website: https://softepen.com
 
-softdepend: ["PlaceholderAPI"]
+softdepend: ["PlaceholderAPI", "WorldGuard"]
 
 commands:
   spvp:

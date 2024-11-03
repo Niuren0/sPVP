@@ -23,6 +23,8 @@ public class DamageEvent implements Listener {
         if (event.isCancelled()) return;
         if (event.getDamager() instanceof Player attacker) {
             if (event.getEntity() instanceof Player victim) {
+                if (isPlayerInDisabledRegion(attacker, "hit") || isPlayerInDisabledRegion(victim, "hit")) return;
+                if (isPlayerInDisabledWorld(attacker, "hit") || isPlayerInDisabledWorld(victim, "hit")) return;
 
                 if (frozens.containsKey(attacker)) {
                     event.setCancelled(true);

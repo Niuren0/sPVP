@@ -1,5 +1,10 @@
 package com.softepen.sPvP;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.softepen.sPvP.managers.PlayerSettingsManager;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
@@ -158,7 +163,31 @@ public class utils {
             writer.write(message);
             writer.newLine();
         } catch (IOException e) {
-            plugin.getLogger().severe("Log dosyasına yazılamadı: " + e.getMessage());
+            plugin.getLogger().severe("Log file could not write: " + e.getMessage());
         }
+    }
+
+    public static boolean isPlayerInDisabledRegion(Player player, String path) {
+        List<String> disabledRegions = configManager.getStringList("disabledRegions." + path);
+        RegionContainer container = WGPlugin.getPlatform().getRegionContainer();
+        RegionManager regions = container.get(BukkitAdapter.adapt(player.getWorld()));
+
+        if (regions != null) {
+            ApplicableRegionSet regionSet = regions.getApplicableRegions(BukkitAdapter.asBlockVector(player.getLocation()));
+            for (ProtectedRegion region : regionSet) {
+                if (disabledRegions.contains(region.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isPlayerInDisabledWorld(Player player, String path) {
+        List<String> disabledWorlds = configManager.getStringList("disabledWorld." + path);
+
+        String playerWorldName = player.getWorld().getName();
+
+        return disabledWorlds.contains(playerWorldName);
     }
 }

@@ -28,6 +28,8 @@ public class DeathEvent implements Listener {
 
         Player killer = victim.getKiller();
         if (killer != null) {
+            if (isPlayerInDisabledRegion(killer, "death") || isPlayerInDisabledRegion(victim, "death")) return;
+            if (isPlayerInDisabledWorld(killer, "death") || isPlayerInDisabledWorld(victim, "death")) return;
             killSeries.put(killer, killSeries.getOrDefault(killer, 0) + 1);
             kills.put(killer, kills.getOrDefault(killer, 0) + 1);
 

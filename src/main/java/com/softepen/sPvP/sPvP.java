@@ -1,5 +1,6 @@
 package com.softepen.sPvP;
 
+import com.sk89q.worldguard.WorldGuard;
 import com.softepen.sPvP.commands.MainCommand;
 import com.softepen.sPvP.commands.ProfileCommand;
 import com.softepen.sPvP.commands.freeze.FreezeCommand;
@@ -34,6 +35,8 @@ public final class sPvP extends JavaPlugin {
     public static HashMap<Player, Integer> kills = new HashMap<>();
     public static HashMap<Player, Integer> deaths = new HashMap<>();
     public static HashMap<Player, CommandSender> frozens = new HashMap<>();
+    public static boolean wgExpansion;
+    public static WorldGuard WGPlugin;
 
     @Override
     public void onEnable() {
@@ -74,7 +77,16 @@ public final class sPvP extends JavaPlugin {
             new papi().register();
             getLogger().info("sPvP PlaceholderAPI expansion enabled.");
         } else {
-            getLogger().warning("PlaceholderAPI plugin not found. sPvp PlaceholderAPI expansion disabled.");
+            getLogger().warning("PlaceholderAPI plugin not found. Expansion disabled.");
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            WGPlugin = WorldGuard.getInstance();
+            wgExpansion = true;
+            getLogger().info("sPvP WorldGuard expansion enabled.");
+        } else {
+            wgExpansion = false;
+            getLogger().warning("WorldGuard plugin not found. Expansion disabled.");
         }
 
         Objects.requireNonNull(getCommand("spvp")).setExecutor(new MainCommand());
