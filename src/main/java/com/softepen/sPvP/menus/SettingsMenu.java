@@ -53,7 +53,7 @@ public class SettingsMenu {
 
         GuiItem colorItem = ItemBuilder.from(getItemStack(player, "color")).asGuiItem(event -> new ColorSelectMenu(player));
         
-        GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> new SoundSelectmenu(player));
+        GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> new SoundSelectMenu(player));
 
         GuiItem killMessagesItem = ItemBuilder.from(getItemStack(player, "killMessages")).asGuiItem(event -> new KillMessagesSelector(player));
 
