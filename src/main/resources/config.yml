@@ -7,20 +7,43 @@ freeze:
     - "ban {playerName} Freeze Quit"
 
 # hit -> combo count, combo messages, critical sound, health indicator
-# death -> Disabled regions for kill streaks, special kill messages, kill and death saves, kill and death logs
+# death -> Disabled regions for kill streaks, special kill messages
+# rank -> Earning or losing rank points
 disabledRegions:
   hit:
-    - elmas
-  death: []
+    - spawn
+  death:
+    - spawn
+  rank:
+    - spawn
 
 disabledWorld:
   hit:
-    - elmas
+    - spawn
   death: []
+  rank: []
+
+# ipPrevent -> If victim and killer are in the same ip
+# streak -> When true, attacker's kill streaks are not counted
+# hit -> When true, attacker's hits are not counted
+# kill -> When true, killer's kills and victim's deaths are not counted
+# rank -> When true, players do not gain or lose rank points
+ipPrevent:
+  streak: true
+  hit: true
+  kill: true
+  rank: true
+
+rank:
+  enabled: true
+  defaultRank: warrior
+  # cooldown -> cooldown for gaining and losing points for killing the same person repeatedly (in seconds)
+  # - Does not work if players are in a world or region disabled for death
+  cooldown: 300
 
 log:
   enable: true
-  format: "[{date}] {killer} ✘ {victim}"
+  format: "[{date}] {killer} +{+points} ✘ {victim} -{-points}"
 
 sounds:
   critical_hit_default: Experience Sound # sounds.yml

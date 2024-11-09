@@ -6,6 +6,9 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.softepen.sPvP.managers.PlayerSettingsManager;
+import com.softepen.sPvP.managers.RankManager;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.Node;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,6 +23,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.softepen.sPvP.sPvP.*;
 
@@ -167,6 +171,8 @@ public class utils {
     }
 
     public static boolean isPlayerInDisabledRegion(Player player, String path) {
+        if (!wgExpansion) return false;
+
         List<String> disabledRegions = configManager.getStringList("disabledRegions." + path);
         RegionContainer container = WGPlugin.getPlatform().getRegionContainer();
         RegionManager regions = container.get(BukkitAdapter.adapt(player.getWorld()));
@@ -189,4 +195,119 @@ public class utils {
 
         return disabledWorlds.contains(playerWorldName);
     }
+
+    public static String getPlayerRank(String playerName) {
+        double playerExp = new RankManager(playerName).getPoints();
+        String defaultRank = configManager.getString("rank.defaultRank");
+
+        for (Map.Entry<String, Double> entry : ranks.entrySet()) {
+            String rank = entry.getKey();
+            double rankExp = entry.getValue();
+            if (rankExp > playerExp) return defaultRank;
+            else defaultRank = rank;
+        }
+
+        return defaultRank;
+    }
+
+    public static void ranksReload() {
+        if (ranks != null) ranks.clear();
+        List<String> rankList = getAllSection("ranks");
+        for (String rank : rankList) {
+            double rankExp = ranksManager.getDouble("ranks." + rank + ".exp");
+            ranks.put(rank, rankExp);
+        }
+        ranks = ranks.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    public static List<String> getAllSection(String path) {
+        List<String> list = new ArrayList<>();
+        ConfigurationSection section = ranksManager.getConfigurationSection(path);
+        if (section != null) {
+            list.addAll(section.getKeys(false));
+        }
+        return list;
+    }
+
+    public static Integer getValueAfterKey(String key) {
+        boolean found = false;
+        for (Map.Entry<String, Double> entry : ranks.entrySet()) {
+            if (found) {
+                return entry.getValue().intValue();
+            }
+            if (entry.getKey().equals(key)) {
+                found = true;
+            }
+        }
+        return null;
+    }
+
+    public static void updateRankGroup(Player player) {
+        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+
+        if (user != null) {
+            String rank = getPlayerRank(player.getName());
+
+            for (String group : ranksManager.getConfigurationSection("ranks").getKeys(false)) {
+                if (player.hasPermission("group." + group) && !Objects.equals(group, rank)) {
+                    user.data().remove(Node.builder("group." + group).build());
+                }
+            }
+
+            if (!player.hasPermission("group." + rank)) {
+                user.data().add(Node.builder("group." + rank).build());
+            }
+
+            luckPerms.getUserManager().saveUser(user);
+        }
+
+    }
+
+    public static String getPlayerIP(Player player) {
+        return Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress();
+    }
+
+    public static int getPlayerRanking(String playerName) {
+        File file = new File(plugin.getDataFolder(), "points.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+
+        Map<String, Double> playerScores = new HashMap<>();
+        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
+            double score = config.getDouble("players." + player);
+            playerScores.put(player, score);
+        }
+
+        playerScores.putIfAbsent(playerName, 0.0);
+
+        List<Map.Entry<String, Double>> sortedScores = new ArrayList<>(playerScores.entrySet());
+        sortedScores.sort((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()));
+
+        for (int i = 0; i < sortedScores.size(); i++) {
+            if (sortedScores.get(i).getKey().equals(playerName)) {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+    public static Map.Entry<String, Double> getPlayerAtRank(int rank) {
+        File file = new File(plugin.getDataFolder(), "points.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+
+        Map<String, Double> playerScores = new HashMap<>();
+        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
+            double score = config.getDouble("players." + player);
+            playerScores.put(player, score);
+        }
+
+        List<Map.Entry<String, Double>> sortedScores = new ArrayList<>(playerScores.entrySet());
+        sortedScores.sort((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()));
+
+        if (rank > 0 && rank <= sortedScores.size()) {
+            return sortedScores.get(rank - 1);
+        }
+
+        return null;
+    }
+
 }

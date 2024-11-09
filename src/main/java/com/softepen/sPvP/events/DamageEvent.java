@@ -14,6 +14,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Objects;
+
 import static com.softepen.sPvP.sPvP.*;
 import static com.softepen.sPvP.utils.*;
 
@@ -50,10 +52,13 @@ public class DamageEvent implements Listener {
 
                 if (isCritical){
                     int currentCombo = criticalHitCombo.getOrDefault(attacker, 0);
-
                     currentCombo++;
 
-                    criticalHitCombo.put(attacker, currentCombo);
+                    if (configManager.getBoolean("ipPrevent.hit")) {
+                        if (!Objects.equals(getPlayerIP(attacker), getPlayerIP(victim))) {
+                            criticalHitCombo.put(attacker, currentCombo);
+                        }
+                    }
 
                     if (settings.getSound()) {
                         Sound criticalSound = getComboSound(currentCombo, attacker);
@@ -70,25 +75,35 @@ public class DamageEvent implements Listener {
                         }
                     }
 
-                    int finalCurrentCombo = currentCombo;
-                    int cooldownDuration = configManager.getInt("comboCooldown");
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                        int lastCombo = criticalHitCombo.getOrDefault(attacker, 0);
+                    if (configManager.getBoolean("ipPrevent.hit")) {
+                        if (!Objects.equals(getPlayerIP(attacker), getPlayerIP(victim))) {
+                            int finalCurrentCombo = currentCombo;
+                            int cooldownDuration = configManager.getInt("comboCooldown");
+                            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                                int lastCombo = criticalHitCombo.getOrDefault(attacker, 0);
 
-                        if (finalCurrentCombo == lastCombo) {
-                            setCombo(attacker);
+                                if (finalCurrentCombo == lastCombo) {
+                                    setCombo(attacker);
 
-                            criticalHitCombo.put(attacker, 0);
+                                    criticalHitCombo.put(attacker, 0);
+                                }
+                            }, (long) cooldownDuration * 20);
                         }
-                    }, (long) cooldownDuration * 20);
+                    }
+
                 } else {
-                    if (criticalHitCombo.getOrDefault(attacker, 0) != 0) {
-                        setCombo(attacker);
+                    if (configManager.getBoolean("ipPrevent.hit")) {
+                        if (!Objects.equals(getPlayerIP(attacker), getPlayerIP(victim))) {
+                            if (criticalHitCombo.getOrDefault(attacker, 0) != 0) {
+                                setCombo(attacker);
+                                criticalHitCombo.put(attacker, 0);
+                            }
+                        }
 
                         Sound breakSound = getBreakSound(Sound.ENTITY_VILLAGER_NO);
                         attacker.playSound(attacker.getLocation(), breakSound, 1, 1);
-                        criticalHitCombo.put(attacker, 0);
                     }
+
                 }
 
                 if (settings.getHealthIndicator()) {
@@ -130,7 +145,7 @@ public class DamageEvent implements Listener {
 
     private void setCombo(Player player) {
         int combo = criticalHitCombo.getOrDefault(player, 0);
-        if (combo > 0 ) {
+        if (combo > 0) {
             criticalHitLastCombo.put(player, combo);
             if (criticalHitComboRecord.getOrDefault(player, 0) < combo) {
                 criticalHitComboRecord.put(player, combo);

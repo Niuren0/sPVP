@@ -4,7 +4,12 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+import java.util.Objects;
+
 import static com.softepen.sPvP.sPvP.*;
+import static com.softepen.sPvP.utils.getPlayerAtRank;
+import static com.softepen.sPvP.utils.getPlayerRanking;
 
 public class papi extends PlaceholderExpansion {
     @NotNull
@@ -42,6 +47,16 @@ public class papi extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("combo_record")) return criticalHitComboRecord.get(player).toString();
         if (params.equalsIgnoreCase("current_streak")) return killSeries.get(player).toString();
         if (params.equalsIgnoreCase("streak_record")) return killSeriesRecord.get(player).toString();
+        if (params.equalsIgnoreCase("rank_ranking")) return String.valueOf(getPlayerRanking(player.getName()));
+
+        if (params.startsWith("rank_top_")) {
+            String[] paramsList = params.split("_");
+            Map.Entry<String, Double> data = getPlayerAtRank(Integer.parseInt(paramsList[2]));
+            assert data != null;
+
+            if (Objects.equals(paramsList[3], "name")) return String.valueOf(data.getValue());
+            else if (Objects.equals(paramsList[3], "points")) return data.getKey();
+        }
 
         return null;
     }

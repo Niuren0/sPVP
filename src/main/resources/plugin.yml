@@ -1,5 +1,5 @@
 name: sPvP
-version: '1.0-SNAPSHOT'
+version: '1.5'
 main: com.softepen.sPvP.sPvP
 api-version: '1.18'
 prefix: sPvP
@@ -7,25 +7,24 @@ author: Niuren_
 description: A customizable PvP plugin for Minecraft servers.
 website: https://softepen.com
 
-softdepend: ["PlaceholderAPI", "WorldGuard"]
+softdepend: ["PlaceholderAPI", "WorldGuard", "LuckPerms"]
 
 commands:
   spvp:
     description: Opens the sPvP menu
     usage: /spvp
-    permission: spvp.commands.spvp
   profile:
     description: Player profile menu
-    usage: /profile [player]
-    permission: spvp.commands.profile
+    usage: /profile <player>
   freeze:
     description: Freeze the player
     usage: /freeze [player]
-    permission: spvp.commands.freeze
   unfreeze:
     description: Unfreeze the player
     usage: /unfreeze [player]
-    permission: spvp.commands.unfreeze
+  rank:
+    description: Main rank command
+    usage: /rank <player>
 
 permissions:
   spvp.commands.spvp:
@@ -43,6 +42,30 @@ permissions:
   spvp.commands.unfreeze:
     description: Permission to unfreeze the player
     default: op
+  spvp.commands.rank:
+    description: Permission to use rank command
+    default: true
+  spvp.commands.rank.others:
+    description: Permission to see other players rank
+    default: true
+  spvp.commands.rank.set:
+    description: Permission to set players points
+    default: op
+  spvp.commands.rank.add:
+    description: Permission to add players points
+    default: op
+  spvp.commands.rank.remove:
+    description: Permission to remove players points
+    default: op
+  spvp.commands.rank.*:
+    description: Permission to use all rank commands
+    default: op
+    children:
+      spvp.commands.rank: true
+      spvp.commands.rank.others: true
+      spvp.commands.rank.set: true
+      spvp.commands.rank.add: true
+      spvp.commands.rank.remove: true
   spvp.commands.*:
     description: Grants access to all sPvP commands
     default: op
@@ -52,6 +75,7 @@ permissions:
       spvp.commands.profile: true
       spvp.commands.freeze: true
       spvp.commands.unfreeze: true
+      spvp.commands.rank.*: true
 
   spvp.messages.*:
     description: Grants access to all custom kill messages

@@ -23,5 +23,7 @@ public class JoinEvent implements Listener {
         killSeries.put(player, 0);
         kills.put(player, settings.getKills());
         deaths.put(player, settings.getDeaths());
+
+        pointsManager.set("players." + player.getName(), pointsManager.getDouble("players." + player.getName(), 0));
     }
 }

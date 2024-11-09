@@ -101,10 +101,6 @@ public class ProfileMenu {
 
                     String death = deaths.getOrDefault(player, settings.getDeaths()).toString();
                     String kill = kills.getOrDefault(player, settings.getKills()).toString();
-                    String last5death = "122";
-                    String last5kill = "122";
-                    String top5death = "122";
-                    String top5kill = "122";
                     String lastCombo = criticalHitLastCombo.getOrDefault(player, settings.getLastCombo()).toString();
                     String comboRecord = criticalHitComboRecord.getOrDefault(player, settings.getComboRecord()).toString();
                     String currentStreak = killSeries.getOrDefault(player, 0).toString();
@@ -112,10 +108,6 @@ public class ProfileMenu {
 
                     if (Objects.equals(s, "deaths")) lore = lore.replace("{" + s + "}", death);
                     if (Objects.equals(s, "kills")) lore = lore.replace("{" + s + "}", kill);
-                    if (Objects.equals(s, "last5deaths")) lore = lore.replace("{" + s + "}", last5death);
-                    if (Objects.equals(s, "last5kills")) lore = lore.replace("{" + s + "}", last5kill);
-                    if (Objects.equals(s, "top5deaths")) lore = lore.replace("{" + s + "}", top5death);
-                    if (Objects.equals(s, "top5kills")) lore = lore.replace("{" + s + "}", top5kill);
                     if (Objects.equals(s, "lastCombo")) lore = lore.replace("{" + s + "}", lastCombo);
                     if (Objects.equals(s, "comboRecord")) lore = lore.replace("{" + s + "}", comboRecord);
                     if (Objects.equals(s, "currentStreak")) lore = lore.replace("{" + s + "}", currentStreak);

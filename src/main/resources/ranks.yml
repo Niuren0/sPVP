@@ -1,0 +1,165 @@
+ranks:
+  warrior:
+    exp: 0
+    min: 1
+    max: 2
+  elite3:
+    exp: 25
+    min: 1
+    max: 2
+  elite2:
+    exp: 50
+    min: 1
+    max: 3
+  elite1:
+    exp: 75
+    min: 1
+    max: 3
+  master4:
+    exp: 100
+    min: 2
+    max: 4
+  master3:
+    exp: 150
+    min: 2
+    max: 4
+  master2:
+    exp: 200
+    min: 2
+    max: 5
+  master1:
+    exp: 250
+    min: 2
+    max: 5
+  epic5:
+    exp: 400
+    min: 3
+    max: 6
+  epic4:
+    exp: 500
+    min: 3
+    max: 6
+  epic3:
+    exp: 600
+    min: 3
+    max: 7
+  epic2:
+    exp: 700
+    min: 3
+    max: 7
+  epic1:
+    exp: 850
+    min: 3
+    max: 8
+  legend5:
+    exp: 1000
+    min: 4
+    max: 8
+  legend4:
+    exp: 1200
+    min: 4
+    max: 9
+  legend3:
+    exp: 1400
+    min: 4
+    max: 9
+  legend2:
+    exp: 1600
+    min: 2
+    max: 10
+  legend1:
+    exp: 1800
+    min: 4
+    max: 10
+  mystic6:
+    exp: 2250
+    min: 5
+    max: 11
+  mystic5:
+    exp: 2500
+    min: 5
+    max: 11
+  mystic4:
+    exp: 2750
+    min: 5
+    max: 12
+  mystic3:
+    exp: 3000
+    min: 5
+    max: 12
+  mystic2:
+    exp: 3250
+    min: 5
+    max: 13
+  mystic1:
+    exp: 3500
+    min: 5
+    max: 13
+  glorious7:
+    exp: 4000
+    min: 6
+    max: 14
+  glorious6:
+    exp: 4300
+    min: 6
+    max: 14
+  glorious5:
+    exp: 4600
+    min: 6
+    max: 15
+  glorious4:
+    exp: 4900
+    min: 6
+    max: 15
+  glorious3:
+    exp: 5200
+    min: 6
+    max: 16
+  glorious2:
+    exp: 5500
+    min: 6
+    max: 16
+  glorious1:
+    exp: 6000
+    min: 6
+    max: 17
+  victorious8:
+    exp: 6200
+    min: 7
+    max: 17
+  victorious7:
+    exp: 6400
+    min: 7
+    max: 18
+  victorious6:
+    exp: 6600
+    min: 7
+    max: 18
+  victorious5:
+    exp: 6800
+    min: 7
+    max: 19
+  victorious4:
+    exp: 7000
+    min: 7
+    max: 20
+  victorious3:
+    exp: 7200
+    min: 7
+    max: 20
+  victorious2:
+    exp: 7400
+    min: 7
+    max: 21
+  victorious1:
+    exp: 7600
+    min: 7
+    max: 21
+
+# Example for default -> Victim lost: 10 points, killer earn 15 (10 + %50) points
+earnedPoints:
+  mvp+: 90.0
+  mvp: 80.0
+  vip+: 70.0
+  vip: 60.0
+  default: 50.0

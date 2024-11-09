@@ -1,14 +1,14 @@
 package com.softepen.sPvP;
 
 import com.sk89q.worldguard.WorldGuard;
-import com.softepen.sPvP.commands.MainCommand;
-import com.softepen.sPvP.commands.ProfileCommand;
+import com.softepen.sPvP.commands.*;
 import com.softepen.sPvP.commands.freeze.FreezeCommand;
 import com.softepen.sPvP.commands.freeze.UnfreezeCommand;
-import com.softepen.sPvP.commands.spvpTabComplete;
 import com.softepen.sPvP.events.*;
 import com.softepen.sPvP.listeners.papi;
 import com.softepen.sPvP.managers.FileManager;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -21,12 +21,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.softepen.sPvP.utils.ranksReload;
+
 public final class sPvP extends JavaPlugin {
     public static sPvP plugin;
     public static FileManager configManager;
     public static FileManager soundsManager;
     public static FileManager messagesManager;
     public static File logFile;
+    public static FileManager pointsManager;
+    public static FileManager ranksManager;
     public static HashMap<Player, Integer> criticalHitCombo = new HashMap<>();
     public static HashMap<Player, Integer> criticalHitLastCombo = new HashMap<>();
     public static HashMap<Player, Integer> criticalHitComboRecord = new HashMap<>();
@@ -35,8 +39,10 @@ public final class sPvP extends JavaPlugin {
     public static HashMap<Player, Integer> kills = new HashMap<>();
     public static HashMap<Player, Integer> deaths = new HashMap<>();
     public static HashMap<Player, CommandSender> frozens = new HashMap<>();
+    public static HashMap<String, Double> ranks = new HashMap<>();
     public static boolean wgExpansion;
     public static WorldGuard WGPlugin;
+    public static LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
@@ -73,6 +79,13 @@ public final class sPvP extends JavaPlugin {
             }
         }
 
+        pointsManager = new FileManager("points.yml");
+        pointsManager.loadConfig();
+
+        ranksManager = new FileManager("ranks.yml");
+        ranksManager.loadConfig();
+        ranksReload();
+
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new papi().register();
             getLogger().info("sPvP PlaceholderAPI expansion enabled.");
@@ -89,16 +102,25 @@ public final class sPvP extends JavaPlugin {
             getLogger().warning("WorldGuard plugin not found. Expansion disabled.");
         }
 
-        Objects.requireNonNull(getCommand("spvp")).setExecutor(new MainCommand());
+        if (Bukkit.getPluginManager().getPlugin("LuckPerms") != null) {
+            luckPerms = LuckPermsProvider.get();
+            getLogger().info("sPvP LuckPerms expansion enabled.");
+        } else {
+            getLogger().warning("LuckPerms plugin not found. Expansion disabled.");
+        }
+
+        Objects.requireNonNull(getCommand("spvp")).setExecutor(new spvpCommand());
         Objects.requireNonNull(getCommand("profile")).setExecutor(new ProfileCommand());
         Objects.requireNonNull(getCommand("freeze")).setExecutor(new FreezeCommand());
         Objects.requireNonNull(getCommand("unfreeze")).setExecutor(new UnfreezeCommand());
+        Objects.requireNonNull(getCommand("rank")).setExecutor(new MainRankCommand());
 
         Objects.requireNonNull(getCommand("spvp")).setTabCompleter(new spvpTabComplete());
+        Objects.requireNonNull(getCommand("rank")).setTabCompleter(new RankTabComplete());
 
 
         getServer().getPluginManager().registerEvents(new DamageEvent(), this);
-        getServer().getPluginManager().registerEvents(new DeathEvent(), this);
+        getServer().getPluginManager().registerEvents(new DeathEventPVP(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new OnBreak(), this);
         getServer().getPluginManager().registerEvents(new OnClick(), this);

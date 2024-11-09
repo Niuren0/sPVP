@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -49,8 +50,15 @@ public class FileManager {
         return config.getIntegerList(path);
     }
 
+    public double getDouble(String path) {
+        return config.getDouble(path);
+    }
     public double getDouble(String path, double def) {
         return config.getDouble(path, def);
+    }
+
+    public Long getLong(String path) {
+        return config.getLong(path);
     }
 
     public ConfigurationSection getConfigurationSection(String path) {
@@ -71,6 +79,15 @@ public class FileManager {
 
     public void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(configFile);
+    }
+
+    public void set(String target, Object value) {
+        config.set(target, value);
+        try {
+            config.save(configFile);
+        } catch (IOException e) {
+            plugin.getLogger().severe("An error occurred when saving " + configFile.getName() + ": " + e);
+        }
     }
 }
 
