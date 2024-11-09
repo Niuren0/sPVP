@@ -48,6 +48,7 @@ public class papi extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("current_streak")) return killSeries.get(player).toString();
         if (params.equalsIgnoreCase("streak_record")) return killSeriesRecord.get(player).toString();
         if (params.equalsIgnoreCase("rank_ranking")) return String.valueOf(getPlayerRanking(player.getName()));
+        if (params.equalsIgnoreCase("kd")) return String.valueOf(kills.get(player) / deaths.get(player));
 
         if (params.startsWith("rank_top_")) {
             String[] paramsList = params.split("_");
