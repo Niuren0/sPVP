@@ -11,14 +11,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static com.softepen.sPvP.sPvP.*;
-import static com.softepen.sPvP.utils.applyLast5;
-import static com.softepen.sPvP.utils.applyTop5;
+import static com.softepen.sPvP.utils.*;
 
 public class ProfileMenu {
     public ProfileMenu (Player opener, Player player) {
@@ -27,30 +27,18 @@ public class ProfileMenu {
                 .rows(configManager.getInt("profileMenu.row"))
                 .create();
 
-        GuiItem deathItem = ItemBuilder.from(getItemStack("deaths", player)).asGuiItem();
-        GuiItem killItem = ItemBuilder.from(getItemStack("kills", player)).asGuiItem();
+        GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem();
+
         GuiItem last5deathItem = ItemBuilder.from(getItemStack("last5deaths", player)).asGuiItem();
         GuiItem last5killItem = ItemBuilder.from(getItemStack("last5kills", player)).asGuiItem();
         GuiItem top5deathItem = ItemBuilder.from(getItemStack("top5deaths", player)).asGuiItem();
         GuiItem top5killItem = ItemBuilder.from(getItemStack("top5kills", player)).asGuiItem();
-        GuiItem lastComboItem = ItemBuilder.from(getItemStack("lastCombo", player)).asGuiItem();
-        GuiItem comboRecordItem = ItemBuilder.from(getItemStack("comboRecord", player)).asGuiItem();
-        GuiItem currentStreakItem = ItemBuilder.from(getItemStack("currentStreak", player)).asGuiItem();
-        GuiItem streakRecordItem = ItemBuilder.from(getItemStack("streakRecord", player)).asGuiItem();
 
-        gui.setItem(configManager.getInt("profileMenu.deaths.slot"), deathItem);
-        gui.setItem(configManager.getInt("profileMenu.kills.slot"), killItem);
+        gui.setItem(configManager.getInt("profileMenu.profile.slot"), profileItem);
         gui.setItem(configManager.getInt("profileMenu.last5deaths.slot"), last5deathItem);
         gui.setItem(configManager.getInt("profileMenu.last5kills.slot"), last5killItem);
         gui.setItem(configManager.getInt("profileMenu.top5deaths.slot"), top5deathItem);
         gui.setItem(configManager.getInt("profileMenu.top5kills.slot"), top5killItem);
-        gui.setItem(configManager.getInt("profileMenu.lastCombo.slot"), lastComboItem);
-        gui.setItem(configManager.getInt("profileMenu.comboRecord.slot"), comboRecordItem);
-        gui.setItem(configManager.getInt("profileMenu.currentStreak.slot"), currentStreakItem);
-        gui.setItem(configManager.getInt("profileMenu.streakRecord.slot"), streakRecordItem);
-
-        GuiItem backItem = ItemBuilder.from(getItemStack("back", player)).asGuiItem(event -> new SettingsMenu(opener));
-        gui.setItem(configManager.getInt("profileMenu.back.slot"), backItem);
 
         if (configManager.getBoolean("profileMenu.filler.enable")) {
             for (String key : configManager.getConfigurationSection("profileMenu.filler.items").getKeys(false)) {
@@ -70,7 +58,6 @@ public class ProfileMenu {
         Material material;
         String itemName;
         List<String> itemLore;
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
 
         if (s.startsWith("profileMenu.filler.items.")) {
             material = Material.valueOf(configManager.getString(s + ".item"));
@@ -98,22 +85,7 @@ public class ProfileMenu {
                 List<String> coloredLore = new ArrayList<>();
                 for (String lore : itemLore) {
                     lore = lore.replace("{player}", player.getName());
-
-                    String death = deaths.getOrDefault(player, settings.getDeaths()).toString();
-                    String kill = kills.getOrDefault(player, settings.getKills()).toString();
-                    String lastCombo = criticalHitLastCombo.getOrDefault(player, settings.getLastCombo()).toString();
-                    String comboRecord = criticalHitComboRecord.getOrDefault(player, settings.getComboRecord()).toString();
-                    String currentStreak = killSeries.getOrDefault(player, 0).toString();
-                    String streakRecord = killSeriesRecord.getOrDefault(player, settings.getKillSeriesRecord()).toString();
-
-                    if (Objects.equals(s, "deaths")) lore = lore.replace("{" + s + "}", death);
-                    if (Objects.equals(s, "kills")) lore = lore.replace("{" + s + "}", kill);
-                    if (Objects.equals(s, "lastCombo")) lore = lore.replace("{" + s + "}", lastCombo);
-                    if (Objects.equals(s, "comboRecord")) lore = lore.replace("{" + s + "}", comboRecord);
-                    if (Objects.equals(s, "currentStreak")) lore = lore.replace("{" + s + "}", currentStreak);
-                    if (Objects.equals(s, "streakRecord")) lore = lore.replace("{" + s + "}", streakRecord);
                     coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
-
                 }
                 meta.setLore(coloredLore);
             }
@@ -121,5 +93,57 @@ public class ProfileMenu {
         }
 
         return itemStack;
+    }
+
+    private ItemStack getPlayerSkull(Player player) {
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
+        if (headMeta != null) {
+            headMeta.setOwningPlayer(player);
+
+            headMeta.setDisplayName(player.getDisplayName());
+            List<String> itemLore = configManager.getStringList("profileMenu.profile.lore");
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    lore = lore
+                            .replace("{kills}", kills.getOrDefault(player, 0).toString())
+                            .replace("{deaths}", deaths.getOrDefault(player, 0).toString())
+                            .replace("{kd}", String.valueOf(getKD(player)))
+                            .replace("{lastCombo}", criticalHitLastCombo.getOrDefault(player, 0).toString())
+                            .replace("{comboRecord}", getComboRecord(player))
+                            .replace("{killSeries}", killSeries.getOrDefault(player, 0).toString())
+                            .replace("{killSeriesRecord}", getKillSeriesRecord(player));
+
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                headMeta.setLore(coloredLore);
+            }
+
+            head.setItemMeta(headMeta);
+        }
+        else {
+            plugin.getLogger().warning("Can not find head meta for " + player.getName());
+        }
+
+        return head;
+    }
+
+    private String getComboRecord(Player player) {
+        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+
+        int savedRecord = settings.getComboRecord();
+        int hashmapRecord = criticalHitComboRecord.getOrDefault(player, 0);
+
+        return String.valueOf(Math.max(hashmapRecord, savedRecord));
+    }
+
+    private String getKillSeriesRecord(Player player) {
+        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+
+        int savedRecord = settings.getKillSeriesRecord();
+        int hashmapRecord = killSeriesRecord.getOrDefault(player, 0);
+
+        return String.valueOf(Math.max(hashmapRecord, savedRecord));
     }
 }

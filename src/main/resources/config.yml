@@ -53,17 +53,7 @@ comboCooldown: 3
 
 settingsMenu:
   title: "&6Settings"
-  row: 6
-
-  profile:
-    slot: 13
-    lore:
-      - "&aKills: &e{kills}"
-      - "&aDeaths: &e{deaths}"
-      - "&aLast Combo: &e{lastCombo}"
-      - "&aCombo Record: &e{comboRecord}"
-      - "&aKill Series: &e{killSeries}"
-      - "&aKill Series Record: &e{killSeriesRecord}"
+  row: 5
 
   killMessages:
     slot: 20
@@ -122,19 +112,20 @@ settingsMenu:
           - "&7www.softepen.com"
         slots:
           - 9
-          - 17
           - 18
-          - 26
           - 27
+          - 17
+          - 26
           - 35
-          - 36
-          - 44
       lime:
         item: LIME_STAINED_GLASS_PANE
         title: " " # Use blank for nothing
         lore:
           - "&7www.softepen.com"
         slots:
+          - 11
+          - 13
+          - 15
           - 29
           - 31
           - 33
@@ -144,6 +135,8 @@ settingsMenu:
         lore:
           - "&7www.softepen.com"
         slots:
+          - 12
+          - 14
           - 30
           - 32
 
@@ -178,8 +171,8 @@ killMessagesMenu:
   filler:
     enable: true
     items:
-      lime:
-        item: LIME_STAINED_GLASS_PANE
+      gray:
+        item: GRAY_STAINED_GLASS_PANE
         title: " " # Use blank for nothing
         lore:
           - "&7www.softepen.com"
@@ -214,8 +207,8 @@ colorSelectMenu:
   filler:
     enable: true
     items:
-      lime:
-        item: LIME_STAINED_GLASS_PANE
+      gray:
+        item: GRAY_STAINED_GLASS_PANE
         title: " " # Use blank for nothing
         lore:
           - "&7www.softepen.com"
@@ -265,8 +258,8 @@ soundSelectMenu:
   filler:
     enable: true
     items:
-      lime:
-        item: LIME_STAINED_GLASS_PANE
+      gray:
+        item: GRAY_STAINED_GLASS_PANE
         title: " " # Use blank for nothing
         lore:
           - "&7www.softepen.com"
@@ -281,24 +274,22 @@ soundSelectMenu:
 
 profileMenu:
   title: "&6{player} Profile"
-  row: 6
+  row: 3
 
-  deaths:
-    slot: 20
-    item: SKELETON_SKULL
-    title: "&cTotal Deaths"
+  profile:
+    slot: 10
     lore:
-      - "&7{player} &cdied {deaths} &7times"
-  kills:
-    slot: 29
-    item: WITHER_SKELETON_SKULL
-    title: "&aTotal Kills"
-    lore:
-      - "&7{player} &ahas {kills} &7kills"
+      - "&aKills: &e{kills}"
+      - "&aDeaths: &e{deaths}"
+      - "&aK/D: &e{kd}"
+      - "&aLast Combo: &e{lastCombo}"
+      - "&aCombo Record: &e{comboRecord}"
+      - "&aKill Series: &e{killSeries}"
+      - "&aKill Series Record: &e{killSeriesRecord}"
 
   last5deaths:
-    slot: 21
-    item: SKELETON_SKULL
+    slot: 12
+    item: FIRE_CORAL
     title: "&cLast 5 Deaths"
     lore:
       - "&7#1 &6- &a{1} &7(&b{time1}&7)"
@@ -307,8 +298,8 @@ profileMenu:
       - "&7#4 &6- &a{4} &7(&b{time4}&7)"
       - "&7#5 &6- &a{5} &7(&b{time5}&7)"
   last5kills:
-    slot: 30
-    item: WITHER_SKELETON_SKULL
+    slot: 13
+    item: HORN_CORAL
     title: "&aLast 5 Kills"
     lore:
       - "&7#1 &6- &a{1} &7(&b{time1}&7)"
@@ -318,8 +309,8 @@ profileMenu:
       - "&7#5 &6- &a{5} &7(&b{time5}&7)"
 
   top5deaths:
-    slot: 22
-    item: SKELETON_SKULL
+    slot: 14
+    item: TUBE_CORAL
     title: "&cTop 5 Deaths"
     lore:
       - "&7#1 &6- &c{1} &6- &b{count1}"
@@ -328,8 +319,8 @@ profileMenu:
       - "&7#4 &6- &c{4} &6- &b{count4}"
       - "&7#5 &6- &c{5} &6- &b{count5}"
   top5kills:
-    slot: 31
-    item: WITHER_SKELETON_SKULL
+    slot: 15
+    item: BRAIN_CORAL
     title: "&aTop 5 Kills"
     lore:
       - "&7#1 &6- &a{1} &6- &b{count1}"
@@ -337,38 +328,6 @@ profileMenu:
       - "&7#3 &6- &a{3} &6- &b{count3}"
       - "&7#4 &6- &a{4} &6- &b{count4}"
       - "&7#5 &6- &a{5} &6- &b{count5}"
-
-  lastCombo:
-    slot: 23
-    item: SKELETON_SKULL
-    title: "&aLast Combo"
-    lore:
-      - "&7{player}'s last combo &a{lastCombo}"
-  comboRecord:
-    slot: 32
-    item: WITHER_SKELETON_SKULL
-    title: "&bCombo Record"
-    lore:
-      - "&7{player}'s combo record &a{comboRecord}"
-
-  currentStreak:
-    slot: 24
-    item: SKELETON_SKULL
-    title: "&aCurrent Streak"
-    lore:
-      - "&7{player}'s current streak &a{currentStreak}"
-  streakRecord:
-    slot: 33
-    item: WITHER_SKELETON_SKULL
-    title: "&bStreak Record"
-    lore:
-      - "&7{player}'s streak record &a{streakRecord}"
-
-  back:
-    slot: 49
-    item: BARRIER
-    title: "&cBack"
-    lore: []
 
   filler:
     enable: false

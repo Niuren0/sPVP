@@ -23,8 +23,8 @@ import java.util.Objects;
 import static com.softepen.sPvP.sPvP.*;
 import static com.softepen.sPvP.sPvP.plugin;
 
-public class SoundSelectMenu {
-    public SoundSelectMenu(Player player) {
+public class HitSoundSelectMenu {
+    public HitSoundSelectMenu(Player player) {
         String playerName = player.getName();
 
         Gui gui = Gui.gui()
