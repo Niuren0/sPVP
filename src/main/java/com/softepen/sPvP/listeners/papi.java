@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.softepen.sPvP.sPvP.*;
-import static com.softepen.sPvP.utils.getPlayerAtRank;
-import static com.softepen.sPvP.utils.getPlayerRanking;
+import static com.softepen.sPvP.utils.*;
 
 public class papi extends PlaceholderExpansion {
     @NotNull
@@ -48,7 +47,7 @@ public class papi extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("current_streak")) return killSeries.get(player).toString();
         if (params.equalsIgnoreCase("streak_record")) return killSeriesRecord.get(player).toString();
         if (params.equalsIgnoreCase("rank_ranking")) return String.valueOf(getPlayerRanking(player.getName()));
-        if (params.equalsIgnoreCase("kd")) return String.valueOf(kills.get(player) / deaths.get(player));
+        if (params.equalsIgnoreCase("kd")) return String.valueOf(getKD(player));
 
         if (params.startsWith("rank_top_")) {
             String[] paramsList = params.split("_");

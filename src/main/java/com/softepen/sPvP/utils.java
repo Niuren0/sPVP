@@ -310,4 +310,14 @@ public class utils {
         return null;
     }
 
+    public static Double getKD(Player player) {
+        int killCount = kills.getOrDefault(player, 0);
+        int deathCount = deaths.getOrDefault(player, 0);
+
+        if (deathCount == 0 && killCount == 0) return 0.0;
+
+        return deathCount == 0 ? 1.0 : (double) killCount / deathCount;
+    }
+
+
 }
