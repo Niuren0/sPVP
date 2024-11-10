@@ -7,15 +7,23 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import static com.softepen.sPvP.sPvP.*;
+import static com.softepen.sPvP.utils.ranksReload;
 
 public class Reload implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender.hasPermission("spvp.commands.reload") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
             configManager.reloadConfig();
+
             soundsManager.reloadConfig();
+
             messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
             messagesManager.loadConfig();
+
+            pointsManager.reloadConfig();
+
+            ranksManager.reloadConfig();
+            ranksReload();
 
             commandSender.sendMessage(messagesManager.getPrefixString("reloaded"));
         } else commandSender.sendMessage(messagesManager.getPrefixString("noPerm"));
