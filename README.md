@@ -66,6 +66,7 @@
 |------------------------------------|-----------------------------------------------------------------------------------|
 | `%spvp_kills%`                     | Oyuncunun toplam öldürme sayısını gösterir                                        |
 | `%spvp_deaths%`                    | Oyuncunun toplam ölüm sayısını gösterir                                           |
+| `%spvp_kd%`                        | Oyuncunun kd değerini gösterir                                                    |
 | `%spvp_current_combo%`             | Oyuncunun mevcut kombo sayısını gösterir                                          |
 | `%spvp_combo_record%`              | Oyuncunun en yüksek kombo rekorunu gösterir                                       |
 | `%spvp_current_streak%`            | Oyuncunun mevcut öldürme serisini gösterir                                        |
