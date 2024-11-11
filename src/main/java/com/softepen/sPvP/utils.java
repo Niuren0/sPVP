@@ -316,7 +316,9 @@ public class utils {
 
         if (deathCount == 0 && killCount == 0) return 0.0;
 
-        return deathCount == 0 ? 1.0 : (double) killCount / deathCount;
+        double kd = deathCount == 0 ? 1.0 : (double) killCount / deathCount;
+
+        return Math.round(kd * 100.0) / 100.0;
     }
 
 

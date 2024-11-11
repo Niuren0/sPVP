@@ -54,7 +54,7 @@ public class papi extends PlaceholderExpansion {
             Map.Entry<String, Double> data = getPlayerAtRank(Integer.parseInt(paramsList[2]));
             assert data != null;
 
-            if (Objects.equals(paramsList[3], "points")) return String.valueOf(data.getValue());
+            if (Objects.equals(paramsList[3], "points")) return String.format("%.2f", data.getValue());
             else if (Objects.equals(paramsList[3], "name")) return data.getKey();
         }
 

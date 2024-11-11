@@ -45,8 +45,8 @@ public class RankCommand implements CommandExecutor {
         commandSender.sendMessage(messagesManager.getPrefixString("rank")
                 .replace("{player}", name)
                 .replace("{rank}", role)
-                .replace("{points}", String.valueOf(playerPoints))
-                .replace("{remainingPoints}", String.valueOf(remainingPoints))
+                .replace("{points}", String.format("%.2f", playerPoints))
+                .replace("{remainingPoints}", String.format("%.2f", remainingPoints))
                 .replace("{ranking}", String.valueOf(getPlayerRanking(name)))
         );
 
