@@ -156,10 +156,9 @@ ranks:
     min: 7
     max: 21
 
-# Example for default -> Victim lost: 10 points, killer earn 15 (10 + %50) points
+# Example for default -> Victim lost: 1.0 points, killer earn 5.0 (1.0 * %500) points
 earnedPoints:
-  mvp+: 90.0
-  mvp: 80.0
-  vip+: 70.0
-  vip: 60.0
-  default: 50.0
+  mvp+: 1000.0
+  mvp: 800.0
+  vip: 650.0
+  default: 500.0
