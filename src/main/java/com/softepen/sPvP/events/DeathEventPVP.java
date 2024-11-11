@@ -164,7 +164,7 @@ public class DeathEventPVP implements Listener {
                         Random random = new Random();
 
                         lostPoints = min + (max - min) * random.nextDouble();
-                        earnedPoints = lostPoints + (lostPoints * ranksManager.getDouble("earnedPoints." + killerGroup, 0) / 100);
+                        earnedPoints = lostPoints + (lostPoints * ranksManager.getDouble("earnedPoints." + killerGroup, ranksManager.getDouble("earnedPoints.default")) / 100);
 
                         lostPoints = Math.floor(lostPoints * 100) / 100;
                         earnedPoints = Math.floor(earnedPoints * 100) / 100;
