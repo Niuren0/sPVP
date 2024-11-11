@@ -5,7 +5,7 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import com.softepen.sPvP.managers.PlayerSettingsManager;
+import com.softepen.sPvP.managers.PlayerSettings;
 import com.softepen.sPvP.managers.RankManager;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
@@ -37,21 +37,21 @@ public class utils {
         }
     }
 
-    public static Sound getComboSound(int combo, Player player) {
+    public static Sound getComboSound(int combo, String playerName, PlayerSettings settings) {
         try {
-            String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
+            String path = settings.getComboSound();
             String soundName = soundsManager.getString(path + "." + combo + ".sound");
             if (soundName == null) soundName = soundsManager.getString(path + ".default.sound");
             return Sound.valueOf(soundName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            plugin.getLogger().warning("Error at " + player.getName() + "'s getComboSound function, using default sound :" + e);
+            plugin.getLogger().warning("Error at " + playerName + "'s getComboSound function, using default sound :" + e);
             return Sound.valueOf(soundsManager.getString(configManager.getString("sounds.critical_hit_default") + ".default.sound"));
         }
     }
 
-    public static float getComboSoundPitch(int combo, Player player) {
+    public static float getComboSoundPitch(int combo, PlayerSettings settings) {
         try {
-            String path = PlayerSettingsManager.getPlayerSettings(player).getComboSound();
+            String path = settings.getComboSound();
             return (float) soundsManager.getDouble(path + "." + combo + ".pitch", 1);
         } catch (IllegalArgumentException | NullPointerException e) {
             return 1;

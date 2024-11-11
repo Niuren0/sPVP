@@ -61,9 +61,9 @@ public class DamageEvent implements Listener {
                     }
 
                     if (settings.getSound()) {
-                        Sound criticalSound = getComboSound(currentCombo, attacker);
+                        Sound criticalSound = getComboSound(currentCombo, attacker.getName(), settings);
                         if (criticalSound != null) {
-                            float soundPitch = getComboSoundPitch(currentCombo, attacker);
+                            float soundPitch = getComboSoundPitch(currentCombo, settings);
                             attacker.playSound(attacker.getLocation(), criticalSound, 1.0f, soundPitch);
                         }
                     }
