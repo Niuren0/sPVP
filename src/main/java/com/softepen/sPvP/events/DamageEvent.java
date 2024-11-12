@@ -100,8 +100,10 @@ public class DamageEvent implements Listener {
                             }
                         }
 
-                        Sound breakSound = getBreakSound(Sound.ENTITY_VILLAGER_NO);
-                        attacker.playSound(attacker.getLocation(), breakSound, 1, 1);
+                        if (criticalHitCombo.getOrDefault(attacker, 0) != 0) {
+                            Sound breakSound = getBreakSound(Sound.ENTITY_VILLAGER_NO);
+                            attacker.playSound(attacker.getLocation(), breakSound, 1, 1);
+                        }
                     }
 
                 }
