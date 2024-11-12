@@ -135,7 +135,7 @@ public final class sPvP extends JavaPlugin {
         List<String> lines = List.of(
                 "&c-=-=-=-=-=-=-=-=-= &6sPvP Plugin &c-=-=-=-=-=-=-=-=-=",
                 "&aThe sPvP plugin has been successfully enabled!",
-                "&aFor support or questions, visit our website: &6www.softepen.com",
+                "&aFor support, visit: &6www.softepen.com",
                 "&c-=-=-=-=-=-=-=-=-=-= &6Softepen &c-=-=-=-=-=-=-=-=-=-="
         );
         for (String line : lines) {
