@@ -68,17 +68,18 @@
 | `%spvp_deaths%`                    | Oyuncunun toplam ölüm sayısını gösterir                                           |
 | `%spvp_kd%`                        | Oyuncunun kd değerini gösterir                                                    |
 | `%spvp_current_combo%`             | Oyuncunun mevcut kombo sayısını gösterir                                          |
+| `%spvp_last_combo%`                | Oyuncunun son kombo sayısını gösterir                                             |
 | `%spvp_combo_record%`              | Oyuncunun en yüksek kombo rekorunu gösterir                                       |
 | `%spvp_current_streak%`            | Oyuncunun mevcut öldürme serisini gösterir                                        |
 | `%spvp_streak_record%`             | Oyuncunun en yüksek öldürme serisi rekorunu gösterir                              |
-| `%spvp_streak_record%`             | Oyuncunun en yüksek öldürme serisi rekorunu gösterir                              |
 | `%spvp_rank_ranking%`              | Oyuncunun sunucudaki rank sıralamasını gösterir                                   |
+| `%spvp_rank_points%`               | Oyuncunun rank puanlarını gösterir                                                |
 | `%spvp_rank_top_<ranking>.name%`   | Sunucuda belirtilen sıradaki oyuncunun ismi (Ör.: %spvp_rank_top_1_name%)         |
 | `%spvp_rank_top_<ranking>.points%` | Sunucuda belirtilen sıradaki oyuncunun rank puani (Ör.: %spvp_rank_top_1_points%) |
 
 ## Kurulum
 
-1. Son sürümü [Releases](https://github.com/username/sPvP/releases) sayfasından indirin.
+1. Son sürümü [Releases](https://github.com/niuren0/sPvP/releases) sayfasından indirin.
 2. `.jar` dosyasını sunucunuzun `plugins` klasörüne yerleştirin.
 3. Sunucuyu yeniden başlatın veya `/reload` komutunu kullanarak eklentiyi etkinleştirin.
 4. Dil dosyalarını ve ayarları `/lang` klasöründen ve ana yapılandırma dosyasından gerektiği gibi yapılandırın.

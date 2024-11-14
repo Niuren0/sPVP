@@ -1,5 +1,6 @@
 package com.softepen.sPvP.listeners;
 
+import com.softepen.sPvP.managers.RankManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -41,13 +42,14 @@ public class papi extends PlaceholderExpansion {
 
         if (params.equalsIgnoreCase("kills")) return kills.get(player).toString();
         if (params.equalsIgnoreCase("deaths")) return deaths.get(player).toString();
+        if (params.equalsIgnoreCase("kd")) return String.valueOf(getKD(player));
         if (params.equalsIgnoreCase("current_combo")) return criticalHitCombo.get(player).toString();
         if (params.equalsIgnoreCase("last_combo")) return criticalHitLastCombo.get(player).toString();
         if (params.equalsIgnoreCase("combo_record")) return criticalHitComboRecord.get(player).toString();
         if (params.equalsIgnoreCase("current_streak")) return killSeries.get(player).toString();
         if (params.equalsIgnoreCase("streak_record")) return killSeriesRecord.get(player).toString();
         if (params.equalsIgnoreCase("rank_ranking")) return String.valueOf(getPlayerRanking(player.getName()));
-        if (params.equalsIgnoreCase("kd")) return String.valueOf(getKD(player));
+        if (params.equalsIgnoreCase("rank_points")) return String.valueOf(new RankManager(player.getName()).getPoints());
 
         if (params.startsWith("rank_top_")) {
             String[] paramsList = params.split("_");
