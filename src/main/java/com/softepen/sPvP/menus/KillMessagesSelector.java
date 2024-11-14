@@ -36,6 +36,9 @@ public class KillMessagesSelector {
         String message;
         for (String key : messagesManager.getConfigurationSection("specialKillMessages").getKeys(false)) {
             message = messagesManager.getString("specialKillMessages." + key)
+                    .replace("{prefix}", "")
+                    .replace("{+points}", "")
+                    .replace("{-points}", "")
                     .replace("{victim}", playerName)
                     .replace("{attacker}", playerName)
                     .replace("{killer}", playerName);

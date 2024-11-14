@@ -79,64 +79,64 @@ public class DeathEventPVP implements Listener {
 
                 if (configManager.getBoolean("ipPrevent.kill")) {
                     if (!Objects.equals(getPlayerIP(killer), getPlayerIP(victim))) {
-                    String victimName = victim.getName();
-                    String killerName = killer.getName();
+                        String victimName = victim.getName();
+                        String killerName = killer.getName();
 
-                    // KILLER SAVE
-                    File killerFile = new File(plugin.getDataFolder(), "data/" + killerName + ".yml");
-                    FileConfiguration killerData = YamlConfiguration.loadConfiguration(killerFile);
+                        // KILLER SAVE
+                        File killerFile = new File(plugin.getDataFolder(), "data/" + killerName + ".yml");
+                        FileConfiguration killerData = YamlConfiguration.loadConfiguration(killerFile);
 
-                    int killerKills = killerData.getInt("kill." + victimName, 0);
-                    killerData.set("kill." + victimName, killerKills + 1);
+                        int killerKills = killerData.getInt("kill." + victimName, 0);
+                        killerData.set("kill." + victimName, killerKills + 1);
 
-                    killerData.set("last5kills.5.player", killerData.getString("last5kills.4.player", null));
-                    killerData.set("last5kills.5.time", killerData.getString("last5kills.4.time", null));
+                        killerData.set("last5kills.5.player", killerData.getString("last5kills.4.player", null));
+                        killerData.set("last5kills.5.time", killerData.getString("last5kills.4.time", null));
 
-                    killerData.set("last5kills.4.player", killerData.getString("last5kills.3.player", null));
-                    killerData.set("last5kills.4.time", killerData.getString("last5kills.3.time", null));
+                        killerData.set("last5kills.4.player", killerData.getString("last5kills.3.player", null));
+                        killerData.set("last5kills.4.time", killerData.getString("last5kills.3.time", null));
 
-                    killerData.set("last5kills.3.player", killerData.getString("last5kills.2.player", null));
-                    killerData.set("last5kills.3.time", killerData.getString("last5kills.2.time", null));
+                        killerData.set("last5kills.3.player", killerData.getString("last5kills.2.player", null));
+                        killerData.set("last5kills.3.time", killerData.getString("last5kills.2.time", null));
 
-                    killerData.set("last5kills.2.player", killerData.getString("last5kills.1.player", null));
-                    killerData.set("last5kills.2.time", killerData.getString("last5kills.1.time", null));
+                        killerData.set("last5kills.2.player", killerData.getString("last5kills.1.player", null));
+                        killerData.set("last5kills.2.time", killerData.getString("last5kills.1.time", null));
 
-                    killerData.set("last5kills.1.player", victimName);
-                    killerData.set("last5kills.1.time", formattedDateTime);
+                        killerData.set("last5kills.1.player", victimName);
+                        killerData.set("last5kills.1.time", formattedDateTime);
 
-                    try {
-                        killerData.save(killerFile);
-                    } catch (IOException e) {
-                        plugin.getLogger().severe("An error occurred when saving " + killerName + " killer data file: " + e);
-                    }
+                        try {
+                            killerData.save(killerFile);
+                        } catch (IOException e) {
+                            plugin.getLogger().severe("An error occurred when saving " + killerName + " killer data file: " + e);
+                        }
 
-                    // VICTIM SAVE
-                    File victimFile = new File(plugin.getDataFolder(), "data/" + victimName + ".yml");
-                    FileConfiguration victimData = YamlConfiguration.loadConfiguration(victimFile);
+                        // VICTIM SAVE
+                        File victimFile = new File(plugin.getDataFolder(), "data/" + victimName + ".yml");
+                        FileConfiguration victimData = YamlConfiguration.loadConfiguration(victimFile);
 
-                    int victimDeaths = victimData.getInt("death." + killerName, 0);
-                    victimData.set("death." + killerName, victimDeaths + 1);
+                        int victimDeaths = victimData.getInt("death." + killerName, 0);
+                        victimData.set("death." + killerName, victimDeaths + 1);
 
-                    victimData.set("last5deaths.5.player", victimData.getString("last5deaths.4.player", null));
-                    victimData.set("last5deaths.5.time", victimData.getString("last5deaths.4.time", null));
+                        victimData.set("last5deaths.5.player", victimData.getString("last5deaths.4.player", null));
+                        victimData.set("last5deaths.5.time", victimData.getString("last5deaths.4.time", null));
 
-                    victimData.set("last5deaths.4.player", victimData.getString("last5deaths.3.player", null));
-                    victimData.set("last5deaths.4.time", victimData.getString("last5deaths.3.time", null));
+                        victimData.set("last5deaths.4.player", victimData.getString("last5deaths.3.player", null));
+                        victimData.set("last5deaths.4.time", victimData.getString("last5deaths.3.time", null));
 
-                    victimData.set("last5deaths.3.player", victimData.getString("last5deaths.2.player", null));
-                    victimData.set("last5deaths.3.time", victimData.getString("last5deaths.2.time", null));
+                        victimData.set("last5deaths.3.player", victimData.getString("last5deaths.2.player", null));
+                        victimData.set("last5deaths.3.time", victimData.getString("last5deaths.2.time", null));
 
-                    victimData.set("last5deaths.2.player", victimData.getString("last5deaths.1.player", null));
-                    victimData.set("last5deaths.2.time", victimData.getString("last5deaths.1.time", null));
+                        victimData.set("last5deaths.2.player", victimData.getString("last5deaths.1.player", null));
+                        victimData.set("last5deaths.2.time", victimData.getString("last5deaths.1.time", null));
 
-                    victimData.set("last5deaths.1.player", killerName);
-                    victimData.set("last5deaths.1.time", formattedDateTime);
+                        victimData.set("last5deaths.1.player", killerName);
+                        victimData.set("last5deaths.1.time", formattedDateTime);
 
-                    try {
-                        victimData.save(victimFile);
-                    } catch (IOException e) {
-                        plugin.getLogger().severe("An error occurred when saving " + victimName + " victim data file: " + e);
-                    }
+                        try {
+                            victimData.save(victimFile);
+                        } catch (IOException e) {
+                            plugin.getLogger().severe("An error occurred when saving " + victimName + " victim data file: " + e);
+                        }
                     }
                 }
             }
@@ -219,15 +219,14 @@ public class DeathEventPVP implements Listener {
             Bukkit.broadcastMessage(broadcastMessage);
 
             // DEATH LOG
-            if (configManager.getBoolean("log.enable")) {
-                String message = configManager.getString("log.format")
-                        .replace("{date}", formattedDateTime)
+            if (configManager.getBoolean("log.kill.enable")) {
+                String message = configManager.getString("log.kill.format")
                         .replace("{killer}", killer.getName())
                         .replace("{victim}", victim.getName())
                         .replace("{+points}", String.valueOf(earnedPoints))
                         .replace("{-points}", String.valueOf(lostPoints));
 
-                logMessage(message);
+                logMessage(message, killLogFile);
             }
         }
     }

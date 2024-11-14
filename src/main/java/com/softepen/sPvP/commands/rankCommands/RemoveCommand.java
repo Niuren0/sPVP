@@ -8,7 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.softepen.sPvP.sPvP.messagesManager;
+import static com.softepen.sPvP.sPvP.*;
+import static com.softepen.sPvP.utils.logMessage;
 import static com.softepen.sPvP.utils.updateRankGroup;
 
 public class RemoveCommand implements CommandExecutor {
@@ -18,7 +19,12 @@ public class RemoveCommand implements CommandExecutor {
             if (args.length < 3) {
                 commandSender.sendMessage(messagesManager.getPrefixString("invalidArguments"));
             } else {
+                double beforePoints = new RankManager(args[1]).getPoints();
+
                 new RankManager(args[1]).removePoints(Double.parseDouble(args[2]));
+
+                double afterPoints = new RankManager(args[1]).getPoints();
+
                 double newPoints = new RankManager(args[1]).getPoints();
                 if (newPoints < 0) new RankManager(args[1]).setPoints(0);
 
@@ -29,6 +35,17 @@ public class RemoveCommand implements CommandExecutor {
 
                 Player player = Bukkit.getPlayer(args[1]);
                 if (player != null) updateRankGroup(player);
+
+                // COMMAND LOG
+                if (configManager.getBoolean("log.command.enable")) {
+                    String message = configManager.getString("log.command.format")
+                            .replace("{sender}", commandSender.getName())
+                            .replace("{command}", "/rank remove " + args[1] + " " + args[2])
+                            .replace("{beforePoints}", String.valueOf(beforePoints))
+                            .replace("{afterPoints}", String.valueOf(afterPoints));
+
+                    logMessage(message, commandLogFile);
+                }
             }
         } else commandSender.sendMessage(messagesManager.getPrefixString("noPerm"));
 

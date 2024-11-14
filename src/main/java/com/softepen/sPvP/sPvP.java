@@ -28,7 +28,8 @@ public final class sPvP extends JavaPlugin {
     public static FileManager configManager;
     public static FileManager soundsManager;
     public static FileManager messagesManager;
-    public static File logFile;
+    public static File killLogFile;
+    public static File commandLogFile;
     public static FileManager pointsManager;
     public static FileManager ranksManager;
     public static HashMap<Player, Integer> criticalHitCombo = new HashMap<>();
@@ -61,22 +62,34 @@ public final class sPvP extends JavaPlugin {
         messagesManager = new FileManager("lang/" + configManager.getString("language") + ".yml");
         messagesManager.loadConfig();
 
-        if (configManager.getBoolean("log.enable")) {
-            logFile = new File(plugin.getDataFolder(), "logs/deaths.log");
-
-            try {
-                File logDir = logFile.getParentFile();
-                if (!logDir.exists() && !logDir.mkdir()) {
-                    getLogger().severe("Log directory couldn't be created.");
-                }
-
-                if (!logFile.exists() && !logFile.createNewFile()) {
-                    getLogger().severe("Log file couldn't be created.");
-                }
-
-            } catch (IOException e) {
-                getLogger().severe("Log file creation failed: " + e.getMessage());
+        killLogFile = new File(plugin.getDataFolder(), "logs/deaths.log");
+        try {
+            File logDir = killLogFile.getParentFile();
+            if (!logDir.exists() && !logDir.mkdir()) {
+                getLogger().severe("Log directory couldn't be created.");
             }
+
+            if (!killLogFile.exists() && !killLogFile.createNewFile()) {
+                getLogger().severe("Log file couldn't be created.");
+            }
+
+        } catch (IOException e) {
+            getLogger().severe("Log file creation failed: " + e.getMessage());
+        }
+
+        commandLogFile = new File(plugin.getDataFolder(), "logs/commands.log");
+        try {
+            File logDir = commandLogFile.getParentFile();
+            if (!logDir.exists() && !logDir.mkdir()) {
+                getLogger().severe("Log directory couldn't be created.");
+            }
+
+            if (!commandLogFile.exists() && !commandLogFile.createNewFile()) {
+                getLogger().severe("Log file couldn't be created.");
+            }
+
+        } catch (IOException e) {
+            getLogger().severe("Log file creation failed: " + e.getMessage());
         }
 
         pointsManager = new FileManager("points.yml");

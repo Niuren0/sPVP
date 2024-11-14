@@ -73,11 +73,8 @@ public class utils {
     }
 
     public static String getSpecialKillMessage(String perm, Player killer, Player victim) {
-        String killMessage = messagesManager.getString("specialKillMessages." + perm);
-        String message = messagesManager.getPrefixString("specialKillMessageFormat");
+        String message = messagesManager.getPrefixString("specialKillMessages." + perm);
         if (message == null) return null;
-
-        message = message.replace("{message}", killMessage);
 
         message = message
                 .replace("{killer}", killer.getDisplayName())
@@ -157,11 +154,11 @@ public class utils {
         return updatedMessages;
     }
 
-    public static void logMessage(String message) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
+    public static void logMessage(String message, File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-            message = message.replace("{timestamp}", timestamp);
+            message = message.replace("{date}", timestamp);
 
             writer.write(message);
             writer.newLine();

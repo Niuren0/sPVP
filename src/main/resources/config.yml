@@ -18,8 +18,7 @@ disabledRegions:
     - spawn
 
 disabledWorld:
-  hit:
-    - spawn
+  hit: []
   death: []
   rank: []
 
@@ -42,8 +41,12 @@ rank:
   cooldown: 300
 
 log:
-  enable: true
-  format: "[{date}] {killer} +{+points} ✘ {victim} -{-points}"
+  kill:
+    enable: true
+    format: "[{date}] {killer} (+{+points}) ✘ {victim} (-{-points})"
+  command:
+    enable: true
+    format: "[{date}] {sender}: '{command} - ({beforePoints}' -> {afterPoints})"
 
 sounds:
   critical_hit_default: Experience Sound # sounds.yml

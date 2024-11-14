@@ -20,25 +20,25 @@ public class RankTabComplete implements TabCompleter {
 
         if (args.length == 1) {
             if (commandSender.hasPermission("spvp.commands.rank.others") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
-
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     COMMANDS.add(player.getName());
                 }
-
-                if (commandSender.hasPermission("spvp.commands.rank.set") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
-                    COMMANDS.add("set");
-                }
-
-                if (commandSender.hasPermission("spvp.commands.rank.add") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
-                    COMMANDS.add("add");
-                }
-
-                if (commandSender.hasPermission("spvp.commands.rank.remove") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
-                    COMMANDS.add("remove");
-                }
-
-                StringUtil.copyPartialMatches(args[0], COMMANDS, completions);
             }
+
+            if (commandSender.hasPermission("spvp.commands.rank.set") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
+                COMMANDS.add("set");
+            }
+
+            if (commandSender.hasPermission("spvp.commands.rank.add") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
+                COMMANDS.add("add");
+            }
+
+            if (commandSender.hasPermission("spvp.commands.rank.remove") || commandSender.hasPermission("spvp.commands.rank.*") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
+                COMMANDS.add("remove");
+            }
+
+            StringUtil.copyPartialMatches(args[0], COMMANDS, completions);
+
         } else if (args.length == 2) {
             if (Objects.equals(args[0], "set")) return null;
             if (Objects.equals(args[0], "add")) return null;
