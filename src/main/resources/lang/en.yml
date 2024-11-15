@@ -81,7 +81,7 @@ streakMessages:
 specialKillMessages:
   messagePermission1: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fmercilessly eliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
   messagePermission2: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fachieved absolute victory over §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission3: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fbrutally crushed §x§F§6§5§5§5§5{victim}&f!"
+  messagePermission3: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fbrutally crushed §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
   messagePermission4: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fperformed an impressive move on §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
   messagePermission5: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &femerged victorious against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
   messagePermission6: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &feliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fon the battlefield!"

@@ -3,6 +3,11 @@ streakAnnouncements: true
 specialKillMessages: true
 
 freeze:
+  whitelistCommands:
+    - msg
+    - message
+    - r
+    - reply
   commands: # Commands to be processed when frozen player quits
     - "ban {playerName} Freeze Quit"
 
