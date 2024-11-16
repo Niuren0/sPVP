@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.softepen.sPvP.sPvP.frozens;
+import static com.softepen.sPvP.sPvP.frozenPlayers;
 import static com.softepen.sPvP.sPvP.messagesManager;
 
 public class UnfreezeCommand implements CommandExecutor {
@@ -19,9 +19,9 @@ public class UnfreezeCommand implements CommandExecutor {
                 Player player = Bukkit.getPlayer(args[0]);
                 if (player == null) commandSender.sendMessage(messagesManager.getPrefixString("cantFindPlayer"));
                 else {
-                    if (!frozens.containsKey(player)) commandSender.sendMessage(messagesManager.getPrefixString("notFrozen").replace("{player}", player.getName()));
+                    if (!frozenPlayers.containsKey(player)) commandSender.sendMessage(messagesManager.getPrefixString("notFrozen").replace("{player}", player.getName()));
                     else {
-                        frozens.remove(player);
+                        frozenPlayers.remove(player);
                         player.sendMessage(messagesManager.getPrefixString("unfrozenBy").replace("{staff}", commandSender.getName()));
                         commandSender.sendMessage(messagesManager.getPrefixString("unfrozen").replace("{player}", player.getName()));
                     }

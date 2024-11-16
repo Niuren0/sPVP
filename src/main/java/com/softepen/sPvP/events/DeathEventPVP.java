@@ -228,6 +228,9 @@ public class DeathEventPVP implements Listener {
 
                 logMessage(message, killLogFile);
             }
+
+            playerSettings.put(killer, PlayerSettingsManager.getPlayerSettings(killer));
+            playerSettings.put(victim, PlayerSettingsManager.getPlayerSettings(victim));
         }
     }
 

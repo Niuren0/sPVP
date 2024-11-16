@@ -18,8 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static com.softepen.sPvP.sPvP.configManager;
-import static com.softepen.sPvP.sPvP.plugin;
+import static com.softepen.sPvP.sPvP.*;
 
 public class ColorSelectMenu {
     public ColorSelectMenu(Player player) {
@@ -37,7 +36,7 @@ public class ColorSelectMenu {
                 "BROWN", "GREEN", "RED", "BLACK");
 
         String item = configManager.getString("settingsMenu.color.item").toUpperCase();
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings = playerSettings.get(player);
         int i = 0;
         GuiItem colorItem;
 
@@ -58,6 +57,8 @@ public class ColorSelectMenu {
                     } catch (IOException e) {
                         plugin.getLogger().severe("An error occurred when saving player data file: " + e);
                     }
+
+                    playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
                     new SettingsMenu(player);
                 });
@@ -81,6 +82,7 @@ public class ColorSelectMenu {
         }
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
+        gui.setCloseGuiAction(event -> playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player)));
         gui.open(player);
     }
 

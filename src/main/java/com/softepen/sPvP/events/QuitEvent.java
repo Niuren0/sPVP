@@ -20,7 +20,7 @@ public class QuitEvent implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (frozens.containsKey(player)) {
+        if (frozenPlayers.containsKey(player)) {
             List<String> commands = configManager.getStringList("freeze.commands");
             for (String command : commands) {
                 command = command.replace("{playerName}", player.getName());

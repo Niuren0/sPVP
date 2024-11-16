@@ -7,6 +7,7 @@ import com.softepen.sPvP.commands.freeze.UnfreezeCommand;
 import com.softepen.sPvP.events.*;
 import com.softepen.sPvP.listeners.papi;
 import com.softepen.sPvP.managers.FileManager;
+import com.softepen.sPvP.managers.PlayerSettings;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
@@ -39,8 +40,9 @@ public final class sPvP extends JavaPlugin {
     public static HashMap<Player, Integer> killSeriesRecord = new HashMap<>();
     public static HashMap<Player, Integer> kills = new HashMap<>();
     public static HashMap<Player, Integer> deaths = new HashMap<>();
-    public static HashMap<Player, CommandSender> frozens = new HashMap<>();
+    public static HashMap<Player, CommandSender> frozenPlayers = new HashMap<>();
     public static HashMap<String, Double> ranks = new HashMap<>();
+    public static HashMap<Player, PlayerSettings> playerSettings = new HashMap<>();
     public static boolean wgExpansion;
     public static WorldGuard WGPlugin;
     public static LuckPerms luckPerms;

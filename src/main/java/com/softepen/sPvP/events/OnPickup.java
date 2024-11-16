@@ -5,12 +5,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 
-import static com.softepen.sPvP.sPvP.frozens;
+import static com.softepen.sPvP.sPvP.frozenPlayers;
 
 public class OnPickup implements Listener {
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
         Player player = (Player) event.getEntity();
-        if (frozens.containsKey(player)) event.setCancelled(true);
+        if (frozenPlayers.containsKey(player)) event.setCancelled(true);
     }
 }

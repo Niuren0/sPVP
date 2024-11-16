@@ -44,7 +44,7 @@ public class KillMessagesSelector {
                     .replace("{killer}", playerName);
 
             if (player.hasPermission("spvp.messages." + key) || player.hasPermission("spvp.messages.*") || player.hasPermission("spvp.*")) {
-                PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+                PlayerSettings settings = playerSettings.get(player);
                 if (Objects.equals(settings.getKillMessage(), key)) {
                     guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {
                         File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
@@ -57,6 +57,8 @@ public class KillMessagesSelector {
                         } catch (IOException e) {
                             plugin.getLogger().severe("An error occurred when saving player data file: " + e);
                         }
+
+                        playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
                         new SettingsMenu(player);
                     });
@@ -72,6 +74,8 @@ public class KillMessagesSelector {
                         } catch (IOException e) {
                             plugin.getLogger().severe("An error occurred when saving player data file: " + e);
                         }
+
+                        playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
                         new SettingsMenu(player);
 
@@ -99,6 +103,7 @@ public class KillMessagesSelector {
         }
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
+        gui.setCloseGuiAction(event -> playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player)));
         gui.open(player);
     }
 

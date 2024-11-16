@@ -19,11 +19,11 @@ public class FreezeCommand implements CommandExecutor {
                 Player player = Bukkit.getPlayer(args[0]);
                 if (player == null) commandSender.sendMessage(messagesManager.getPrefixString("cantFindPlayer"));
                 else {
-                    if (frozens.containsKey(player)) commandSender.sendMessage(messagesManager.getPrefixString("alreadyFrozen").replace("{player}", player.getName()));
+                    if (frozenPlayers.containsKey(player)) commandSender.sendMessage(messagesManager.getPrefixString("alreadyFrozen").replace("{player}", player.getName()));
                     else {
                         if (player == commandSender) commandSender.sendMessage(messagesManager.getPrefixString("cantFreezeYourself"));
                         else {
-                            frozens.put(player, commandSender);
+                            frozenPlayers.put(player, commandSender);
                             player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", commandSender.getName()));
                             commandSender.sendMessage(messagesManager.getPrefixString("frozen").replace("{player}", player.getName()));
                             player.sendTitle(messagesManager.getPrefixString("frozenTitle").replace("{staff}", commandSender.getName()), "", 10, 40, 10);

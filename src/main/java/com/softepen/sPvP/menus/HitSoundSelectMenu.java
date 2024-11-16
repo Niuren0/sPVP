@@ -32,7 +32,7 @@ public class HitSoundSelectMenu {
                 .rows(configManager.getInt("soundSelectMenu.row"))
                 .create();
 
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings = playerSettings.get(player);
         GuiItem guiItem;
         int i = 0;
 
@@ -52,6 +52,8 @@ public class HitSoundSelectMenu {
                         plugin.getLogger().severe("An error occurred when saving player data file: " + e);
                     }
 
+                    playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
+
                     new SettingsMenu(player);
                 });
             }
@@ -63,7 +65,7 @@ public class HitSoundSelectMenu {
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
-            PlayerSettings settings2 = PlayerSettingsManager.getPlayerSettings(player);
+            PlayerSettings settings2 = playerSettings.get(player);
 
             playerData.set("sound", !settings2.getSound());
 
@@ -72,6 +74,8 @@ public class HitSoundSelectMenu {
             } catch (IOException e) {
                 plugin.getLogger().severe("An error occurred when saving player data file: " + e);
             }
+
+            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
             gui.updateItem(configManager.getInt("soundSelectMenu.sound.slot"), new ItemStack(getItemStack("sound", null, player)));
         });
@@ -91,6 +95,7 @@ public class HitSoundSelectMenu {
         }
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
+        gui.setCloseGuiAction(event -> playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player)));
         gui.open(player);
     }
 
@@ -105,7 +110,7 @@ public class HitSoundSelectMenu {
             itemLore = configManager.getStringList(s + ".lore");
         } else {
             if (Objects.equals(s, "sound")) {
-                String state = PlayerSettingsManager.getPlayerSettings(player).getSound() ? "enabled_state" : "disabled_state";
+                String state = playerSettings.get(player).getSound() ? "enabled_state" : "disabled_state";
                 material = Material.valueOf(configManager.getString("soundSelectMenu." + s + "." + state + ".item"));
                 itemName = configManager.getString("soundSelectMenu." + s + "." + state + ".title");
                 itemLore = configManager.getStringList("soundSelectMenu." + s + "." + state + ".lore");

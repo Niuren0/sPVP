@@ -15,7 +15,13 @@ public class JoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings;
+
+        if (playerSettings.containsKey(player)) settings = playerSettings.get(player);
+        else {
+            settings = PlayerSettingsManager.getPlayerSettings(player);
+            playerSettings.put(player, settings);
+        }
 
         criticalHitLastCombo.put(player, settings.getLastCombo());
         criticalHitComboRecord.put(player, settings.getComboRecord());

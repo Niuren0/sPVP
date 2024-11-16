@@ -5,16 +5,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import static com.softepen.sPvP.sPvP.frozens;
+import static com.softepen.sPvP.sPvP.frozenPlayers;
 import static com.softepen.sPvP.sPvP.messagesManager;
 
 public class OnClick implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (frozens.containsKey(player)) {
+        if (frozenPlayers.containsKey(player)) {
             event.setCancelled(true);
-            player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(player).getName()));
+            player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozenPlayers.get(player).getName()));
         }
     }
 }

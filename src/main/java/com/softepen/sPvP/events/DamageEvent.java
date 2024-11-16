@@ -1,7 +1,6 @@
 package com.softepen.sPvP.events;
 
 import com.softepen.sPvP.managers.PlayerSettings;
-import com.softepen.sPvP.managers.PlayerSettingsManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -28,14 +27,14 @@ public class DamageEvent implements Listener {
                 if (isPlayerInDisabledRegion(attacker, "hit") || isPlayerInDisabledRegion(victim, "hit")) return;
                 if (isPlayerInDisabledWorld(attacker, "hit") || isPlayerInDisabledWorld(victim, "hit")) return;
 
-                if (frozens.containsKey(attacker)) {
+                if (frozenPlayers.containsKey(attacker)) {
                     event.setCancelled(true);
-                    attacker.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(attacker).getName()));
+                    attacker.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozenPlayers.get(attacker).getName()));
                     return;
                 }
-                if (frozens.containsKey(victim)) {
+                if (frozenPlayers.containsKey(victim)) {
                     event.setCancelled(true);
-                    victim.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(victim).getName()));
+                    victim.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozenPlayers.get(victim).getName()));
                     return;
                 }
 
@@ -48,7 +47,7 @@ public class DamageEvent implements Listener {
                         attacker.getVelocity().getY() + 0.0784000015258789 <= 0 &&
                         attacker.getAttackCooldown() > 0.9;
 
-                PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(attacker);
+                PlayerSettings settings = playerSettings.get(attacker);
 
                 if (isCritical){
                     int currentCombo = criticalHitCombo.getOrDefault(attacker, 0);

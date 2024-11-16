@@ -35,7 +35,7 @@ public class SettingsMenu {
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
-            PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+            PlayerSettings settings = playerSettings.get(player);
 
             playerData.set("healthIndicator", !settings.getHealthIndicator());
 
@@ -44,6 +44,8 @@ public class SettingsMenu {
             } catch (IOException e) {
                 plugin.getLogger().severe("An error occurred when saving player data file: " + e);
             }
+
+            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
             gui.updateItem(configManager.getInt("settingsMenu.enable.slot"), new ItemStack(getItemStack(player, "enable")));
         });
@@ -58,7 +60,7 @@ public class SettingsMenu {
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
-            PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+            PlayerSettings settings = playerSettings.get(player);
 
             playerData.set("comboMessages", !settings.getComboMessages());
 
@@ -67,6 +69,8 @@ public class SettingsMenu {
             } catch (IOException e) {
                 plugin.getLogger().severe("An error occurred when saving player data file: " + e);
             }
+
+            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
 
             gui.updateItem(configManager.getInt("settingsMenu.comboMessages.slot"), new ItemStack(getItemStack(player, "comboMessages")));
         });
@@ -88,12 +92,13 @@ public class SettingsMenu {
         }
 
         gui.setDefaultClickAction(event -> event.setCancelled(true));
+        gui.setCloseGuiAction(event -> playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player)));
 
         gui.open(player);
     }
 
     private ItemStack getItemStack(Player player, String item) {
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings = playerSettings.get(player);
 
         Material material;
         String state = null, itemName;

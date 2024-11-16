@@ -13,7 +13,7 @@ public class OnCommand implements Listener {
     @EventHandler
     public void onCommandUse(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (frozens.containsKey(player)) {
+        if (frozenPlayers.containsKey(player)) {
             String command = event.getMessage().split(" ")[0];
 
             for (String wlCommand : configManager.getStringList("freeze.whitelistCommands")) {
@@ -21,7 +21,7 @@ public class OnCommand implements Listener {
             }
 
             event.setCancelled(true);
-            player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozens.get(player).getName()));
+            player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", frozenPlayers.get(player).getName()));
         }
     }
 }

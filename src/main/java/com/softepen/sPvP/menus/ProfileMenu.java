@@ -1,7 +1,6 @@
 package com.softepen.sPvP.menus;
 
 import com.softepen.sPvP.managers.PlayerSettings;
-import com.softepen.sPvP.managers.PlayerSettingsManager;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
@@ -130,7 +129,7 @@ public class ProfileMenu {
     }
 
     private String getComboRecord(Player player) {
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings = playerSettings.get(player);
 
         int savedRecord = settings.getComboRecord();
         int hashmapRecord = criticalHitComboRecord.getOrDefault(player, 0);
@@ -139,7 +138,7 @@ public class ProfileMenu {
     }
 
     private String getKillSeriesRecord(Player player) {
-        PlayerSettings settings = PlayerSettingsManager.getPlayerSettings(player);
+        PlayerSettings settings = playerSettings.get(player);
 
         int savedRecord = settings.getKillSeriesRecord();
         int hashmapRecord = killSeriesRecord.getOrDefault(player, 0);

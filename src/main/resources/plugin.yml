@@ -1,5 +1,5 @@
 name: sPvP
-version: '1.5.3'
+version: '1.5.4'
 main: com.softepen.sPvP.sPvP
 api-version: '1.18'
 prefix: sPvP
