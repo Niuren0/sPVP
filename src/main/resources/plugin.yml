@@ -1,5 +1,5 @@
 name: sPvP
-version: '1.5.7'
+version: '1.6.0'
 main: com.softepen.sPvP.sPvP
 api-version: '1.18'
 prefix: sPvP
@@ -79,6 +79,10 @@ permissions:
 
   spvp.messages.*:
     description: Grants access to all custom kill messages
+    default: op
+
+  spvp.particles.*:
+    description: Grants access to all hit effects
     default: op
 
   spvp.*:

@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -113,6 +114,22 @@ public class DamageEvent implements Listener {
 
                     String formattedHearts = String.format("%.1f", healthAfterDamage);
                     attacker.sendTitle(" ", getColor(settings.getHealthIndicatorColor()) + "❤" + formattedHearts, 10, 40, 10);
+                }
+
+                if (configManager.getBoolean("particlesEnabled")) {
+                    String particleName = settings.getParticle();
+                    if (particleName != null) {
+                        if (attacker.hasPermission("spvp.particles." + particleName)) {
+                            try {
+                                Particle particle = Particle.valueOf(particleName.toUpperCase());
+
+                                attacker.getWorld().spawnParticle(particle, victim.getLocation(), 10);
+
+                            } catch (IllegalArgumentException e) {
+                                plugin.getLogger().warning("Invalid particle name (" + attacker.getName() + "): " + particleName);
+                            }
+                        }
+                    }
                 }
             }
         }

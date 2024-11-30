@@ -37,6 +37,8 @@ public class SettingsMenu {
 
         GuiItem killMessagesItem = ItemBuilder.from(getItemStack(player, "killMessages")).asGuiItem(event -> new KillMessagesSelector(player));
 
+        GuiItem particleItem = ItemBuilder.from(getItemStack(player, "particle")).asGuiItem(event -> new HitParticleSelector(player));
+
         GuiItem comboMessagesItem = ItemBuilder.from(getItemStack(player, "comboMessages")).asGuiItem(event -> {
             File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
             FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
@@ -59,6 +61,7 @@ public class SettingsMenu {
         gui.setItem(configManager.getInt("settingsMenu.sound.slot"), soundItem);
         gui.setItem(configManager.getInt("settingsMenu.killMessages.slot"), killMessagesItem);
         gui.setItem(configManager.getInt("settingsMenu.comboMessages.slot"), comboMessagesItem);
+        gui.setItem(configManager.getInt("settingsMenu.particle.slot"), particleItem);
         gui.setItem(configManager.getInt("settingsMenu.healthIndicator.slot"), indicatorItem);
 
         if (configManager.getBoolean("settingsMenu.filler.enable")) {

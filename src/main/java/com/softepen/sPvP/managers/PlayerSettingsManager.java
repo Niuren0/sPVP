@@ -23,6 +23,7 @@ public class PlayerSettingsManager {
     private static final int DEFAULT_DEATHS = 0;
     private static final String DEFAULT_KILL_MESSAGE = null;
     private static final String DEFAULT_COMBO_SOUND = configManager.getString("sounds.critical_hit_default");
+    private static final String DEFAULT_PARTICLE = null;
 
     public static PlayerSettings getPlayerSettings(Player player) {
         String playerName = player.getName();
@@ -42,12 +43,14 @@ public class PlayerSettingsManager {
         int deaths = playerConfig.getInt("deaths", DEFAULT_DEATHS);
         String killMessage = playerConfig.getString("killMessage", DEFAULT_KILL_MESSAGE);
         String comboSound = playerConfig.getString("comboSound", DEFAULT_COMBO_SOUND);
+        String particle = playerConfig.getString("particle", DEFAULT_PARTICLE);
 
         playerConfig.set("sound", sound);
         playerConfig.set("comboSound", comboSound);
         playerConfig.set("healthIndicator", healthIndicator);
         playerConfig.set("healthIndicatorColor", healthIndicatorColor.name());
         playerConfig.set("comboMessages", comboMessages);
+        playerConfig.set("particle", particle);
         playerConfig.set("lastCombo", lastCombo);
         playerConfig.set("comboRecord", comboRecord);
         playerConfig.set("killSeriesRecord", killSeriesRecord);
@@ -61,6 +64,6 @@ public class PlayerSettingsManager {
             plugin.getLogger().severe("An error occurred when saving player data file: " + e);
         }
 
-        return new PlayerSettings(sound, healthIndicator, healthIndicatorColorName, comboMessages, lastCombo, comboRecord, killSeriesRecord, kills, deaths, killMessage, comboSound);
+        return new PlayerSettings(sound, healthIndicator, healthIndicatorColorName, comboMessages, lastCombo, comboRecord, killSeriesRecord, kills, deaths, killMessage, comboSound, particle);
     }
 }

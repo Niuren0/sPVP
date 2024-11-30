@@ -1,6 +1,7 @@
 language: en
 streakAnnouncements: true
 specialKillMessages: true
+particlesEnabled: true
 
 freeze:
   whitelistCommands:
@@ -59,6 +60,144 @@ sounds:
 
 comboCooldown: 3
 
+particles:
+  bubble_pop:
+    particle: BUBBLE_POP
+    name: "Bubble Pop Effect"
+    menu: true
+  campfire_cosy_smoke:
+    particle: CAMPFIRE_COSY_SMOKE
+    name: "Campfire Cosy Smoke Effect"
+    menu: true
+  campfire_signal_smoke:
+    particle: CAMPFIRE_SIGNAL_SMOKE
+    name: "Campfire Signal Smoke Effect"
+    menu: true
+  cloud:
+    particle: CLOUD
+    name: "Cloud Effect"
+    menu: true
+  crimson_spore:
+    particle: CRIMSON_SPORE
+    name: "Crimson Spore Effect"
+    menu: true
+  crit:
+    particle: CRIT
+    name: "Crit Effect"
+    menu: true
+  crit_magic:
+    particle: CRIT_MAGIC
+    name: "Crit Magic Effect"
+    menu: true
+  damage_indicator:
+    particle: DAMAGE_INDICATOR
+    name: "Damage Indicator Effect"
+    menu: true
+  dragon_breath:
+    particle: DRAGON_BREATH
+    name: "Dragon Breath Effect"
+    menu: true
+  enchantment_table:
+    particle: ENCHANTMENT_TABLE
+    name: "Enchantment Table Effect"
+    menu: true
+  end_rod:
+    particle: END_ROD
+    name: "End Rod Effect"
+    menu: true
+  explosion_large:
+    particle: EXPLOSION_LARGE
+    name: "Explosion Large Effect"
+    menu: true
+  explosion_normal:
+    particle: EXPLOSION_NORMAL
+    name: "Explosion Normal Effect"
+    menu: true
+  fireworks_spark:
+    particle: FIREWORKS_SPARK
+    name: "Fireworks Spark Effect"
+    menu: true
+  flame:
+    particle: FLAME
+    name: "Flame Effect"
+    menu: true
+  heart:
+    particle: HEART
+    name: "Heart Effect"
+    menu: true
+  lava:
+    particle: LAVA
+    name: "Lava Effect"
+    menu: true
+  nautilus:
+    particle: NAUTILUS
+    name: "Nautilus Effect"
+    menu: true
+  note:
+    particle: NOTE
+    name: "Note Effect"
+    menu: true
+  portal:
+    particle: PORTAL
+    name: "Portal Effect"
+    menu: true
+  reverse_portal:
+    particle: REVERSE_PORTAL
+    name: "Reverse Portal Effect"
+    menu: true
+  slime:
+    particle: SLIME
+    name: "Slime Effect"
+    menu: true
+  smoke_normal:
+    particle: SMOKE_NORMAL
+    name: "Smoke Normal Effect"
+    menu: true
+  sneeze:
+    particle: SNEEZE
+    name: "Sneeze Effect"
+    menu: true
+  snowball:
+    particle: SNOWBALL
+    name: "Snowball Effect"
+    menu: true
+  soul:
+    particle: SOUL
+    name: "Soul Effect"
+    menu: true
+  soul_fire_flame:
+    particle: SOUL_FIRE_FLAME
+    name: "Soul Fire Flame Effect"
+    menu: true
+  spell_mob:
+    particle: SPELL_MOB
+    name: "Spell Mob Effect"
+    menu: true
+  spell_witch:
+    particle: SPELL_WITCH
+    name: "Spell Witch Effect"
+    menu: true
+  spit:
+    particle: SPIT
+    name: "Spit Effect"
+    menu: true
+  squid_ink:
+    particle: SQUID_INK
+    name: "Squid Ink Effect"
+    menu: true
+  sweep_attack:
+    particle: SWEEP_ATTACK
+    name: "Sweep Attack Effect"
+    menu: true
+  totem:
+    particle: TOTEM
+    name: "Totem Effect"
+    menu: true
+  villager_angry:
+    particle: VILLAGER_ANGRY
+    name: "Villager Angry Effect"
+    menu: true
+
 settingsMenu:
   title: "&6Settings"
   row: 5
@@ -82,6 +221,13 @@ settingsMenu:
       title: "&cCombo Messages Disabled"
       lore:
         - "&7Click to change the combo messages to &atrue&c!"
+
+  particle:
+    slot: 22
+    item: NETHERITE_SWORD
+    title: "&bHit Effects"
+    lore:
+      - "&7Click to change the hit effect!"
 
   sound:
     slot: 23
@@ -276,6 +422,52 @@ soundSelectMenu:
           - 19
           - 20
           - 22
+          - 24
+          - 25
+          - 26
+
+particleSelectMenu:
+  title: "&cHit Effects"
+  row: 3
+
+  selected:
+    item: YELLOW_STAINED_GLASS_PANE
+    title: "&e{name}"
+    lore:
+      - "&aClick to remove the effect"
+
+  hasPerm:
+    item: GREEN_STAINED_GLASS_PANE
+    title: "&a{name}"
+    lore:
+      - "&7Click to select the effect"
+
+  hasNotPerm:
+    item: RED_STAINED_GLASS_PANE
+    title: "&c{name}"
+    lore:
+      - "&7Visit &bwww.softepen.com &7to buy the effect"
+
+  back:
+    slot: 22
+    item: BARRIER
+    title: "&cBack"
+    lore: []
+
+  filler:
+    enable: true
+    items:
+      gray:
+        item: GRAY_STAINED_GLASS_PANE
+        title: " " # Use blank for nothing
+        lore:
+          - "&7www.softepen.com"
+        slots:
+          - 18
+          - 19
+          - 20
+          - 21
+          - 23
           - 24
           - 25
           - 26

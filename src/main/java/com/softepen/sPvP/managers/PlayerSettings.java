@@ -12,8 +12,9 @@ public class PlayerSettings {
     private final int deaths;
     private final String killMessage;
     private final String comboSound;
+    private final String particle;
 
-    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, int lastCombo, int comboRecord, int killSeriesRecord, int kills, int deaths, String killMessage, String comboSound) {
+    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, int lastCombo, int comboRecord, int killSeriesRecord, int kills, int deaths, String killMessage, String comboSound, String particle) {
         this.sound = sound;
         this.healthIndicator = healthIndicator;
         this.healthIndicatorColor = healthIndicatorColor;
@@ -25,6 +26,7 @@ public class PlayerSettings {
         this.deaths = deaths;
         this.killMessage = killMessage;
         this.comboSound = comboSound;
+        this.particle = particle;
     }
 
     public boolean getSound() {
@@ -69,5 +71,9 @@ public class PlayerSettings {
 
     public String getComboSound() {
         return comboSound;
+    }
+
+    public String getParticle() {
+        return particle;
     }
 }

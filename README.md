@@ -20,6 +20,7 @@
   - Rakibin canını gösterme açıp kapatma
   - Can göstergesi yazı rengini seçme
   - Özel öldürme mesajı seçme
+  - Özel vurma efekti seçme
 - 🥶 **Oyuncu Dondurma**: Ceza komutu ayarlanabilir /freeze ve /unfreeze
 - ⚔️ **Ölme Öldürme Log'u**: Gelişmiş ölme ve öldürme kayıtları
 - 📊 **PlaceholderAPI Desteği**: Ölüm, öldürme, mevcut kombo sayısı, kombo rekoru, mevcut öldürme serisi ve öldürme serisi rekoru gibi istatistikleri PlaceholderAPI ile takip edin.
@@ -59,6 +60,8 @@
 | `spvp.commands.rank.remove` | Rank puanı azaltma izni                     | `op`     |
 | `spvp.messages.*`           | Tüm özel öldürme mesajları için izin        | `op`       |
 | `spvp.messages.<perm>`      | Belirli özel öldürme mesajı için izin       | `op`       |
+| `spvp.particles.*`          | Tüm vurma efektleri için izin               | `op`       |
+| `spvp.particles.<perm>`      | Belirli vurma efekti için izin              | `op`       |
 
 ## PlaceholderAPI Desteği
 
