@@ -33,60 +33,64 @@ public class KillMessagesSelector {
 
         int i = 0;
         GuiItem guiItem;
-        String message;
         for (String key : messagesManager.getConfigurationSection("specialKillMessages").getKeys(false)) {
-            message = messagesManager.getString("specialKillMessages." + key)
-                    .replace("{prefix}", "")
-                    .replace("{+points}", "")
-                    .replace("{-points}", "")
-                    .replace("{victim}", playerName)
-                    .replace("{attacker}", playerName)
-                    .replace("{killer}", playerName);
+            String message = messagesManager.getString("specialKillMessages." + key + ".message");
+            boolean menu = messagesManager.getBoolean("specialKillMessages." + key + ".menu");
 
-            if (player.hasPermission("spvp.messages." + key) || player.hasPermission("spvp.messages.*") || player.hasPermission("spvp.*")) {
-                PlayerSettings settings = playerSettings.get(player);
-                if (Objects.equals(settings.getKillMessage(), key)) {
-                    guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {
-                        File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
-                        FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
+            if (menu) {
+                message = message
+                        .replace("{prefix}", "")
+                        .replace("{+points}", "")
+                        .replace("{-points}", "")
+                        .replace("{victim}", playerName)
+                        .replace("{attacker}", playerName)
+                        .replace("{killer}", playerName);
 
-                        playerData.set("killMessage", null);
+                if (player.hasPermission("spvp.messages." + key) || player.hasPermission("spvp.messages.*") || player.hasPermission("spvp.*")) {
+                    PlayerSettings settings = playerSettings.get(player);
+                    if (Objects.equals(settings.getKillMessage(), key)) {
+                        guiItem = ItemBuilder.from(getItemStack("selected", message)).asGuiItem(event -> {
+                            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
+                            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
-                        try {
-                            playerData.save(playerFile);
-                        } catch (IOException e) {
-                            plugin.getLogger().severe("An error occurred when saving player data file: " + e);
-                        }
+                            playerData.set("killMessage", null);
 
-                        playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
+                            try {
+                                playerData.save(playerFile);
+                            } catch (IOException e) {
+                                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
+                            }
 
-                        new SettingsMenu(player);
-                    });
+                            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
+
+                            new SettingsMenu(player);
+                        });
+                    } else {
+                        guiItem = ItemBuilder.from(getItemStack("hasPerm", message)).asGuiItem(event -> {
+                            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
+                            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
+
+                            playerData.set("killMessage", key);
+
+                            try {
+                                playerData.save(playerFile);
+                            } catch (IOException e) {
+                                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
+                            }
+
+                            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
+
+                            new SettingsMenu(player);
+
+                        });
+                    }
                 } else {
-                    guiItem = ItemBuilder.from(getItemStack("hasPerm", message)).asGuiItem(event -> {
-                        File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
-                        FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
-
-                        playerData.set("killMessage", key);
-
-                        try {
-                            playerData.save(playerFile);
-                        } catch (IOException e) {
-                            plugin.getLogger().severe("An error occurred when saving player data file: " + e);
-                        }
-
-                        playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
-
-                        new SettingsMenu(player);
-
-                    });
+                    guiItem = ItemBuilder.from(getItemStack("hasNotPerm", message)).asGuiItem();
                 }
-            } else {
-                guiItem = ItemBuilder.from(getItemStack("hasNotPerm", message)).asGuiItem();
-            }
 
-            gui.setItem(i, guiItem);
-            i++;
+                gui.setItem(i, guiItem);
+                i++;
+            }
         }
 
         GuiItem backItem = ItemBuilder.from(getItemStack("back", "")).asGuiItem(event -> new SettingsMenu(player));

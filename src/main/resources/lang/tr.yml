@@ -79,15 +79,39 @@ streakMessages:
   30: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &file 30 öldürmeye ulaştı, &dtüm zamanların en iyisi!"
 
 specialKillMessages:
-  messagePermission1: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) acımasızca ortadan kaldırdı!"
-  messagePermission2: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &füzerinde mutlak zafer kazandı!"
-  messagePermission3: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) ezici bir şekilde ezip geçti!"
-  messagePermission4: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında etkileyici bir hareket sergiledi!"
-  messagePermission5: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) yenerek galip çıktı!"
-  messagePermission6: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) savaş alanında yok etti!"
-  messagePermission7: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında durdurulamaz olduğunu kanıtladı!"
-  messagePermission8: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) büyük bir güçle devirdi!"
-  messagePermission9: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) yenerek zafer yolunda ilerledi!"
-  messagePermission10: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) karşısında çaresiz bıraktı!"
-  messagePermission11: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında dahice bir strateji kullandı!"
-  messagePermission12: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'in &7(§x§C§D§D§9§B§6-{-points}&7) sonunu getirdi!"
+  messagePermission1:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) acımasızca ortadan kaldırdı!"
+    menu: true
+  messagePermission2:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &füzerinde mutlak zafer kazandı!"
+    menu: true
+  messagePermission3:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) ezici bir şekilde ezip geçti!"
+    menu: true
+  messagePermission4:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında etkileyici bir hareket sergiledi!"
+    menu: true
+  messagePermission5:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) yenerek galip çıktı!"
+    menu: true
+  messagePermission6:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) savaş alanında yok etti!"
+    menu: true
+  messagePermission7:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında durdurulamaz olduğunu kanıtladı!"
+    menu: true
+  messagePermission8:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) büyük bir güçle devirdi!"
+    menu: true
+  messagePermission9:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) yenerek zafer yolunda ilerledi!"
+    menu: true
+  messagePermission10:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'i &7(§x§C§D§D§9§B§6-{-points}&7) karşısında çaresiz bıraktı!"
+    menu: true
+  messagePermission11:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fkarşısında dahice bir strateji kullandı!"
+    menu: true
+  messagePermission12:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim}&f'in &7(§x§C§D§D§9§B§6-{-points}&7) sonunu getirdi!"
+    menu: true

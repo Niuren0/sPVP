@@ -79,15 +79,39 @@ streakMessages:
   30: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fhas reached 30 kills, &dyou are unstoppable!"
 
 specialKillMessages:
-  messagePermission1: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fmercilessly eliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission2: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fachieved absolute victory over §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission3: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fbrutally crushed §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission4: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fperformed an impressive move on §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission5: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &femerged victorious against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission6: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &feliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fon the battlefield!"
-  messagePermission7: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fproved unstoppable against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission8: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fknocked down §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fwith great power!"
-  messagePermission9: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fadvanced toward victory over §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission10: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fleft §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fhelpless!"
-  messagePermission11: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fused a brilliant strategy against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
-  messagePermission12: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fhas brought §x§F§6§5§5§5§5{victim}&f's &7(§x§C§D§D§9§B§6-{-points}&7) end!"
+  messagePermission1:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fmercilessly eliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission2:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fachieved absolute victory over §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission3:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fbrutally crushed §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission4:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fperformed an impressive move on §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission5:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &femerged victorious against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission6:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &feliminated §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fon the battlefield!"
+    menu: true
+  messagePermission7:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fproved unstoppable against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission8:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fknocked down §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fwith great power!"
+    menu: true
+  messagePermission9:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fadvanced toward victory over §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission10:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fleft §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7) &fhelpless!"
+    menu: true
+  messagePermission11:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fused a brilliant strategy against §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)&f!"
+    menu: true
+  messagePermission12:
+    message: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7) &fhas brought §x§F§6§5§5§5§5{victim}&f's &7(§x§C§D§D§9§B§6-{-points}&7) end!"
+    menu: true
