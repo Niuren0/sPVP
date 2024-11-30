@@ -12,7 +12,7 @@ freeze:
   commands: # Commands to be processed when frozen player quits
     - "ban {playerName} Freeze Quit"
 
-# hit -> combo count, combo messages, critical sound, health indicator
+# hit -> combo count, combo messages, critical sound, health indicator, hit particle effects
 # death -> Disabled regions for kill streaks, special kill messages
 # rank -> Earning or losing rank points
 disabledRegions:
