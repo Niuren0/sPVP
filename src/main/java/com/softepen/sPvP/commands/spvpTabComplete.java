@@ -16,11 +16,23 @@ public class spvpTabComplete implements TabCompleter {
         List<String> COMMANDS = new ArrayList<>();
 
         if (args.length == 1) {
-            if (commandSender.hasPermission("spvp.commands.reload") || commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
-                COMMANDS.add("reload");
-                StringUtil.copyPartialMatches(args[0], COMMANDS, completions);
+            if (commandSender.hasPermission("spvp.commands.*") ||commandSender.hasPermission("spvp.*")) {
+                if (commandSender.hasPermission("spvp.commands.reload")) {
+                    COMMANDS.add("reload");
+                }
+                if (commandSender.hasPermission("spvp.commands.set")) {
+                    COMMANDS.add("set");
+                }
+                if (commandSender.hasPermission("spvp.commands.add")) {
+                    COMMANDS.add("add");
+                }
+                if (commandSender.hasPermission("spvp.commands.remove")) {
+                    COMMANDS.add("remove");
+                }
             }
         }
+
+        StringUtil.copyPartialMatches(args[0], COMMANDS, completions);
 
         return completions;
     }

@@ -36,6 +36,15 @@ permissions:
   spvp.commands.profile:
     description: Permission to open the player profile menu
     default: true
+  spvp.commands.set:
+    description: Permission to set player kills and deaths
+    default: op
+  spvp.commands.add:
+    description: Permission to increase player kills and deaths
+    default: op
+  spvp.commands.remove:
+    description: Permission to decrease player kilsl and deaths
+    default: op
   spvp.commands.freeze:
     description: Permission to freeze the player
     default: op
