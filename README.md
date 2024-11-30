@@ -33,41 +33,41 @@
 |--------------------------------------------------|---------------------------------------------------------|-----------------------------|------------|
 | `/spvp`                                          | sPvP menüsünü açar                                      | `spvp.commands.spvp`        | `true`     |
 | `/profile [oyuncu]`                              | Belirtilen oyuncunun profilini açar                     | `spvp.commands.profile`     | `true`     |
-| `/spvp set <kill \| death> [oyuncu] <miktar>`    | Belirtilen oyuncunun ölme\öldürme sayısını düzenler     | `spvp.commands.profile`     | `true`     |
-| `/spvp add <kill \| death> [oyuncu] <miktar>`    | Belirtilen oyuncunun ölme\öldürme sayısını arttırır     | `spvp.commands.profile`     | `true`     |
-| `/spvp remove <kill \| death> [oyuncu] <miktar>` | Belirtilen oyuncunun ölme\öldürme sayısını azaltır      | `spvp.commands.profile`     | `true`     |
+| `/spvp set <kill \| death> [oyuncu] <miktar>`    | Belirtilen oyuncunun ölme\öldürme sayısını düzenler     | `spvp.commands.set`         | `op`       |
+| `/spvp add <kill \| death> [oyuncu] <miktar>`    | Belirtilen oyuncunun ölme\öldürme sayısını arttırır     | `spvp.commands.add`         | `op`       |
+| `/spvp remove <kill \| death> [oyuncu] <miktar>` | Belirtilen oyuncunun ölme\öldürme sayısını azaltır      | `spvp.commands.remove`      | `op`       |
 | `/freeze <oyuncu>`                               | Belirtilen oyuncuyu dondurur                            | `spvp.commands.freeze`      | `op`       |
 | `/unfreeze <oyuncu>`                             | Belirtilen oyuncunun dondurulmasını kaldır              | `spvp.commands.unfreese`    | `op`       |
 | `/rank [oyuncu]`                                 | Belirtilen oyuncunun rank bilgilerini gösterir          | `spvp.commands.rank`        | `true`     |
-| `/rank set <oyuncu> <miktar>`                    | Belirtilen oyuncunun puanın belirtilen miktara ayarlar  | `spvp.commands.rank.set`    | `op`        |
-| `/rank add <oyuncu> <miktar>`                    | Belirtilen oyuncunun puanın belirtilen miktara arttırır | `spvp.commands.rank.add`    | `op`        |
-| `/rank remove <oyuncu> <miktar>`                 | Belirtilen oyuncunun puanın belirtilen miktara azaltır  | `spvp.commands.rank.remove` | `op`        |
+| `/rank set <oyuncu> <miktar>`                    | Belirtilen oyuncunun puanın belirtilen miktara ayarlar  | `spvp.commands.rank.set`    | `op`       |
+| `/rank add <oyuncu> <miktar>`                    | Belirtilen oyuncunun puanın belirtilen miktara arttırır | `spvp.commands.rank.add`    | `op`       |
+| `/rank remove <oyuncu> <miktar>`                 | Belirtilen oyuncunun puanın belirtilen miktara azaltır  | `spvp.commands.rank.remove` | `op`       |
 | `/spvp reload`                                   | Eklentiyi yeniden yükler                                | `spvp.commands.reload`      | `op`       |
 
 ## İzinler
 
-| İzin                        | Açıklama                                    | Varsayılan        |
-|-----------------------------|---------------------------------------------|-------------------|
-| `spvp.*`                    | Tüm izinleri verir                          | `op`              |
-| `spvp.commands.*`           | Tüm komutlar için izin                      | `op`              |
-| `spvp.commands.reload`      | /spvp reload komutu izni                    | `op`              |
-| `spvp.commands.spvp`        | /spvp komutu izni                           | `true`            |
-| `spvp.commands.profile`     | /profile komutu izni                        | `true`            |
-| `spvp.commands.set`         | /spvp set <kill \| death> komutu izni       | `true`     |
-| `spvp.commands.add`         | /spvp add <kill \| death> komutu izni       | `true`            |
-| `spvp.commands.remove`      | /spvp remove <kill \| death> komutu izni    | `true`            |
-| `spvp.commands.freeze`      | /freeze komutu izni                         | `true`            |
-| `spvp.commands.unfreeze`    | /unfreeze komutu izni                       | `true`            |
-| `spvp.commands.rank.*`      | Tüm rank komutları                          | `op`              |
-| `spvp.commands.rank`        | Oyuncunun kendi rank bilgisi için izin      | `true`            |
-| `spvp.commands.rank.others` | Başka oyuncuların rank bilgisine bakma izni | `true`            |
-| `spvp.commands.rank.set`    | Rank puanı ayarlama izni                    | `op`              |
-| `spvp.commands.rank.add`    | Rank puani arttırma izni                    | `op`              |
-| `spvp.commands.rank.remove` | Rank puanı azaltma izni                     | `op`              |
-| `spvp.messages.*`           | Tüm özel öldürme mesajları için izin        | `op`              |
-| `spvp.messages.<perm>`      | Belirli özel öldürme mesajı için izin       | `op`              |
-| `spvp.particles.*`          | Tüm vurma efektleri için izin               | `op`              |
-| `spvp.particles.<perm>`     | Belirli vurma efekti için izin              | `op`              |
+| İzin                        | Açıklama                                    | Varsayılan |
+|-----------------------------|---------------------------------------------|------------|
+| `spvp.*`                    | Tüm izinleri verir                          | `op`       |
+| `spvp.commands.*`           | Tüm komutlar için izin                      | `op`       |
+| `spvp.commands.reload`      | /spvp reload komutu izni                    | `op`       |
+| `spvp.commands.spvp`        | /spvp komutu izni                           | `true`     |
+| `spvp.commands.profile`     | /profile komutu izni                        | `true`     |
+| `spvp.commands.set`         | /spvp set <kill \| death> komutu izni       | `op`       |
+| `spvp.commands.add`         | /spvp add <kill \| death> komutu izni       | `op`       |
+| `spvp.commands.remove`      | /spvp remove <kill \| death> komutu izni    | `op`       |
+| `spvp.commands.freeze`      | /freeze komutu izni                         | `op`       |
+| `spvp.commands.unfreeze`    | /unfreeze komutu izni                       | `op`       |
+| `spvp.commands.rank.*`      | Tüm rank komutları                          | `op`       |
+| `spvp.commands.rank`        | Oyuncunun kendi rank bilgisi için izin      | `true`     |
+| `spvp.commands.rank.others` | Başka oyuncuların rank bilgisine bakma izni | `true`     |
+| `spvp.commands.rank.set`    | Rank puanı ayarlama izni                    | `op`       |
+| `spvp.commands.rank.add`    | Rank puani arttırma izni                    | `op`       |
+| `spvp.commands.rank.remove` | Rank puanı azaltma izni                     | `op`       |
+| `spvp.messages.*`           | Tüm özel öldürme mesajları için izin        | `op`       |
+| `spvp.messages.<perm>`      | Belirli özel öldürme mesajı için izin       | `op`       |
+| `spvp.particles.*`          | Tüm vurma efektleri için izin               | `op`       |
+| `spvp.particles.<perm>`     | Belirli vurma efekti için izin              | `op`       |
 
 ## PlaceholderAPI Desteği
 
