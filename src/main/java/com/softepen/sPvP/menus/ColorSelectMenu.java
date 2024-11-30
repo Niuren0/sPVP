@@ -35,7 +35,7 @@ public class ColorSelectMenu {
                 "LIGHT_GRAY", "CYAN", "PURPLE", "BLUE",
                 "BROWN", "GREEN", "RED", "BLACK");
 
-        String item = configManager.getString("settingsMenu.color.item").toUpperCase();
+        String item = configManager.getString("colorSelectMenu.item").toUpperCase();
         PlayerSettings settings = playerSettings.get(player);
         int i = 0;
         GuiItem colorItem;
@@ -67,6 +67,26 @@ public class ColorSelectMenu {
             gui.setItem(i, colorItem);
             i++;
         }
+
+        GuiItem indicatorItem = ItemBuilder.from(getItemStack(player)).asGuiItem(event -> {
+            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
+            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
+
+            PlayerSettings settings2 = playerSettings.get(player);
+
+            playerData.set("healthIndicator", !settings2.getHealthIndicator());
+
+            try {
+                playerData.save(playerFile);
+            } catch (IOException e) {
+                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
+            }
+
+            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
+
+            gui.updateItem(configManager.getInt("colorSelectMenu.indicator.slot"), new ItemStack(getItemStack(player)));
+        });
+        gui.setItem(configManager.getInt("colorSelectMenu.indicator.slot"), indicatorItem);
 
         GuiItem backItem = ItemBuilder.from(getItemStack(null, "back")).asGuiItem(event -> new SettingsMenu(player));
         gui.setItem(configManager.getInt("colorSelectMenu.back.slot"), backItem);
@@ -101,6 +121,33 @@ public class ColorSelectMenu {
             }
             itemLore = configManager.getStringList("colorSelectMenu." + s + ".lore");
         }
+
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta != null) {
+            if (itemName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemName));
+            if (itemLore != null) {
+                List<String> coloredLore = new ArrayList<>();
+                for (String lore : itemLore) {
+                    coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                meta.setLore(coloredLore);
+            }
+            itemStack.setItemMeta(meta);
+        }
+
+        return itemStack;
+    }
+
+    private ItemStack getItemStack(Player player) {
+        Material material;
+        String itemName;
+        List<String> itemLore;
+
+        String state = playerSettings.get(player).getHealthIndicator() ? "enabled_state" : "disabled_state";
+        material = Material.valueOf(configManager.getString("colorSelectMenu.indicator." + state + ".item"));
+        itemName = configManager.getString("colorSelectMenu.indicator." + state + ".title");
+        itemLore = configManager.getStringList("colorSelectMenu.indicator." + state + ".lore");
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();

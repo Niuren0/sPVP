@@ -31,26 +31,7 @@ public class SettingsMenu {
                 .rows(configManager.getInt("settingsMenu.row"))
                 .create();
 
-        GuiItem enableItem = ItemBuilder.from(getItemStack(player, "enable")).asGuiItem(event -> {
-            File playerFile = new File(plugin.getDataFolder(), "data/" + playerName + ".yml");
-            FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
-
-            PlayerSettings settings = playerSettings.get(player);
-
-            playerData.set("healthIndicator", !settings.getHealthIndicator());
-
-            try {
-                playerData.save(playerFile);
-            } catch (IOException e) {
-                plugin.getLogger().severe("An error occurred when saving player data file: " + e);
-            }
-
-            playerSettings.put(player, PlayerSettingsManager.getPlayerSettings(player));
-
-            gui.updateItem(configManager.getInt("settingsMenu.enable.slot"), new ItemStack(getItemStack(player, "enable")));
-        });
-
-        GuiItem colorItem = ItemBuilder.from(getItemStack(player, "color")).asGuiItem(event -> new ColorSelectMenu(player));
+        GuiItem indicatorItem = ItemBuilder.from(getItemStack(player, "healthIndicator")).asGuiItem(event -> new ColorSelectMenu(player));
         
         GuiItem soundItem = ItemBuilder.from(getItemStack(player, "sound")).asGuiItem(event -> new HitSoundSelectMenu(player));
 
@@ -78,8 +59,7 @@ public class SettingsMenu {
         gui.setItem(configManager.getInt("settingsMenu.sound.slot"), soundItem);
         gui.setItem(configManager.getInt("settingsMenu.killMessages.slot"), killMessagesItem);
         gui.setItem(configManager.getInt("settingsMenu.comboMessages.slot"), comboMessagesItem);
-        gui.setItem(configManager.getInt("settingsMenu.enable.slot"), enableItem);
-        gui.setItem(configManager.getInt("settingsMenu.color.slot"), colorItem);
+        gui.setItem(configManager.getInt("settingsMenu.healthIndicator.slot"), indicatorItem);
 
         if (configManager.getBoolean("settingsMenu.filler.enable")) {
             for (String key : configManager.getConfigurationSection("settingsMenu.filler.items").getKeys(false)) {
@@ -98,15 +78,12 @@ public class SettingsMenu {
     }
 
     private ItemStack getItemStack(Player player, String item) {
-        PlayerSettings settings = playerSettings.get(player);
-
         Material material;
         String state = null, itemName;
         List<String> itemLore;
 
-        if (Objects.equals(item, "enable")) {
-            state = settings.getHealthIndicator() ? "enabled_state" : "disabled_state";
-        } else if (Objects.equals(item, "comboMessages")) {
+        if (Objects.equals(item, "comboMessages")) {
+            PlayerSettings settings = playerSettings.get(player);
             state = settings.getComboMessages() ? "enabled_state" : "disabled_state";
         }
 
@@ -119,11 +96,8 @@ public class SettingsMenu {
                 material = Material.valueOf(configManager.getString(item + ".item"));
                 itemName = configManager.getString(item + ".title");
                 itemLore = configManager.getStringList(item + ".lore");
-
             } else {
-                if (Objects.equals(item, "color")) {
-                    material = Material.valueOf(getRawColor(settings.getHealthIndicatorColor()) + "_" + configManager.getString("settingsMenu.color.item"));
-                } else material = Material.valueOf(configManager.getString("settingsMenu." + item + ".item"));
+                material = Material.valueOf(configManager.getString("settingsMenu." + item + ".item"));
                 itemName = configManager.getString("settingsMenu." + item + ".title");
                 itemLore = configManager.getStringList("settingsMenu." + item + ".lore");
             }
@@ -144,16 +118,5 @@ public class SettingsMenu {
         }
 
         return itemStack;
-    }
-
-    private String getRawColor(String input) {
-        input = input.replace("_WOOL", "");
-        input = input.replace("_CONCRETE", "");
-        input = input.replace("_POWDER", "");
-        input = input.replace("_STAINED_GLASS", "");
-        input = input.replace("_PANE", "");
-        input = input.replace("_DYE", "");
-
-        return input;
     }
 }

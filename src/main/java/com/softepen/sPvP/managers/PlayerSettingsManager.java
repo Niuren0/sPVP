@@ -14,7 +14,7 @@ import static com.softepen.sPvP.sPvP.plugin;
 public class PlayerSettingsManager {
     private static final boolean DEFAULT_SOUND = true;
     private static final boolean DEFAULT_HEALTH_INDICATOR = true;
-    private static final String DEFAULT_HEALTH_INDICATOR_COLOR = "RED_" + configManager.getString("settingsMenu.color.item");
+    private static final String DEFAULT_HEALTH_INDICATOR_COLOR = "RED_" + configManager.getString("colorSelectMenu.item");
     private static final boolean DEFAULT_COMBO_MESSAGES = true;
     private static final int DEFAULT_LAST_COMBO = 0;
     private static final int DEFAULT_COMBO_RECORD = 0;

@@ -7,11 +7,14 @@ import dev.triumphteam.gui.guis.GuiItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,10 +31,10 @@ public class ProfileMenu {
 
         GuiItem profileItem = ItemBuilder.from(getPlayerSkull(player)).asGuiItem();
 
-        GuiItem last5deathItem = ItemBuilder.from(getItemStack("last5deaths", player)).asGuiItem();
-        GuiItem last5killItem = ItemBuilder.from(getItemStack("last5kills", player)).asGuiItem();
-        GuiItem top5deathItem = ItemBuilder.from(getItemStack("top5deaths", player)).asGuiItem();
-        GuiItem top5killItem = ItemBuilder.from(getItemStack("top5kills", player)).asGuiItem();
+        GuiItem last5deathItem = ItemBuilder.from(getItemStack("last5deaths", player, opener)).asGuiItem();
+        GuiItem last5killItem = ItemBuilder.from(getItemStack("last5kills", player, opener)).asGuiItem();
+        GuiItem top5deathItem = ItemBuilder.from(getItemStack("top5deaths", player, opener)).asGuiItem();
+        GuiItem top5killItem = ItemBuilder.from(getItemStack("top5kills", player, opener)).asGuiItem();
 
         gui.setItem(configManager.getInt("profileMenu.profile.slot"), profileItem);
         gui.setItem(configManager.getInt("profileMenu.last5deaths.slot"), last5deathItem);
@@ -39,10 +42,15 @@ public class ProfileMenu {
         gui.setItem(configManager.getInt("profileMenu.top5deaths.slot"), top5deathItem);
         gui.setItem(configManager.getInt("profileMenu.top5kills.slot"), top5killItem);
 
+        if (!opener.getName().equals(player.getName())) {
+            GuiItem infoItem = ItemBuilder.from(getItemStack("killDeathInfo", player, opener)).asGuiItem();
+            gui.setItem(configManager.getInt("profileMenu.killDeathInfo.slot"), infoItem);
+        }
+
         if (configManager.getBoolean("profileMenu.filler.enable")) {
             for (String key : configManager.getConfigurationSection("profileMenu.filler.items").getKeys(false)) {
                 List<Integer> slots = configManager.getIntegerList("profileMenu.filler.items." + key + ".slots");
-                GuiItem fillerItem = ItemBuilder.from(getItemStack("profileMenu.filler.items." + key, player)).asGuiItem();
+                GuiItem fillerItem = ItemBuilder.from(getItemStack("profileMenu.filler.items." + key, player, opener)).asGuiItem();
                 for (Integer slot : slots) {
                     gui.setItem(slot, fillerItem);
                 }
@@ -53,7 +61,19 @@ public class ProfileMenu {
         gui.open(opener);
     }
 
-    private ItemStack getItemStack(String s, Player player) {
+    private ItemStack getItemStack(String s, Player player, Player opener) {
+        int deathCount = 0, killCount = kills.getOrDefault(opener, 0);
+
+        if (Objects.equals(s, "killDeathInfo")) {
+            if (player.isOnline()) deathCount = kills.getOrDefault(player, 0);
+            else {
+                File playerFile = new File(plugin.getDataFolder(), "data/" + player.getName() + ".yml");
+                FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
+
+                deathCount = playerData.getInt("kill." + opener.getName(), 0);
+            }
+        }
+
         Material material;
         String itemName;
         List<String> itemLore;
@@ -84,6 +104,12 @@ public class ProfileMenu {
                 List<String> coloredLore = new ArrayList<>();
                 for (String lore : itemLore) {
                     lore = lore.replace("{player}", player.getName());
+
+                    if (Objects.equals(s, "killDeathInfo")) {
+                        lore = lore.replace("{kill}", String.valueOf(killCount));
+                        lore = lore.replace("{death}", String.valueOf(deathCount));
+                    }
+
                     coloredLore.add(ChatColor.translateAlternateColorCodes('&', lore));
                 }
                 meta.setLore(coloredLore);

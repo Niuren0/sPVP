@@ -84,31 +84,18 @@ settingsMenu:
         - "&7Click to change the combo messages to &atrue&c!"
 
   sound:
-    slot: 22
+    slot: 23
     item: BELL
     title: "&bCombo Sound"
     lore:
       - "&7Click to change the combo sounds!"
 
-  enable:
-    slot: 23
-    enabled_state:
-      item: GREEN_WOOL
-      title: "&aHealth Indicator Enabled"
-      lore:
-        - "&7Click to change the health indicator to &cfalse&a!"
-    disabled_state:
-      item: RED_WOOL
-      title: "&cHealth Indicator Disabled"
-      lore:
-        - "&7Click to change the health indicator to &atrue&c!"
-
-  color:
+  healthIndicator:
     slot: 24
-    item: WOOL # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
-    title: "&bHealth Color"
+    item: HEART_OF_THE_SEA
+    title: "&bHealth Indicator"
     lore:
-      - "&7Click to change the health indicator color!"
+      - "&7Click to change the health indicator settings!"
 
   filler:
     enable: true
@@ -197,6 +184,7 @@ killMessagesMenu:
 colorSelectMenu:
   title: "&6Color Select"
   row: 3
+  item: WOOL # must be WOOL, CONCRETE, CONCRETE_POWDER, STAINED_GLASS, STAINED_GLASS_PANE or DYE
 
   selected:
     lore:
@@ -206,8 +194,21 @@ colorSelectMenu:
     lore:
       - "&aClick to select the color"
 
+  indicator:
+    slot: 21
+    enabled_state:
+      item: GREEN_WOOL
+      title: "&aHealth Indicator Enabled"
+      lore:
+        - "&7Click to change the health indicator to &cfalse&a!"
+    disabled_state:
+      item: RED_WOOL
+      title: "&cHealth Indicator Disabled"
+      lore:
+        - "&7Click to change the health indicator to &atrue&c!"
+
   back:
-    slot: 22
+    slot: 23
     item: BARRIER
     title: "&cBack"
     lore: []
@@ -224,8 +225,7 @@ colorSelectMenu:
           - 18
           - 19
           - 20
-          - 21
-          - 23
+          - 22
           - 24
           - 25
           - 26
@@ -336,6 +336,14 @@ profileMenu:
       - "&7#3 &6- &a{3} &6- &b{count3}"
       - "&7#4 &6- &a{4} &6- &b{count4}"
       - "&7#5 &6- &a{5} &6- &b{count5}"
+
+  killDeathInfo:
+    slot: 16
+    item: SKELETON_SKULL
+    title: "&bKill/Death Info"
+    lore:
+      - "&7You killed &b{player} &a{kill} &7times."
+      - "&7You killed by &b{player} &c{death} &7times."
 
   filler:
     enable: false
