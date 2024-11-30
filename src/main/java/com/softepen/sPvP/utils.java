@@ -20,6 +20,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -318,5 +319,27 @@ public class utils {
         return Math.round(kd * 100.0) / 100.0;
     }
 
+    public static boolean isInCooldown(String name, String secondName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        File killerFile = new File(plugin.getDataFolder(), "data/" + name + ".yml");
+        FileConfiguration killerData = YamlConfiguration.loadConfiguration(killerFile);
+
+        if (Objects.equals(killerData.getString("last5kills.1.player"), secondName)) {
+            String firstDate = killerData.getString("last5kills.1.time");
+
+            if (firstDate != null) {
+                LocalDateTime dateTime1 = LocalDateTime.parse(firstDate, formatter);
+                LocalDateTime dateTime2 = LocalDateTime.now();
+
+                Duration duration = Duration.between(dateTime2, dateTime1);
+                long seconds = duration.getSeconds();
+
+                return seconds <= configManager.getLong("cooldown");
+            }
+        }
+
+        return false;
+    }
 
 }

@@ -38,12 +38,12 @@ ipPrevent:
   kill: true
   rank: true
 
+# cooldown -> cooldown for gaining and losing points, kills, streaks etc for killing the same person repeatedly (in seconds)
+cooldown: 300
+
 rank:
   enabled: true
   defaultRank: warrior
-  # cooldown -> cooldown for gaining and losing points for killing the same person repeatedly (in seconds)
-  # - Does not work if players are in a world or region disabled for death
-  cooldown: 300
 
 log:
   kill:
@@ -51,7 +51,7 @@ log:
     format: "[{date}] {killer} (+{+points}) ✘ {victim} (-{-points})"
   command:
     enable: true
-    format: "[{date}] {sender}: '{command} - ({beforePoints}' -> {afterPoints})"
+    format: "[{date}] {sender}: '{command}' - ({beforePoints} -> {afterPoints})"
 
 sounds:
   critical_hit_default: Experience Sound # sounds.yml
