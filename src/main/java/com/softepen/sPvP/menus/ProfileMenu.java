@@ -62,17 +62,11 @@ public class ProfileMenu {
     }
 
     private ItemStack getItemStack(String s, Player player, Player opener) {
-        int deathCount = 0, killCount = kills.getOrDefault(opener, 0);
+        File playerFile = new File(plugin.getDataFolder(), "data/" + player.getName() + ".yml");
+        FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
 
-        if (Objects.equals(s, "killDeathInfo")) {
-            if (player.isOnline()) deathCount = kills.getOrDefault(player, 0);
-            else {
-                File playerFile = new File(plugin.getDataFolder(), "data/" + player.getName() + ".yml");
-                FileConfiguration playerData = YamlConfiguration.loadConfiguration(playerFile);
-
-                deathCount = playerData.getInt("kill." + opener.getName(), 0);
-            }
-        }
+        int killCount = playerData.getInt("kill." + opener.getName(), 0);
+        int deathCount = playerData.getInt("death." + opener.getName(), 0);
 
         Material material;
         String itemName;
