@@ -74,7 +74,7 @@ public class utils {
     }
 
     public static String getSpecialKillMessage(String perm, Player killer, Player victim) {
-        String message = messagesManager.getPrefixString("specialKillMessages." + perm);
+        String message = messagesManager.getPrefixString("specialKillMessages." + perm + ".message");
         if (message == null) return null;
 
         message = message
