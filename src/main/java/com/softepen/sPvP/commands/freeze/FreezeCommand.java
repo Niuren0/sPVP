@@ -1,6 +1,7 @@
 package com.softepen.sPvP.commands.freeze;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.softepen.sPvP.sPvP.*;
 import static com.softepen.sPvP.sPvP.messagesManager;
+import static com.softepen.sPvP.utils.getTeleportLocation;
 
 public class FreezeCommand implements CommandExecutor {
     @Override
@@ -23,6 +25,10 @@ public class FreezeCommand implements CommandExecutor {
                     else {
                         if (player == commandSender) commandSender.sendMessage(messagesManager.getPrefixString("cantFreezeYourself"));
                         else {
+                            Location tpLocation = getTeleportLocation("freeze");
+                            if (tpLocation != null) player.teleport(tpLocation);
+                            else commandSender.sendMessage(messagesManager.getPrefixString("cantTeleport"));
+
                             frozenPlayers.put(player, commandSender);
                             player.sendMessage(messagesManager.getPrefixString("frozenBy").replace("{staff}", commandSender.getName()));
                             commandSender.sendMessage(messagesManager.getPrefixString("frozen").replace("{player}", player.getName()));

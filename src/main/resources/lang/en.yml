@@ -17,6 +17,7 @@ pointsSet: "{prefix} &a{player}'s points set to {points}!"
 pointsAdded: "{prefix} &a{points} points added to {player}!"
 pointsRemoved: "{prefix} &a{points} points removed from {player}!"
 deathMessage: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)"
+cantTeleport: "{prefix} &cCouldn't teleport the player, please check the teleport location."
 
 comboMessages:
   3: "&e3 combo, &a&lGreat start!"

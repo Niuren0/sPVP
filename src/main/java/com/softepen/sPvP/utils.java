@@ -9,7 +9,10 @@ import com.softepen.sPvP.managers.PlayerSettings;
 import com.softepen.sPvP.managers.RankManager;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -340,6 +343,30 @@ public class utils {
         }
 
         return false;
+    }
+
+    public static Location getTeleportLocation(String type) {
+        if (!configManager.getBoolean("freeze.teleport.enable")) return null;
+
+        String locationString = configManager.getString("freeze.teleport." + type + "Location");
+
+        if (locationString == null || locationString.isEmpty()) return null;
+
+        try {
+            String[] parts = locationString.split(",\\s*");
+
+            double x = Double.parseDouble(parts[0]);
+            double y = Double.parseDouble(parts[1]);
+            double z = Double.parseDouble(parts[2]);
+            String worldName = parts[3];
+
+            World world = Bukkit.getWorld(worldName);
+            if (world == null) return null;
+
+            return new Location(world, x, y, z);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

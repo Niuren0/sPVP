@@ -17,6 +17,7 @@ pointsSet: "{prefix} &a{player} adlı oyuncunun puanı {points} olarak ayarland�
 pointsAdded: "{prefix} &a{player} adlı oyuncuya {points} puan eklendi!"
 pointsRemoved: "{prefix} &a{player} adlı oyuncudan {points} puan alındı!"
 deathMessage: "{prefix} §x§A§C§F§F§0§0{killer} &7(§x§C§D§D§9§B§6+{+points}&7), §x§F§6§5§5§5§5{victim} &7(§x§C§D§D§9§B§6-{-points}&7)"
+cantTeleport: "{prefix} &cOyuncu ışınlanılamadı, ışınlanma konumunu kontrol edin."
 
 comboMessages:
   3: "&e3 kombo, &a&lHarika başlangıç!"

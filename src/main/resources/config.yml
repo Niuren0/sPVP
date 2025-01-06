@@ -4,6 +4,10 @@ specialKillMessages: true
 particlesEnabled: true
 
 freeze:
+  teleport:
+    enable: true
+    freezeLocation: 0, 0, 0, world
+    unfreezeLocation: 0, 0, 0, world
   whitelistCommands:
     - msg
     - message
