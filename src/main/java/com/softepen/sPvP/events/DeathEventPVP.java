@@ -60,8 +60,8 @@ public class DeathEventPVP implements Listener {
                         lostPoints = Math.floor(lostPoints * 100) / 100;
                         earnedPoints = Math.floor(earnedPoints * 100) / 100;
 
-                        updateRankGroup(victim);
-                        updateRankGroup(killer);
+//                        updateRankGroup(victim);
+//                        updateRankGroup(killer);
 
                         if (configManager.getBoolean("ipPrevent.rank")) {
                             if (Objects.equals(getPlayerIP(killer), getPlayerIP(victim))) {

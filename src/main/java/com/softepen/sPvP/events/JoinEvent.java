@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import static com.softepen.sPvP.sPvP.*;
+import static com.softepen.sPvP.utils.updateRankGroup;
 
 public class JoinEvent implements Listener {
 
@@ -30,6 +31,6 @@ public class JoinEvent implements Listener {
         kills.put(player, settings.getKills());
         deaths.put(player, settings.getDeaths());
 
-        pointsManager.set("players." + player.getName(), pointsManager.getDouble("players." + player.getName(), 0));
+//        updateRankGroup(player);
     }
 }

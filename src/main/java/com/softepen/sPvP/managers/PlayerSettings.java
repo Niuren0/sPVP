@@ -5,16 +5,16 @@ public class PlayerSettings {
     private final boolean healthIndicator;
     private final String healthIndicatorColor;
     private final boolean comboMessages;
-    private final int lastCombo;
-    private final int comboRecord;
-    private final int killSeriesRecord;
-    private final int kills;
-    private final int deaths;
+    private final Integer lastCombo;
+    private final Integer comboRecord;
+    private final Integer killSeriesRecord;
+    private final Integer kills;
+    private final Integer deaths;
     private final String killMessage;
     private final String comboSound;
     private final String particle;
 
-    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, int lastCombo, int comboRecord, int killSeriesRecord, int kills, int deaths, String killMessage, String comboSound, String particle) {
+    public PlayerSettings(boolean sound, boolean healthIndicator, String healthIndicatorColor, boolean comboMessages, Integer lastCombo, Integer comboRecord, Integer killSeriesRecord, Integer kills, Integer deaths, String killMessage, String comboSound, String particle) {
         this.sound = sound;
         this.healthIndicator = healthIndicator;
         this.healthIndicatorColor = healthIndicatorColor;

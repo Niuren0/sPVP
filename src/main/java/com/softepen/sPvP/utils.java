@@ -7,6 +7,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.softepen.sPvP.managers.PlayerSettings;
 import com.softepen.sPvP.managers.RankManager;
+import net.luckperms.api.context.DefaultContextKeys;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import org.bukkit.Bukkit;
@@ -248,15 +249,25 @@ public class utils {
 
         if (user != null) {
             String rank = getPlayerRank(player.getName());
+            String serverContext = ranksManager.getString("settings.serverContext");
 
             for (String group : ranksManager.getConfigurationSection("ranks").getKeys(false)) {
                 if (player.hasPermission("group." + group) && !Objects.equals(group, rank)) {
-                    user.data().remove(Node.builder("group." + group).build());
+
+                    Node node = Node.builder(("group." + group))
+                            .withContext(DefaultContextKeys.SERVER_KEY, serverContext)
+                            .build();
+                    user.data().remove(node);
                 }
             }
 
             if (!player.hasPermission("group." + rank)) {
-                user.data().add(Node.builder("group." + rank).build());
+
+                Node node = Node.builder(("group." + rank))
+                        .withContext(DefaultContextKeys.SERVER_KEY, serverContext)
+                        .build();
+
+                user.data().add(node);
             }
 
             luckPerms.getUserManager().saveUser(user);
@@ -269,12 +280,18 @@ public class utils {
     }
 
     public static int getPlayerRanking(String playerName) {
-        File file = new File(plugin.getDataFolder(), "points.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+//        File file = new File(plugin.getDataFolder(), "points.yml");
+//        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+//
+//        Map<String, Double> playerScores = new HashMap<>();
+//        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
+//            double score = config.getDouble("players." + player);
+//            playerScores.put(player, score);
+//        }
 
         Map<String, Double> playerScores = new HashMap<>();
-        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
-            double score = config.getDouble("players." + player);
+        for (String player : Objects.requireNonNull(pointsManager.getConfigurationSection("players")).getKeys(false)) {
+            double score = pointsManager.getDouble("players." + player);
             playerScores.put(player, score);
         }
 
@@ -292,14 +309,21 @@ public class utils {
         return -1;
     }
     public static Map.Entry<String, Double> getPlayerAtRank(int rank) {
-        File file = new File(plugin.getDataFolder(), "points.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+//        File file = new File(plugin.getDataFolder(), "points.yml");
+//        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+//
+//        Map<String, Double> playerScores = new HashMap<>();
+//        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
+//            double score = config.getDouble("players." + player);
+//            playerScores.put(player, score);
+//        }
 
         Map<String, Double> playerScores = new HashMap<>();
-        for (String player : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
-            double score = config.getDouble("players." + player);
+        for (String player : Objects.requireNonNull(pointsManager.getConfigurationSection("players")).getKeys(false)) {
+            double score = pointsManager.getDouble("players." + player);
             playerScores.put(player, score);
         }
+
 
         List<Map.Entry<String, Double>> sortedScores = new ArrayList<>(playerScores.entrySet());
         sortedScores.sort((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()));

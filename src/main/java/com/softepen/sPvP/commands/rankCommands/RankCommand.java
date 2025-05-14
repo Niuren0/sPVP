@@ -1,6 +1,7 @@
 package com.softepen.sPvP.commands.rankCommands;
 
 import com.softepen.sPvP.managers.RankManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -36,6 +37,9 @@ public class RankCommand implements CommandExecutor {
                 return true;
             }
         }
+
+        Player targetPlayer = Bukkit.getPlayer(name);
+        if (targetPlayer != null) updateRankGroup(targetPlayer);
 
         double playerPoints = new RankManager(name).getPoints();
         String role = getPlayerRank(name);

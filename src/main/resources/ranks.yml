@@ -1,3 +1,6 @@
+settings:
+  serverContext: global
+
 ranks:
   warrior:
     exp: 0
